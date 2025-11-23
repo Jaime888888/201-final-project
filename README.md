@@ -4,9 +4,9 @@ WIP README
 
 Backend:
 * Kasra
+* KT
   
 Frontend:
-* KT
 * Christine
 * Trent
 ---
