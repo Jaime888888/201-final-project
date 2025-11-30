@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FavoritesPage from '../pages/FavoritesPage';
+import AddSpotPage from '../pages/AddSpotPage';
 // Optionally import other pages and NavBar if available
 // import HomePage from '../pages/HomePage';
 // import StudySpotDetailsPage from '../pages/StudySpotDetailsPage';
@@ -16,6 +17,7 @@ function AppRouter() {
         <Route path="/favorites" element={<FavoritesPage />} />
         {/* <Route path="/spots/:id" element={<StudySpotDetailsPage />} /> */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="/spots/new" element={<AddSpotPage />} />
       </Routes>
     </BrowserRouter>
   );
