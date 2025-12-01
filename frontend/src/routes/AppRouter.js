@@ -23,6 +23,7 @@ function AppRouter() {
 
         {/* <Route path="/spots/:id" element={<StudySpotDetailsPage />} /> */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="/spots/new" element={<AddSpotPage />} />
       </Routes>
     </BrowserRouter>
   );
