@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### MYSQL Container Data ###
-./mysql_data/
+mysql_data/
+.env
