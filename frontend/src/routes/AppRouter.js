@@ -10,6 +10,7 @@ function AppRouter() {
         <Route path="/" element={<MapView />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/mapview" element={<MapView />} />
+        <Route path="/spots/:id" element={<StudySpotDetailsPage />} />
         {/* Additional routes can be added here */}
       </Routes>
     </BrowserRouter>
