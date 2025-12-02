@@ -1,129 +1,73 @@
+/* Add Spot Page styled to match Favorites Page */
+:root {
+  --bg: #f5f7fb;
+  --card-bg: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 .add-spot-page {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 32px 16px 64px;
-  background: #f5f7fb;
+  background: #ffffff; /* same as .page in Favorites */
 }
 
+/* Container styled like .list on Favorites */
 .add-spot-container {
-  max-width: 640px;
-  margin: 0 auto;
-  background: #ffffff;
+  width: 100%;
+  max-width: 980px;
+  padding: 24px 24px;
+  margin: 24px auto; /* centers like Favorites list */
+  background: #fff;
+  border: 1px solid #f0f0f0; /* softer border */
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 24px 24px 32px;
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06); /* softer, modern */
 }
 
+/* Title styled like .favorites-title */
 .add-spot-title {
-  margin: 0 0 16px;
   font-size: 2rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text);
+  margin: 0 0 24px;
+  text-align: left;
 }
 
-.add-spot-error {
-  margin-bottom: 16px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: #fef2f2;
-  color: #991b1b;
-  font-size: 0.9rem;
-}
-
-.add-spot-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.add-spot-field {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-  color: #374151;
-}
-
+/* Form elements kept simple and neutral */
+.add-spot-form { display: flex; flex-direction: column; gap: 16px; }
+.add-spot-field { display: flex; flex-direction: column; font-size: 0.95rem; color: var(--text); }
 .add-spot-field input[type="text"],
 .add-spot-field textarea {
   margin-top: 6px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 0.95rem;
-  color: #111827;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
   background: #ffffff;
+  color: var(--text);
+  font-size: 0.95rem;
 }
-
-.add-spot-field textarea {
-  resize: vertical;
-  min-height: 96px;
-}
+.add-spot-field textarea { resize: vertical; min-height: 96px; }
 
 .add-spot-field input:focus,
 .add-spot-field textarea:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(37,99,235,0.15);
 }
 
-.add-spot-checkbox-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 4px;
-}
+.add-spot-checkbox-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.add-spot-checkbox { display: flex; align-items: center; gap: 8px; color: var(--muted); }
 
-.add-spot-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #374151;
-}
-
-.add-spot-checkbox input {
-  width: 16px;
-  height: 16px;
-}
-
-.add-spot-actions {
-  margin-top: 8px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.add-spot-button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
-  border: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.add-spot-button-primary {
-  background: #2563eb;
-  color: #ffffff;
-}
-
-.add-spot-button-primary:disabled {
-  opacity: 0.7;
-  cursor: default;
-}
-
-.add-spot-button-secondary {
-  background: #e5e7eb;
-  color: #111827;
-}
-
-.add-spot-button-secondary:disabled {
-  opacity: 0.7;
-  cursor: default;
-}
+.add-spot-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+.add-spot-button { padding: 0.6rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: 0.92rem; cursor: pointer; }
+.add-spot-button-primary { background: #1f2937; color: #fff; border: 1px solid #374151; }
+.add-spot-button-secondary { background: #e5e7eb; color: #111827; border: 1px solid #e5e7eb; }
+.add-spot-button:disabled { opacity: 0.7; cursor: default; }
 
 @media (max-width: 640px) {
-  .add-spot-container {
-    padding: 20px 16px 28px;
-  }
+  .add-spot-container { padding: 16px; margin: 12px; border-radius: 12px; }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddSpotPage.css";
+import NavBar from '../components/NavBar';
 
 function AddSpotPage() {
   const navigate = useNavigate();
@@ -62,6 +63,7 @@ function AddSpotPage() {
 
   return (
     <div className="add-spot-page">
+      <NavBar />
       <div className="add-spot-container">
         <h1 className="add-spot-title">Add a new study spot</h1>
         {error && <div className="add-spot-error">{error}</div>}
@@ -119,14 +121,6 @@ function AddSpotPage() {
             </label>
           </div>
           <div className="add-spot-actions">
-            <button
-              type="button"
-              className="add-spot-button add-spot-button-secondary"
-              onClick={() => navigate(-1)}
-              disabled={submitting}
-            >
-              Cancel
-            </button>
             <button
               type="submit"
               className="add-spot-button add-spot-button-primary"
