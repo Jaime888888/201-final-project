@@ -35138,7 +35138,7 @@ $RefreshReg$(_c, "NavBar");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","react-router-dom":"61z4w","./NavBar.css":"cwvsc"}],"cwvsc":[function() {},{}],"evcLl":[function() {},{}],"1bl4f":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./NavBar.css":"cwvsc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"cwvsc":[function() {},{}],"evcLl":[function() {},{}],"1bl4f":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9511 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$9511.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -35534,7 +35534,7 @@ $RefreshReg$(_c1, "MapView");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-leaflet":"jiGne","leaflet/dist/leaflet.css":"6JhOO","leaflet":"gzvEd","leaflet/dist/images/marker-icon.png":"8DYvK","leaflet/dist/images/marker-shadow.png":"exlwG","../styles/MapViewPage.css":"kZVmF","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../components/NavBar":"dNMjD"}],"jiGne":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-leaflet":"jiGne","leaflet/dist/leaflet.css":"6JhOO","leaflet":"gzvEd","leaflet/dist/images/marker-icon.png":"8DYvK","leaflet/dist/images/marker-shadow.png":"exlwG","../styles/MapViewPage.css":"kZVmF","../components/NavBar":"dNMjD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jiGne":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useMap", ()=>(0, _hooksJs.useMap));

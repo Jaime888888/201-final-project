@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RatingStars from '../components/RatingStars';
 import NavBar from '../components/NavBar';
 import '../styles/FavoritesPage.css';
+import { AuthContext } from '../context/AuthContext';
 
 function FavoritesPage() {
+  const { token } = useContext(AuthContext); // token
+  
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +55,10 @@ function FavoritesPage() {
       setError(null);
       try {
         const res = await fetch('/api/favorites', {
-          headers: { 'Accept': 'application/json' },
+          headers: { 
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}` // attach token 
+          },
           credentials: 'include',
         });
         if (!res.ok) throw new Error(`Failed to fetch favorites (${res.status})`);
@@ -79,7 +86,7 @@ function FavoritesPage() {
     }
     loadFavorites();
     return () => { isMounted = false; };
-  }, []);
+  }, [token]);
 
   const handleCardClick = (id) => {
     if (!id) return;

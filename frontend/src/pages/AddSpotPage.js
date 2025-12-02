@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import "../styles/AddSpotPage.css";
+import { AuthContext } from '../context/AuthContext';
 
 function AddSpotPage() {
+  const { token } = useContext(AuthContext); // token
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -42,7 +46,8 @@ function AddSpotPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
+          Authorization: `Bearer ${token}` // attach token
         },
         credentials: "include",
         body: JSON.stringify(payload)

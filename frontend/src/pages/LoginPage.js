@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import "./App.css";
 import "../styles/components.css";
 
 
 function App() {
+  // use AuthContext to get the login function
+  const { login } = useContext(AuthContext);
+
   const [mode, setMode] = useState("login"); // "login" or "signup"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,6 +58,16 @@ function App() {
             : "Could not create account"
         );
         return;
+      }
+
+      const data = await res.json();
+
+      // store token in AuthContext
+      if (data.token) {
+        login(data.token, email);
+      } 
+      else {
+        setServerError("No token returned from server");
       }
 
       alert(mode === "login" ? "Logged in (stub)" : "Account created (stub)");
