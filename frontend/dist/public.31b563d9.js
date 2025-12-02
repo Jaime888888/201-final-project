@@ -25002,6 +25002,10 @@ var _favoritesPage = require("../pages/FavoritesPage");
 var _favoritesPageDefault = parcelHelpers.interopDefault(_favoritesPage);
 var _mapView = require("../pages/MapView");
 var _mapViewDefault = parcelHelpers.interopDefault(_mapView);
+var _loginPage = require("../pages/LoginPage");
+var _loginPageDefault = parcelHelpers.interopDefault(_loginPage);
+var _addSpotPage = require("../pages/AddSpotPage");
+var _addSpotPageDefault = parcelHelpers.interopDefault(_addSpotPage);
 function AppRouter() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -25010,47 +25014,71 @@ function AppRouter() {
                     path: "/",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mapViewDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
-                        lineNumber: 10,
+                        lineNumber: 12,
                         columnNumber: 34
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
-                    lineNumber: 10,
+                    lineNumber: 12,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/favorites",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoritesPageDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
-                        lineNumber: 11,
+                        lineNumber: 13,
                         columnNumber: 43
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
-                    lineNumber: 11,
+                    lineNumber: 13,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/mapview",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mapViewDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
-                        lineNumber: 12,
+                        lineNumber: 14,
                         columnNumber: 41
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
-                    lineNumber: 12,
+                    lineNumber: 14,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/login",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPageDefault.default), {}, void 0, false, {
+                        fileName: "src/routes/AppRouter.js",
+                        lineNumber: 16,
+                        columnNumber: 39
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/routes/AppRouter.js",
+                    lineNumber: 16,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/add-spot",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _addSpotPageDefault.default), {}, void 0, false, {
+                        fileName: "src/routes/AppRouter.js",
+                        lineNumber: 17,
+                        columnNumber: 42
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/routes/AppRouter.js",
+                    lineNumber: 17,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/routes/AppRouter.js",
-            lineNumber: 9,
+            lineNumber: 11,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/routes/AppRouter.js",
-        lineNumber: 8,
+        lineNumber: 10,
         columnNumber: 5
     }, this);
 }
@@ -25064,7 +25092,7 @@ $RefreshReg$(_c, "AppRouter");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../pages/FavoritesPage":"iSU4I","../pages/MapView":"1bl4f","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"61z4w":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../pages/FavoritesPage":"iSU4I","../pages/MapView":"1bl4f","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../pages/LoginPage":"auemd","../pages/AddSpotPage":"3CEjY"}],"61z4w":[function(require,module,exports,__globalThis) {
 /**
  * React Router DOM v6.30.2
  *
@@ -35054,9 +35082,11 @@ function NavBar() {
     const location = (0, _reactRouterDom.useLocation)();
     const navigate = (0, _reactRouterDom.useNavigate)();
     const onLogout = ()=>{
-        // TODO: replace with real logout
-        // For now, just navigate to home
-        navigate('/');
+        // TODO: replace with real logout (clear auth, tokens, etc.)
+        // Navigate to Login page
+        navigate('/login', {
+            replace: true
+        });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
         className: "navbar",
@@ -35095,13 +35125,22 @@ function NavBar() {
                             lineNumber: 28,
                             columnNumber: 11
                         }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
+                            to: "/add-spot",
+                            className: ({ isActive })=>`navlink ${isActive ? 'active' : ''}`,
+                            children: "Add Spot"
+                        }, void 0, false, {
+                            fileName: "src/components/NavBar.js",
+                            lineNumber: 34,
+                            columnNumber: 11
+                        }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                             className: "navlink navlink--button",
                             onClick: onLogout,
                             children: "Logout"
                         }, void 0, false, {
                             fileName: "src/components/NavBar.js",
-                            lineNumber: 34,
+                            lineNumber: 40,
                             columnNumber: 11
                         }, this)
                     ]
@@ -46754,6 +46793,581 @@ const TileLayer = (0, _core.createTileLayerComponent)(function createTileLayer({
     if (url != null && url !== prevProps.url) layer.setUrl(url);
 });
 
-},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6JhOO":[function() {},{}],"8DYvK":[function() {},{}],"exlwG":[function() {},{}],"kZVmF":[function() {},{}]},["cRH9c","a0t4e"], "a0t4e", "parcelRequirec7f7", {}, null, null, "http://localhost:3000")
+},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6JhOO":[function() {},{}],"8DYvK":[function() {},{}],"exlwG":[function() {},{}],"kZVmF":[function() {},{}],"auemd":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$00d4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$00d4.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$00d4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+// Replace missing local App.css with global styles
+var _globalCss = require("../styles/global.css");
+var _componentsCss = require("../styles/components.css");
+var _s = $RefreshSig$();
+function App() {
+    _s();
+    const [mode, setMode] = (0, _react.useState)("login"); // "login" or "signup"
+    const [email, setEmail] = (0, _react.useState)("");
+    const [password, setPassword] = (0, _react.useState)("");
+    const [confirm, setConfirm] = (0, _react.useState)("");
+    const [errors, setErrors] = (0, _react.useState)({});
+    const [serverError, setServerError] = (0, _react.useState)("");
+    const validate = ()=>{
+        const newErrors = {};
+        if (!email.trim()) newErrors.email = "Email is required";
+        else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Enter a valid email";
+        if (!password.trim()) newErrors.password = "Password is required";
+        if (mode === "signup") {
+            if (!confirm.trim()) newErrors.confirm = "Please confirm your password";
+            else if (confirm !== password) newErrors.confirm = "Passwords do not match";
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        setServerError("");
+        if (!validate()) return;
+        const url = mode === "login" ? "http://localhost:8080/api/auth/login" : "http://localhost:8080/api/auth/register"; // adjust to your backend
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+            if (!res.ok) {
+                setServerError(mode === "login" ? "Invalid email or password" : "Could not create account");
+                return;
+            }
+            alert(mode === "login" ? "Logged in (stub)" : "Account created (stub)");
+        } catch  {
+            setServerError("Network error, please try again");
+        }
+    };
+    const switchToSignup = ()=>{
+        setMode("signup");
+        setErrors({});
+        setServerError("");
+        setPassword("");
+        setConfirm("");
+    };
+    const switchToLogin = ()=>{
+        setMode("login");
+        setErrors({});
+        setServerError("");
+        setPassword("");
+        setConfirm("");
+    };
+    const isLogin = mode === "login";
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "app",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "login-card",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                    children: "USC Study Spot Finder"
+                }, void 0, false, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 87,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                    children: isLogin ? "Log in with your account" : "Create your account"
+                }, void 0, false, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 88,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                    className: "tagline",
+                    children: "Find the perfect study spot within 10 miles of campus."
+                }, void 0, false, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 89,
+                    columnNumber: 9
+                }, this),
+                serverError && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "error-banner",
+                    children: serverError
+                }, void 0, false, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 93,
+                    columnNumber: 25
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                    onSubmit: handleSubmit,
+                    noValidate: true,
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                            children: [
+                                "Email",
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                    type: "email",
+                                    value: email,
+                                    onChange: (e)=>setEmail(e.target.value),
+                                    placeholder: "you@usc.edu"
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 98,
+                                    columnNumber: 13
+                                }, this),
+                                errors.email && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                    className: "field-error",
+                                    children: errors.email
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 104,
+                                    columnNumber: 30
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/pages/LoginPage.js",
+                            lineNumber: 96,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                            children: [
+                                "Password",
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                    type: "password",
+                                    value: password,
+                                    onChange: (e)=>setPassword(e.target.value),
+                                    placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 109,
+                                    columnNumber: 13
+                                }, this),
+                                errors.password && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                    className: "field-error",
+                                    children: errors.password
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 116,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/pages/LoginPage.js",
+                            lineNumber: 107,
+                            columnNumber: 11
+                        }, this),
+                        !isLogin && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                            children: [
+                                "Confirm password",
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                    type: "password",
+                                    value: confirm,
+                                    onChange: (e)=>setConfirm(e.target.value),
+                                    placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 123,
+                                    columnNumber: 15
+                                }, this),
+                                errors.confirm && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                    className: "field-error",
+                                    children: errors.confirm
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 130,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/pages/LoginPage.js",
+                            lineNumber: 121,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                            type: "submit",
+                            children: isLogin ? "Log in" : "Sign up"
+                        }, void 0, false, {
+                            fileName: "src/pages/LoginPage.js",
+                            lineNumber: 135,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 95,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "helper-row",
+                    children: isLogin ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                            children: [
+                                "Don\u2019t have an account?",
+                                " ",
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                    type: "button",
+                                    onClick: switchToSignup,
+                                    style: {
+                                        background: "none",
+                                        border: "none",
+                                        padding: 0,
+                                        color: "#475569",
+                                        cursor: "pointer",
+                                        font: "inherit"
+                                    },
+                                    children: "Sign up"
+                                }, void 0, false, {
+                                    fileName: "src/pages/LoginPage.js",
+                                    lineNumber: 143,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/pages/LoginPage.js",
+                            lineNumber: 141,
+                            columnNumber: 15
+                        }, this)
+                    }, void 0, false) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: [
+                                    "Already have an account?",
+                                    " ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        type: "button",
+                                        onClick: switchToLogin,
+                                        style: {
+                                            background: "none",
+                                            border: "none",
+                                            padding: 0,
+                                            color: "#475569",
+                                            cursor: "pointer",
+                                            font: "inherit"
+                                        },
+                                        children: "Log in"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/LoginPage.js",
+                                        lineNumber: 163,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/LoginPage.js",
+                                lineNumber: 161,
+                                columnNumber: 15
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {}, void 0, false, {
+                                fileName: "src/pages/LoginPage.js",
+                                lineNumber: 178,
+                                columnNumber: 15
+                            }, this)
+                        ]
+                    }, void 0, true)
+                }, void 0, false, {
+                    fileName: "src/pages/LoginPage.js",
+                    lineNumber: 138,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/pages/LoginPage.js",
+            lineNumber: 86,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "src/pages/LoginPage.js",
+        lineNumber: 85,
+        columnNumber: 5
+    }, this);
+}
+_s(App, "3FTxuQKc7yoHoBi8tOhPRQgHflI=");
+_c = App;
+exports.default = App;
+var _c;
+$RefreshReg$(_c, "App");
+
+  $parcel$ReactRefreshHelpers$00d4.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../styles/global.css":"ktSbF","../styles/components.css":"g8Z80","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"ktSbF":[function() {},{}],"g8Z80":[function() {},{}],"3CEjY":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$087e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$087e.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$087e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _addSpotPageCss = require("../styles/AddSpotPage.css");
+var _navBar = require("../components/NavBar");
+var _navBarDefault = parcelHelpers.interopDefault(_navBar);
+var _s = $RefreshSig$();
+function AddSpotPage() {
+    _s();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const [formData, setFormData] = (0, _react.useState)({
+        name: "",
+        address: "",
+        description: "",
+        hasWifi: false,
+        hasOutlets: false
+    });
+    const [submitting, setSubmitting] = (0, _react.useState)(false);
+    const [error, setError] = (0, _react.useState)("");
+    const handleChange = (e)=>{
+        const { name, value, type, checked } = e.target;
+        setFormData((prev)=>({
+                ...prev,
+                [name]: type === "checkbox" ? checked : value
+            }));
+    };
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        setError("");
+        if (!formData.name.trim() || !formData.address.trim()) {
+            setError("Name and location are required.");
+            return;
+        }
+        const payload = {
+            name: formData.name.trim(),
+            address: formData.address.trim(),
+            description: formData.description.trim(),
+            hasWifi: formData.hasWifi,
+            hasOutlets: formData.hasOutlets
+        };
+        setSubmitting(true);
+        try {
+            const res = await fetch("/api/spots", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                setError("Could not create study spot.");
+                setSubmitting(false);
+                return;
+            }
+            navigate("/favorites");
+        } catch  {
+            setError("Network error. Please try again.");
+        } finally{
+            setSubmitting(false);
+        }
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "add-spot-page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/AddSpotPage.js",
+                lineNumber: 66,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "add-spot-container",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "add-spot-title",
+                        children: "Add a new study spot"
+                    }, void 0, false, {
+                        fileName: "src/pages/AddSpotPage.js",
+                        lineNumber: 68,
+                        columnNumber: 9
+                    }, this),
+                    error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "add-spot-error",
+                        children: error
+                    }, void 0, false, {
+                        fileName: "src/pages/AddSpotPage.js",
+                        lineNumber: 69,
+                        columnNumber: 19
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                        className: "add-spot-form",
+                        onSubmit: handleSubmit,
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "add-spot-field",
+                                children: [
+                                    "Name",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "name",
+                                        value: formData.name,
+                                        onChange: handleChange,
+                                        placeholder: "Leavey Library",
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 73,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 71,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "add-spot-field",
+                                children: [
+                                    "Location",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "address",
+                                        value: formData.address,
+                                        onChange: handleChange,
+                                        placeholder: "Address or general location",
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 84,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 82,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "add-spot-field",
+                                children: [
+                                    "Description",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("textarea", {
+                                        name: "description",
+                                        value: formData.description,
+                                        onChange: handleChange,
+                                        rows: 4,
+                                        placeholder: "Vibe, seating, best time to go..."
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 95,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 93,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "add-spot-checkbox-row",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "add-spot-checkbox",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "checkbox",
+                                                name: "hasWifi",
+                                                checked: formData.hasWifi,
+                                                onChange: handleChange
+                                            }, void 0, false, {
+                                                fileName: "src/pages/AddSpotPage.js",
+                                                lineNumber: 105,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Wi-Fi available"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 104,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "add-spot-checkbox",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "checkbox",
+                                                name: "hasOutlets",
+                                                checked: formData.hasOutlets,
+                                                onChange: handleChange
+                                            }, void 0, false, {
+                                                fileName: "src/pages/AddSpotPage.js",
+                                                lineNumber: 114,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Outlets available"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 113,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 103,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "add-spot-actions",
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                    type: "submit",
+                                    className: "add-spot-button add-spot-button-primary",
+                                    disabled: submitting,
+                                    children: submitting ? "Saving..." : "Create spot"
+                                }, void 0, false, {
+                                    fileName: "src/pages/AddSpotPage.js",
+                                    lineNumber: 124,
+                                    columnNumber: 13
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 123,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/pages/AddSpotPage.js",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/AddSpotPage.js",
+                lineNumber: 67,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/AddSpotPage.js",
+        lineNumber: 65,
+        columnNumber: 5
+    }, this);
+}
+_s(AddSpotPage, "0VYBNFj7awZNpULzUFEbJdi3L/0=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = AddSpotPage;
+exports.default = AddSpotPage;
+var _c;
+$RefreshReg$(_c, "AddSpotPage");
+
+  $parcel$ReactRefreshHelpers$087e.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../styles/AddSpotPage.css":"jZZCq","../components/NavBar":"dNMjD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jZZCq":[function() {},{}]},["cRH9c","a0t4e"], "a0t4e", "parcelRequirec7f7", {}, null, null, "http://localhost:3000")
 
 //# sourceMappingURL=public.31b563d9.js.map

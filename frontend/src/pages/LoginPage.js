@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./App.css";
+// Replace missing local App.css with global styles
+import "../styles/global.css";
 import "../styles/components.css";
 
 
@@ -146,7 +147,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}
@@ -154,7 +155,6 @@ function App() {
                   Sign up
                 </button>
               </span>
-              <a href="#">Forgot password?</a>
             </>
           ) : (
             <>
@@ -167,7 +167,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}

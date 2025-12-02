@@ -7,9 +7,9 @@ function NavBar() {
   const navigate = useNavigate();
 
   const onLogout = () => {
-    // TODO: replace with real logout
-    // For now, just navigate to home
-    navigate('/');
+    // TODO: replace with real logout (clear auth, tokens, etc.)
+    // Navigate to Login page
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -30,6 +30,12 @@ function NavBar() {
             className={({ isActive }) => `navlink ${isActive ? 'active' : ''}`}
           >
             Favorites
+          </NavLink>
+          <NavLink
+            to="/add-spot"
+            className={({ isActive }) => `navlink ${isActive ? 'active' : ''}`}
+          >
+            Add Spot
           </NavLink>
           <button className="navlink navlink--button" onClick={onLogout}>
             Logout
