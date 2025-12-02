@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import "./App.css";
+// Replace missing local App.css with global styles
+import "../styles/global.css";
+a1065f1e9dba282a0ea6368a7f2074bdcd1fc3e1
 import "../styles/components.css";
 
 
@@ -160,7 +163,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}
@@ -168,7 +171,6 @@ function App() {
                   Sign up
                 </button>
               </span>
-              <a href="#">Forgot password?</a>
             </>
           ) : (
             <>
@@ -181,7 +183,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}

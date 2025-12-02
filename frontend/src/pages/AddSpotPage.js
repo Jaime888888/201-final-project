@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import "../styles/AddSpotPage.css";
 import { AuthContext } from '../context/AuthContext';
+import NavBar from '../components/NavBar';
+a1065f1e9dba282a0ea6368a7f2074bdcd1fc3e1
 
 function AddSpotPage() {
   const { token } = useContext(AuthContext); // token
@@ -67,6 +69,7 @@ function AddSpotPage() {
 
   return (
     <div className="add-spot-page">
+      <NavBar />
       <div className="add-spot-container">
         <h1 className="add-spot-title">Add a new study spot</h1>
         {error && <div className="add-spot-error">{error}</div>}
@@ -124,14 +127,6 @@ function AddSpotPage() {
             </label>
           </div>
           <div className="add-spot-actions">
-            <button
-              type="button"
-              className="add-spot-button add-spot-button-secondary"
-              onClick={() => navigate(-1)}
-              disabled={submitting}
-            >
-              Cancel
-            </button>
             <button
               type="submit"
               className="add-spot-button add-spot-button-primary"

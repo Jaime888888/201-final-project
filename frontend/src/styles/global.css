@@ -1,0 +1,15 @@
+:root {
+  --usc-cardinal: #990000;
+  --usc-gold: #ffc72c;
+  --bg: #fafafa;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
+  --shadow: 0 10px 24px rgba(0,0,0,0.08);
+  --radius: 16px;
+}
+
+html, body, #root { height: 100%; }
+
+/* Keep other page styles in their own files; no global body overrides here */

@@ -1,1 +1,18 @@
+# macOS
 .DS_Store
+
+# Frontend node artifacts
+/frontend/node_modules/
+/frontend/.parcel-cache/
+/frontend/dist/
+/frontend/.env
+/frontend/npm-debug.log*
+
+# Root node artifacts (no root package.json in this repo)
+/package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
