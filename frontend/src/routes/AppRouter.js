@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import FavoritesPage from '../pages/FavoritesPage';
-// Optionally import other pages and NavBar if available
-// import HomePage from '../pages/HomePage';
-// import StudySpotDetailsPage from '../pages/StudySpotDetailsPage';
-// import NotFoundPage from '../pages/NotFoundPage';
-// import NavBar from '../components/NavBar';
+import MapView from "../pages/MapView";
+import LoginPage from '../pages/LoginPage';
+import AddSpotPage from '../pages/AddSpotPage';
 
 function AppRouter() {
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
       <Routes>
-        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/" element={<MapView />} />
         <Route path="/favorites" element={<FavoritesPage />} />
-        {/* <Route path="/spots/:id" element={<StudySpotDetailsPage />} /> */}
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="/mapview" element={<MapView />} />
+        <Route path="/spots/:id" element={<StudySpotDetailsPage />} />
+        {/* Additional routes can be added here */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/add-spot" element={<AddSpotPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import "./App.css";
+// Replace missing local App.css with global styles
+import "../styles/global.css";
 import "../styles/components.css";
 
 function App() {
+  // use AuthContext to get the login function
+  const { login } = useContext(AuthContext);
+
   const [mode, setMode] = useState("login"); // "login" or "signup"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -153,7 +159,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}
@@ -161,7 +167,6 @@ function App() {
                   Sign up
                 </button>
               </span>
-              <a href="#">Forgot password?</a>
             </>
           ) : (
             <>
@@ -174,7 +179,7 @@ function App() {
                     background: "none",
                     border: "none",
                     padding: 0,
-                    color: "#ffc72c",
+                    color: "#475569", // neutral slate, no yellow
                     cursor: "pointer",
                     font: "inherit",
                   }}

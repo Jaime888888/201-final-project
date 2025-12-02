@@ -1,0 +1,31 @@
+/* NavBar styles aligned with MapViewPage.css */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.location h2 {
+  font-size: 1rem;
+  margin: 0;
+  color: #888;
+}
+
+.location p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0.2rem 0 0 0;
+}
+
+.search {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  width: 280px;
+  outline: none;
+  font-size: 0.95rem;
+}
