@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RatingStars from '../components/RatingStars';
-import '../styles/FavoritesPage.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import RatingStars from "../components/RatingStars";
+import "../styles/FavoritesPage.css";
+import { getFavorites } from "../api/favorites";  // NEW
 
 function FavoritesPage() {
   const navigate = useNavigate();
@@ -11,32 +12,27 @@ function FavoritesPage() {
 
   useEffect(() => {
     let isMounted = true;
+
     async function loadFavorites() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch('/api/favorites', {
-          headers: {
-            'Accept': 'application/json',
-          },
-          credentials: 'include',
-        });
-        if (!res.ok) {
-          throw new Error(`Failed to fetch favorites (${res.status})`);
-        }
-        const data = await res.json();
-        if (isMounted) {
-          setFavorites(Array.isArray(data) ? data : (data?.favorites || []));
-        }
+        const data = await getFavorites();   // use API helper
+        if (isMounted) setFavorites(data);
       } catch (e) {
-        if (isMounted) setError(e.message || 'Failed to load favorites');
+        if (isMounted) setError(e.message || "Failed to load favorites");
       } finally {
         if (isMounted) setLoading(false);
       }
     }
+
     loadFavorites();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+
 
   const handleCardClick = (id) => {
     if (!id) return;

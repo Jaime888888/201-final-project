@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import "../styles/components.css";
 
-
 function App() {
   const [mode, setMode] = useState("login"); // "login" or "signup"
   const [email, setEmail] = useState("");
@@ -56,7 +55,15 @@ function App() {
         return;
       }
 
-      alert(mode === "login" ? "Logged in (stub)" : "Account created (stub)");
+      // NEW: read response body and store token
+      const data = await res.json();      // expect something like { token: "..." }
+      const token = data.token;           // change name if your backend uses a different field
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      alert(mode === "login" ? "Logged in!" : "Account created!");
     } catch {
       setServerError("Network error, please try again");
     }

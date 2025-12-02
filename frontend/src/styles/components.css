@@ -136,3 +136,148 @@ button[type="submit"]:hover {
 .helper-row a:hover {
   text-decoration: underline;
 }
+
+
+
+.profile-card {
+  width: 100%;
+  max-width: 720px;
+  padding: 2.25rem 2.5rem;
+  border-radius: 1.25rem;
+  background: rgba(17, 24, 39, 0.96);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(249, 250, 251, 0.08);
+  color: #f9fafb;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffc72c, #fbbf24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+}
+
+.profile-header h1 {
+  margin: 0 0 0.15rem;
+  font-size: 1.4rem;
+}
+
+.profile-header p {
+  margin: 0.1rem 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.profile-section {
+  margin-top: 1.5rem;
+}
+
+.profile-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e5e7eb;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.profile-tag {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: #020617;
+  font-size: 0.78rem;
+  color: #e5e7eb;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.favorite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  background: #020617;
+  border: 1px solid #1f2937;
+}
+
+.favorite-item h3 {
+  margin: 0 0 0.15rem;
+  font-size: 0.98rem;
+}
+
+.favorite-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
+
+.favorite-button {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 199, 44, 0.1);
+  color: #ffc72c;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.favorite-button:hover {
+  background: rgba(255, 199, 44, 0.2);
+}
+
+.profile-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.secondary-button,
+.danger-button {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  border-color: #ffc72c;
+}
+
+.danger-button {
+  border-color: #7f1d1d;
+  color: #fecaca;
+}
+
+.danger-button:hover {
+  background: #7f1d1d;
+}
