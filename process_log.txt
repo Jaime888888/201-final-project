@@ -1,0 +1,57 @@
+Trent:
+Prompt:
+Create a frontend file structure for a studyspot app that includes a study spot details page, a favorites page, a map view page, 
+login/sign-in page, and a add new studyspot page. The frontend will be created using React, Javascript, HTML, and CSS.
+Create any additional files you deem necessary.
+
+Issues:
+There weren't any issues.
+
+Fixes:
+There were no fixes needed.
+
+Explanation:
+There were no issues, so there is no explanation needed.
+
+Prompt:
+Create a Favorites page that displayed the users favorited study spots.
+Use a dedicated CSS file, and make the page in a similar style to MapView.js
+
+Issues:
+Received this error:
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+Check the render method of FavoritesPage.
+▶ 19 stack frames were collapsed.
+This screen is visible only in development. It will not appear if the app crashes in production.
+Open your browser’s developer console to further inspect this error. Click the 'X' or hit ESC to dismiss this message.
+
+Fixes:
+I fixed the issue with another prompt seen later.
+
+Explanation:
+Insert explanation here:
+
+Prompt:
+Create a navigation bar in NavBar.js and NavBar.css, it should include links to the map view page, 
+the favorites page, and an option to log out, and add it to the top of the favorites page.
+
+Issues:
+There weren't any issues.
+
+Fixes:
+There were no fixes needed.
+
+Explanation:
+There were no issues, so there is no explanation needed.
+
+Kasra:
+
+Riya:
+
+Jaime:
+
+KT:
+
+
+
+

@@ -1,0 +1,52 @@
+/* NavBar component styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.navbar__inner {
+  /* removed max-width to allow full bleed spacing */
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes brand to far left, links to far right */
+  padding: 12px 32px; /* wider horizontal padding */
+  box-sizing: border-box;
+}
+
+.navbar__brand {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #111827;
+  cursor: pointer;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* a bit more spacing */
+}
+
+.navlink {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.98rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.navlink:hover { text-decoration: underline; color: #111827; }
+.navlink.active { color: #111827; font-weight: 600; }
+.navlink--button { background: transparent; border: none; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .navbar__inner { flex-wrap: wrap; padding: 10px 16px; }
+  .navbar__links { width: 100%; justify-content: flex-start; margin-top: 6px; }
+}
