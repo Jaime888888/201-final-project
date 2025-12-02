@@ -5,6 +5,7 @@ import L from "leaflet";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "../styles/MapViewPage.css";
+import NavBar from '../components/NavBar';
 
 
 // ✅ Default Leaflet icon fix
@@ -27,7 +28,7 @@ function FlyToMarker({ position }) {
   return null;
 }
 
-function App() {
+function MapView() {
   const [selectedId, setSelectedId] = useState(null);
   const [flyTo, setFlyTo] = useState(null);
 
@@ -87,6 +88,7 @@ function App() {
 
   return (
     <div className="page">
+      <NavBar />
       {/* Header */}
       <header className="header">
         <div className="location">

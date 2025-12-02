@@ -1,0 +1,20 @@
+{
+  "name": "studyspot-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel public/index.html --port 3000",
+    "build": "parcel build public/index.html",
+    "clean": "rm -rf .parcel-cache dist"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.0"
+  }
+}
