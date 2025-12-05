@@ -728,12 +728,19 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _client = require("react-dom/client");
 var _appRouter = require("./routes/AppRouter");
 var _appRouterDefault = parcelHelpers.interopDefault(_appRouter);
+var _authContext = require("./context/AuthContext");
 const container = document.getElementById('root');
 const root = (0, _client.createRoot)(container);
-root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appRouterDefault.default), {}, void 0, false, {
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _authContext.AuthProvider), {
+    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appRouterDefault.default), {}, void 0, false, {
+        fileName: "src/index.js",
+        lineNumber: 11,
+        columnNumber: 7
+    }, undefined)
+}, void 0, false, {
     fileName: "src/index.js",
-    lineNumber: 7,
-    columnNumber: 13
+    lineNumber: 10,
+    columnNumber: 5
 }, undefined));
 
   $parcel$ReactRefreshHelpers$3cdc.postlude(module);
@@ -741,7 +748,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appRouterDefault.defau
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-dom/client":"hrvwu","./routes/AppRouter":"fKrnd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-dom/client":"hrvwu","./routes/AppRouter":"fKrnd","./context/AuthContext":"lhbhb","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -25006,28 +25013,18 @@ var _loginPage = require("../pages/LoginPage");
 var _loginPageDefault = parcelHelpers.interopDefault(_loginPage);
 var _addSpotPage = require("../pages/AddSpotPage");
 var _addSpotPageDefault = parcelHelpers.interopDefault(_addSpotPage);
+var _studySpotDetailsPage = require("../pages/StudySpotDetailsPage");
+var _studySpotDetailsPageDefault = parcelHelpers.interopDefault(_studySpotDetailsPage);
 function AppRouter() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mapViewDefault.default), {}, void 0, false, {
-                        fileName: "src/routes/AppRouter.js",
-                        lineNumber: 12,
-                        columnNumber: 34
-                    }, void 0)
-                }, void 0, false, {
-                    fileName: "src/routes/AppRouter.js",
-                    lineNumber: 12,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "/favorites",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoritesPageDefault.default), {}, void 0, false, {
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPageDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
                         lineNumber: 13,
-                        columnNumber: 43
+                        columnNumber: 34
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
@@ -25047,11 +25044,23 @@ function AppRouter() {
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "/login",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPageDefault.default), {}, void 0, false, {
+                    path: "/favorites",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoritesPageDefault.default), {}, void 0, false, {
+                        fileName: "src/routes/AppRouter.js",
+                        lineNumber: 15,
+                        columnNumber: 43
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/routes/AppRouter.js",
+                    lineNumber: 15,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/spots/:id",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _studySpotDetailsPageDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
                         lineNumber: 16,
-                        columnNumber: 39
+                        columnNumber: 43
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
@@ -25059,26 +25068,38 @@ function AppRouter() {
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/login",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginPageDefault.default), {}, void 0, false, {
+                        fileName: "src/routes/AppRouter.js",
+                        lineNumber: 18,
+                        columnNumber: 39
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/routes/AppRouter.js",
+                    lineNumber: 18,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/add-spot",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _addSpotPageDefault.default), {}, void 0, false, {
                         fileName: "src/routes/AppRouter.js",
-                        lineNumber: 17,
+                        lineNumber: 19,
                         columnNumber: 42
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/routes/AppRouter.js",
-                    lineNumber: 17,
+                    lineNumber: 19,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/routes/AppRouter.js",
-            lineNumber: 11,
+            lineNumber: 12,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/routes/AppRouter.js",
-        lineNumber: 10,
+        lineNumber: 11,
         columnNumber: 5
     }, this);
 }
@@ -25092,7 +25113,7 @@ $RefreshReg$(_c, "AppRouter");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../pages/FavoritesPage":"iSU4I","../pages/MapView":"1bl4f","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../pages/LoginPage":"auemd","../pages/AddSpotPage":"3CEjY"}],"61z4w":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../pages/FavoritesPage":"iSU4I","../pages/MapView":"1bl4f","../pages/LoginPage":"auemd","../pages/AddSpotPage":"3CEjY","../pages/StudySpotDetailsPage":"6YgOF","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"61z4w":[function(require,module,exports,__globalThis) {
 /**
  * React Router DOM v6.30.2
  *
@@ -32385,9 +32406,12 @@ var _ratingStarsDefault = parcelHelpers.interopDefault(_ratingStars);
 var _navBar = require("../components/NavBar");
 var _navBarDefault = parcelHelpers.interopDefault(_navBar);
 var _favoritesPageCss = require("../styles/FavoritesPage.css");
+var _authContext = require("../context/AuthContext");
+var _favorites = require("../api/favorites");
 var _s = $RefreshSig$();
 function FavoritesPage() {
     _s();
+    const { token } = (0, _react.useContext)((0, _authContext.AuthContext)); // token
     const navigate = (0, _reactRouterDom.useNavigate)();
     const [favorites, setFavorites] = (0, _react.useState)([]);
     const [loading, setLoading] = (0, _react.useState)(true);
@@ -32431,31 +32455,10 @@ function FavoritesPage() {
             setLoading(true);
             setError(null);
             try {
-                const res = await fetch('/api/favorites', {
-                    headers: {
-                        'Accept': 'application/json'
-                    },
-                    credentials: 'include'
-                });
-                if (!res.ok) throw new Error(`Failed to fetch favorites (${res.status})`);
-                const contentType = res.headers.get('content-type') || '';
-                if (!contentType.includes('application/json')) // Fallback to demo data when response is not JSON
-                {
-                    if (isMounted) {
-                        setFavorites(demoFavorites);
-                        setError(null);
-                    }
-                } else {
-                    const data = await res.json();
-                    const items = Array.isArray(data) ? data : data?.favorites || [];
-                    if (isMounted) setFavorites(items);
-                }
+                const data = await (0, _favorites.getFavorites)(); // use API helper
+                if (isMounted) setFavorites(data);
             } catch (e) {
-                // Fallback to demo data on error
-                if (isMounted) {
-                    setFavorites(demoFavorites);
-                    setError(null);
-                }
+                if (isMounted) setError(e.message || "Failed to load favorites");
             } finally{
                 if (isMounted) setLoading(false);
             }
@@ -32483,7 +32486,7 @@ function FavoritesPage() {
             "aria-label": "No image available"
         }, void 0, false, {
             fileName: "src/pages/FavoritesPage.js",
-            lineNumber: 99,
+            lineNumber: 91,
             columnNumber: 22
         }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -32493,7 +32496,7 @@ function FavoritesPage() {
             loading: "lazy"
         }, void 0, false, {
             fileName: "src/pages/FavoritesPage.js",
-            lineNumber: 100,
+            lineNumber: 92,
             columnNumber: 12
         }, this);
     };
@@ -32503,7 +32506,7 @@ function FavoritesPage() {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                 fileName: "src/pages/FavoritesPage.js",
-                lineNumber: 107,
+                lineNumber: 99,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32518,7 +32521,7 @@ function FavoritesPage() {
                                     children: "Your Favorites"
                                 }, void 0, false, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 111,
+                                    lineNumber: 103,
                                     columnNumber: 13
                                 }, this),
                                 !loading && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -32529,13 +32532,13 @@ function FavoritesPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 113,
+                                    lineNumber: 105,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/FavoritesPage.js",
-                            lineNumber: 110,
+                            lineNumber: 102,
                             columnNumber: 11
                         }, this),
                         loading && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32545,20 +32548,20 @@ function FavoritesPage() {
                                     className: "spinner"
                                 }, void 0, false, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 119,
+                                    lineNumber: 111,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: "Loading favorites\u2026"
                                 }, void 0, false, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 120,
+                                    lineNumber: 112,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/FavoritesPage.js",
-                            lineNumber: 118,
+                            lineNumber: 110,
                             columnNumber: 13
                         }, this),
                         !loading && list.length > 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32579,7 +32582,7 @@ function FavoritesPage() {
                                             children: "\xd7"
                                         }, void 0, false, {
                                             fileName: "src/pages/FavoritesPage.js",
-                                            lineNumber: 136,
+                                            lineNumber: 128,
                                             columnNumber: 19
                                         }, this),
                                         renderImage(spot),
@@ -32592,12 +32595,12 @@ function FavoritesPage() {
                                                         children: spot?.name || 'Unnamed Spot'
                                                     }, void 0, false, {
                                                         fileName: "src/pages/FavoritesPage.js",
-                                                        lineNumber: 146,
+                                                        lineNumber: 138,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "src/pages/FavoritesPage.js",
-                                                    lineNumber: 145,
+                                                    lineNumber: 137,
                                                     columnNumber: 21
                                                 }, this),
                                                 spot?.address && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -32605,7 +32608,7 @@ function FavoritesPage() {
                                                     children: spot.address
                                                 }, void 0, false, {
                                                     fileName: "src/pages/FavoritesPage.js",
-                                                    lineNumber: 148,
+                                                    lineNumber: 140,
                                                     columnNumber: 39
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -32617,7 +32620,7 @@ function FavoritesPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "src/pages/FavoritesPage.js",
-                                                    lineNumber: 149,
+                                                    lineNumber: 141,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32626,29 +32629,29 @@ function FavoritesPage() {
                                                         rating: spot?.rating || spot?.averageRating || 0
                                                     }, void 0, false, {
                                                         fileName: "src/pages/FavoritesPage.js",
-                                                        lineNumber: 152,
+                                                        lineNumber: 144,
                                                         columnNumber: 48
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "src/pages/FavoritesPage.js",
-                                                    lineNumber: 152,
+                                                    lineNumber: 144,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/pages/FavoritesPage.js",
-                                            lineNumber: 144,
+                                            lineNumber: 136,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, spot.id || spot._id, true, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 127,
+                                    lineNumber: 119,
                                     columnNumber: 17
                                 }, this))
                         }, void 0, false, {
                             fileName: "src/pages/FavoritesPage.js",
-                            lineNumber: 125,
+                            lineNumber: 117,
                             columnNumber: 13
                         }, this),
                         !loading && list.length === 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -32658,41 +32661,41 @@ function FavoritesPage() {
                                     children: "You haven\u2019t added any favorites yet."
                                 }, void 0, false, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 161,
+                                    lineNumber: 153,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: "Browse study spots to add some!"
                                 }, void 0, false, {
                                     fileName: "src/pages/FavoritesPage.js",
-                                    lineNumber: 162,
+                                    lineNumber: 154,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/FavoritesPage.js",
-                            lineNumber: 160,
+                            lineNumber: 152,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/pages/FavoritesPage.js",
-                    lineNumber: 109,
+                    lineNumber: 101,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/pages/FavoritesPage.js",
-                lineNumber: 108,
+                lineNumber: 100,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/pages/FavoritesPage.js",
-        lineNumber: 106,
+        lineNumber: 98,
         columnNumber: 5
     }, this);
 }
-_s(FavoritesPage, "RdrqIOfYx/fHoWR9u/V08QOzdfY=", false, function() {
+_s(FavoritesPage, "Dv/oXElpaBD41RWjDqRZ7aPRcnY=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -32707,7 +32710,7 @@ $RefreshReg$(_c, "FavoritesPage");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/RatingStars":"lAMzg","../components/NavBar":"dNMjD","../styles/FavoritesPage.css":"evcLl","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"lAMzg":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/RatingStars":"lAMzg","../components/NavBar":"dNMjD","../styles/FavoritesPage.css":"evcLl","../context/AuthContext":"lhbhb","../api/favorites":"foKsv","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"lAMzg":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$c32c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$c32c.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -35083,8 +35086,8 @@ function NavBar() {
     const navigate = (0, _reactRouterDom.useNavigate)();
     const onLogout = ()=>{
         // TODO: replace with real logout (clear auth, tokens, etc.)
-        // Navigate to Login page
-        navigate('/login', {
+        // Navigate to Login page (home page)
+        navigate('/', {
             replace: true
         });
     };
@@ -35095,7 +35098,7 @@ function NavBar() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "navbar__brand",
-                    onClick: ()=>navigate('/'),
+                    onClick: ()=>navigate('/mapview'),
                     role: "button",
                     tabIndex: 0,
                     children: "StudySpot"
@@ -35108,8 +35111,8 @@ function NavBar() {
                     className: "navbar__links",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
-                            to: "/",
-                            className: ({ isActive })=>`navlink ${isActive && location.pathname === '/' ? 'active' : ''}`,
+                            to: "/mapview",
+                            className: ({ isActive })=>`navlink ${isActive ? 'active' : ''}`,
                             children: "MapView"
                         }, void 0, false, {
                             fileName: "src/components/NavBar.js",
@@ -35177,7 +35180,85 @@ $RefreshReg$(_c, "NavBar");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./NavBar.css":"cwvsc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"cwvsc":[function() {},{}],"evcLl":[function() {},{}],"1bl4f":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./NavBar.css":"cwvsc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"cwvsc":[function() {},{}],"evcLl":[function() {},{}],"lhbhb":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$34b5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$34b5.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$34b5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AuthContext", ()=>AuthContext);
+parcelHelpers.export(exports, "AuthProvider", ()=>AuthProvider);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
+const AuthContext = /*#__PURE__*/ (0, _react.createContext)();
+const AuthProvider = ({ children })=>{
+    _s();
+    const [token, setToken] = (0, _react.useState)(localStorage.getItem("authToken") || null);
+    const [email, setEmail] = (0, _react.useState)(localStorage.getItem("userEmail") || null);
+    const login = (token, email)=>{
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("userEmail", email);
+        setToken(token);
+        setEmail(email);
+    };
+    const logout = ()=>{
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userEmail");
+        setToken(null);
+        setEmail(null);
+    };
+    const isLoggedIn = !!token;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(AuthContext.Provider, {
+        value: {
+            token,
+            email,
+            login,
+            logout,
+            isLoggedIn
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "src/context/AuthContext.js",
+        lineNumber: 26,
+        columnNumber: 5
+    }, undefined);
+};
+_s(AuthProvider, "A1UKZ95TZzcADi6UX9I2dsg2oso=");
+_c = AuthProvider;
+var _c;
+$RefreshReg$(_c, "AuthProvider");
+
+  $parcel$ReactRefreshHelpers$34b5.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"foKsv":[function(require,module,exports,__globalThis) {
+// src/api/favorites.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getFavorites", ()=>getFavorites);
+async function getFavorites() {
+    const token = localStorage.getItem("token");
+    const res = await fetch("/api/favorites", {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: token ? `Bearer ${token}` : undefined
+        },
+        credentials: "include"
+    });
+    if (!res.ok) throw new Error(`Failed to fetch favorites (${res.status})`);
+    const data = await res.json();
+    return Array.isArray(data) ? data : data?.favorites || [];
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"1bl4f":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9511 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$9511.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -35194,36 +35275,19 @@ var _reactLeaflet = require("react-leaflet");
 var _leafletCss = require("leaflet/dist/leaflet.css");
 var _leaflet = require("leaflet");
 var _leafletDefault = parcelHelpers.interopDefault(_leaflet);
-var _markerIconPng = require("leaflet/dist/images/marker-icon.png");
-var _markerIconPngDefault = parcelHelpers.interopDefault(_markerIconPng);
-var _markerShadowPng = require("leaflet/dist/images/marker-shadow.png");
-var _markerShadowPngDefault = parcelHelpers.interopDefault(_markerShadowPng);
 var _mapViewPageCss = require("../styles/MapViewPage.css");
 var _navBar = require("../components/NavBar");
 var _navBarDefault = parcelHelpers.interopDefault(_navBar);
+var _reactRouterDom = require("react-router-dom");
+var _spots = require("../api/spots");
 var _s = $RefreshSig$(), _s1 = $RefreshSig$();
-// ✅ Default Leaflet icon fix
-let DefaultIcon = (0, _leafletDefault.default).icon({
-    iconUrl: (0, _markerIconPngDefault.default),
-    shadowUrl: (0, _markerShadowPngDefault.default),
-    iconSize: [
-        25,
-        41
-    ],
-    iconAnchor: [
-        12,
-        41
-    ]
-});
-(0, _leafletDefault.default).Marker.prototype.options.icon = DefaultIcon;
-// 🧭 Helper to move map view when a spot is selected
 function FlyToMarker({ position }) {
     _s();
     const map = (0, _reactLeaflet.useMap)();
     (0, _react.useEffect)(()=>{
-        if (position) map.flyTo(position, 18, {
+        if (position) map.flyTo(position, 17, {
             duration: 1.3
-        }); // Smooth zoom-in
+        });
     }, [
         position,
         map
@@ -35236,76 +35300,162 @@ _s(FlyToMarker, "IoceErwr5KVGS9kN4RQ1bOkYMAg=", false, function() {
     ];
 });
 _c = FlyToMarker;
+function LocateButton({ onLocate }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+        className: "locate-btn-floating",
+        onClick: onLocate,
+        title: "Use my location",
+        children: "\uD83D\uDCCD"
+    }, void 0, false, {
+        fileName: "src/pages/MapView.js",
+        lineNumber: 20,
+        columnNumber: 5
+    }, this);
+}
+_c1 = LocateButton;
+// Create a blue-dot icon like Google Maps
+const blueDotIcon = (0, _leafletDefault.default).divIcon({
+    html: `<div class="blue-dot"></div>`,
+    className: "",
+    iconSize: [
+        12,
+        12
+    ]
+});
 function MapView() {
     _s1();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const [spots, setSpots] = (0, _react.useState)([]);
     const [selectedId, setSelectedId] = (0, _react.useState)(null);
     const [flyTo, setFlyTo] = (0, _react.useState)(null);
-    const studySpots = [
-        {
-            id: 1,
-            name: "Leavey Library",
-            type: "Library",
-            status: "Open",
-            rating: 4.7,
-            distance: "150 m",
-            note: "Quiet and well-lit study zones",
-            position: [
-                34.0211,
-                -118.2826
-            ],
-            image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=60"
-        },
-        {
-            id: 2,
-            name: "Caf\xe9 84",
-            type: "Coffee House",
-            status: "Open",
-            rating: 4.2,
-            distance: "400 m",
-            note: "Great coffee, can get crowded midday",
-            position: [
-                34.0206,
-                -118.2853
-            ],
-            image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=60"
-        },
-        {
-            id: 3,
-            name: "Annenberg Commons",
-            type: "Study Lounge",
-            status: "Closed",
-            rating: 3.9,
-            distance: "600 m",
-            note: "Spacious and modern group space",
-            position: [
-                34.0229,
-                -118.2869
-            ],
-            image: "https://images.unsplash.com/photo-1556484687-30636164638b?auto=format&fit=crop&w=800&q=60"
-        },
-        {
-            id: 4,
-            name: "USC Village Starbucks",
-            type: "Coffee Shop",
-            status: "Open",
-            rating: 4.5,
-            distance: "900 m",
-            note: "Busy but perfect for long study sessions",
-            position: [
-                34.0266,
-                -118.2854
-            ],
-            image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=60"
+    const [userLocation, setUserLocation] = (0, _react.useState)(null);
+    const [searchTerm, setSearchTerm] = (0, _react.useState)("");
+    const [ratingFilter, setRatingFilter] = (0, _react.useState)(1);
+    const [openOnly, setOpenOnly] = (0, _react.useState)(false);
+    const [loading, setLoading] = (0, _react.useState)(true);
+    const [error, setError] = (0, _react.useState)(null);
+    // Red and gold icons
+    const redIcon = new (0, _leafletDefault.default).Icon({
+        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+        iconSize: [
+            25,
+            41
+        ],
+        iconAnchor: [
+            12,
+            41
+        ]
+    });
+    const goldIcon = new (0, _leafletDefault.default).Icon({
+        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png",
+        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+        iconSize: [
+            25,
+            41
+        ],
+        iconAnchor: [
+            12,
+            41
+        ]
+    });
+    (0, _react.useEffect)(()=>{
+        async function fetchSpots() {
+            try {
+                setLoading(true);
+                const data = await (0, _spots.getSpots)();
+                if (Array.isArray(data)) {
+                    const mapped = data.map((s)=>({
+                            id: s.id,
+                            name: s.name,
+                            type: s.type || "Study Spot",
+                            imageUrl: s.image,
+                            note: s.note || "",
+                            rating: s.rating || 0.0,
+                            hours: s.hours || "",
+                            isOpen: s.isOpen === 1,
+                            latitude: s.position?.[0],
+                            longitude: s.position?.[1]
+                        }));
+                    setSpots(mapped);
+                } else setError("Invalid data format from server.");
+            } catch (err) {
+                console.error(err);
+                setError("Could not load study spots.");
+            } finally{
+                setLoading(false);
+            }
         }
-    ];
-    // Get selected spot coordinates
-    const selectedSpot = studySpots.find((s)=>s.id === selectedId);
+        fetchSpots();
+    }, []);
+    const filteredSpots = spots.filter((s)=>{
+        const t = searchTerm.toLowerCase();
+        const matchSearch = s.name.toLowerCase().includes(t) || s.type.toLowerCase().includes(t) || s.note.toLowerCase().includes(t);
+        const matchRating = s.rating >= ratingFilter;
+        const matchOpen = !openOnly || s.isOpen;
+        return matchSearch && matchRating && matchOpen;
+    });
+    const handleLocate = ()=>{
+        if (!navigator.geolocation) return alert("Geolocation not supported by your browser.");
+        navigator.geolocation.getCurrentPosition((pos)=>{
+            const coords = [
+                pos.coords.latitude,
+                pos.coords.longitude
+            ];
+            setUserLocation(coords);
+            setFlyTo(coords);
+        }, ()=>alert("Unable to access your location."));
+    };
+    if (loading) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/MapView.js",
+                lineNumber: 120,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "loading-screen",
+                children: "Loading map..."
+            }, void 0, false, {
+                fileName: "src/pages/MapView.js",
+                lineNumber: 121,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/MapView.js",
+        lineNumber: 119,
+        columnNumber: 7
+    }, this);
+    if (error) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/MapView.js",
+                lineNumber: 128,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "error-screen",
+                children: error
+            }, void 0, false, {
+                fileName: "src/pages/MapView.js",
+                lineNumber: 129,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/MapView.js",
+        lineNumber: 127,
+        columnNumber: 7
+    }, this);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "page",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                 fileName: "src/pages/MapView.js",
-                lineNumber: 91,
+                lineNumber: 135,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
@@ -35318,35 +35468,114 @@ function MapView() {
                                 children: "Current Location"
                             }, void 0, false, {
                                 fileName: "src/pages/MapView.js",
-                                lineNumber: 95,
+                                lineNumber: 139,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 children: "USC Campus"
                             }, void 0, false, {
                                 fileName: "src/pages/MapView.js",
-                                lineNumber: 96,
+                                lineNumber: 140,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/MapView.js",
-                        lineNumber: 94,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                        type: "text",
-                        className: "search",
-                        placeholder: "\uD83D\uDD0D Search for study spots..."
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "filters",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                className: "search",
+                                placeholder: "\uD83D\uDD0D Search for study spots...",
+                                value: searchTerm,
+                                onChange: (e)=>setSearchTerm(e.target.value)
+                            }, void 0, false, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 144,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "rating-slider",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        htmlFor: "ratingRange",
+                                        className: "slider-label",
+                                        children: [
+                                            "\u2B50 ",
+                                            ratingFilter,
+                                            "+"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 153,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        id: "ratingRange",
+                                        type: "range",
+                                        min: "90",
+                                        max: "5",
+                                        step: "1",
+                                        value: ratingFilter,
+                                        onChange: (e)=>setRatingFilter(Number(e.target.value))
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 156,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 152,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "toggle-container",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "checkbox",
+                                        checked: openOnly,
+                                        onChange: (e)=>setOpenOnly(e.target.checked)
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 168,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "slider"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 173,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "toggle-label",
+                                        children: "Open now"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 174,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 167,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/pages/MapView.js",
-                        lineNumber: 98,
+                        lineNumber: 143,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/MapView.js",
-                lineNumber: 93,
+                lineNumber: 137,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35359,35 +35588,45 @@ function MapView() {
                                 children: "Study Areas"
                             }, void 0, false, {
                                 fileName: "src/pages/MapView.js",
-                                lineNumber: 109,
+                                lineNumber: 181,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 className: "subtitle",
                                 children: [
-                                    studySpots.length,
+                                    filteredSpots.length,
                                     " spots nearby"
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/MapView.js",
-                                lineNumber: 110,
+                                lineNumber: 182,
                                 columnNumber: 11
                             }, this),
-                            studySpots.map((spot)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: `card ${selectedId === spot.id ? "active" : ""}`,
+                            filteredSpots.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                className: "no-results",
+                                children: "No spots match your filters."
+                            }, void 0, false, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 185,
+                                columnNumber: 13
+                            }, this) : filteredSpots.map((s)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: `card ${selectedId === s.id ? "active" : ""}`,
                                     onClick: ()=>{
-                                        setSelectedId(spot.id);
-                                        setFlyTo(spot.position);
+                                        setSelectedId(s.id);
+                                        setFlyTo([
+                                            s.latitude,
+                                            s.longitude
+                                        ]);
                                     },
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                            src: spot.image,
-                                            alt: spot.name,
+                                            src: s.imageUrl,
+                                            alt: s.name,
                                             className: "thumb"
                                         }, void 0, false, {
                                             fileName: "src/pages/MapView.js",
-                                            lineNumber: 121,
-                                            columnNumber: 15
+                                            lineNumber: 196,
+                                            columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                             className: "info",
@@ -35396,184 +35635,246 @@ function MapView() {
                                                     className: "title-row",
                                                     children: [
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
-                                                            children: spot.name
+                                                            children: s.name
                                                         }, void 0, false, {
                                                             fileName: "src/pages/MapView.js",
-                                                            lineNumber: 124,
-                                                            columnNumber: 19
+                                                            lineNumber: 199,
+                                                            columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                            className: spot.status === "Open" ? "badge open" : "badge closed",
-                                                            children: spot.status
+                                                            className: s.isOpen ? "badge open" : "badge closed",
+                                                            children: s.isOpen ? "Open" : "Closed"
                                                         }, void 0, false, {
                                                             fileName: "src/pages/MapView.js",
-                                                            lineNumber: 125,
-                                                            columnNumber: 19
+                                                            lineNumber: 200,
+                                                            columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "src/pages/MapView.js",
-                                                    lineNumber: 123,
-                                                    columnNumber: 17
+                                                    lineNumber: 198,
+                                                    columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     className: "type",
-                                                    children: spot.type
+                                                    children: s.type
                                                 }, void 0, false, {
                                                     fileName: "src/pages/MapView.js",
-                                                    lineNumber: 133,
-                                                    columnNumber: 17
+                                                    lineNumber: 204,
+                                                    columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     className: "note",
-                                                    children: spot.note
+                                                    children: s.note
                                                 }, void 0, false, {
                                                     fileName: "src/pages/MapView.js",
-                                                    lineNumber: 134,
-                                                    columnNumber: 17
+                                                    lineNumber: 205,
+                                                    columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                                     className: "meta",
                                                     children: [
                                                         "\u2B50 ",
-                                                        spot.rating,
+                                                        s.rating.toFixed(1),
                                                         " \u2022 ",
-                                                        spot.distance
+                                                        s.hours?.split(",")[0]
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "src/pages/MapView.js",
-                                                    lineNumber: 135,
-                                                    columnNumber: 17
+                                                    lineNumber: 206,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                                    className: "open-details-button",
+                                                    onClick: (e)=>{
+                                                        e.stopPropagation();
+                                                        navigate(`/spots/${s.id}`);
+                                                    },
+                                                    children: "Open details"
+                                                }, void 0, false, {
+                                                    fileName: "src/pages/MapView.js",
+                                                    lineNumber: 209,
+                                                    columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/pages/MapView.js",
-                                            lineNumber: 122,
-                                            columnNumber: 15
+                                            lineNumber: 197,
+                                            columnNumber: 17
                                         }, this)
                                     ]
-                                }, spot.id, true, {
+                                }, s.id, true, {
                                     fileName: "src/pages/MapView.js",
-                                    lineNumber: 113,
-                                    columnNumber: 13
+                                    lineNumber: 188,
+                                    columnNumber: 15
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/MapView.js",
-                        lineNumber: 108,
+                        lineNumber: 180,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "map",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.MapContainer), {
-                            center: [
-                                34.0205,
-                                -118.2856
-                            ],
-                            zoom: 17,
-                            style: {
-                                height: "100%",
-                                width: "100%",
-                                borderRadius: "16px"
-                            },
-                            scrollWheelZoom: true,
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
-                                    attribution: "\xa9 OpenStreetMap contributors",
-                                    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                }, void 0, false, {
-                                    fileName: "src/pages/MapView.js",
-                                    lineNumber: 151,
-                                    columnNumber: 13
-                                }, this),
-                                flyTo && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FlyToMarker, {
-                                    position: flyTo
-                                }, void 0, false, {
-                                    fileName: "src/pages/MapView.js",
-                                    lineNumber: 155,
-                                    columnNumber: 23
-                                }, this),
-                                studySpots.map((spot)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Marker), {
-                                        position: spot.position,
-                                        eventHandlers: {
-                                            click: ()=>{
-                                                setSelectedId(spot.id);
-                                                setFlyTo(spot.position);
-                                            }
-                                        },
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Popup), {
-                                            children: [
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
-                                                    children: spot.name
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.MapContainer), {
+                                center: [
+                                    34.0205,
+                                    -118.2856
+                                ],
+                                zoom: 17,
+                                style: {
+                                    height: "100%",
+                                    width: "100%",
+                                    borderRadius: "16px"
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
+                                        attribution: "\xa9 OpenStreetMap contributors",
+                                        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 230,
+                                        columnNumber: 13
+                                    }, this),
+                                    flyTo && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FlyToMarker, {
+                                        position: flyTo
+                                    }, void 0, false, {
+                                        fileName: "src/pages/MapView.js",
+                                        lineNumber: 234,
+                                        columnNumber: 23
+                                    }, this),
+                                    filteredSpots.map((s)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Marker), {
+                                            position: [
+                                                s.latitude,
+                                                s.longitude
+                                            ],
+                                            icon: selectedId === s.id ? goldIcon : redIcon,
+                                            eventHandlers: {
+                                                click: ()=>{
+                                                    setSelectedId(s.id);
+                                                    setFlyTo([
+                                                        s.latitude,
+                                                        s.longitude
+                                                    ]);
+                                                }
+                                            },
+                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Popup), {
+                                                children: [
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                                        children: s.name
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/MapView.js",
+                                                        lineNumber: 249,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                                        fileName: "src/pages/MapView.js",
+                                                        lineNumber: 250,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    s.isOpen ? "\uD83D\uDFE2 Open" : "\uD83D\uDD34 Closed",
+                                                    " ",
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                                                        fileName: "src/pages/MapView.js",
+                                                        lineNumber: 251,
+                                                        columnNumber: 56
+                                                    }, this),
+                                                    "\u2B50 ",
+                                                    s.rating.toFixed(1)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/MapView.js",
+                                                lineNumber: 248,
+                                                columnNumber: 17
+                                            }, this)
+                                        }, s.id, false, {
+                                            fileName: "src/pages/MapView.js",
+                                            lineNumber: 237,
+                                            columnNumber: 15
+                                        }, this)),
+                                    userLocation && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Marker), {
+                                                position: userLocation,
+                                                icon: blueDotIcon,
+                                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Popup), {
+                                                    children: "You are here \uD83D\uDCCD"
                                                 }, void 0, false, {
                                                     fileName: "src/pages/MapView.js",
-                                                    lineNumber: 168,
+                                                    lineNumber: 260,
                                                     columnNumber: 19
-                                                }, this),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                                    fileName: "src/pages/MapView.js",
-                                                    lineNumber: 169,
-                                                    columnNumber: 19
-                                                }, this),
-                                                spot.status === "Open" ? "\uD83D\uDFE2 Open" : "\uD83D\uDD34 Closed",
-                                                " ",
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                                    fileName: "src/pages/MapView.js",
-                                                    lineNumber: 170,
-                                                    columnNumber: 70
-                                                }, this),
-                                                "\u2B50 ",
-                                                spot.rating,
-                                                " \u2022 ",
-                                                spot.distance
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "src/pages/MapView.js",
-                                            lineNumber: 167,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, spot.id, false, {
-                                        fileName: "src/pages/MapView.js",
-                                        lineNumber: 157,
-                                        columnNumber: 15
-                                    }, this))
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/pages/MapView.js",
-                            lineNumber: 145,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "src/pages/MapView.js",
+                                                lineNumber: 259,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Circle), {
+                                                center: userLocation,
+                                                radius: 25,
+                                                pathOptions: {
+                                                    color: "#007bff",
+                                                    fillColor: "#007bff",
+                                                    fillOpacity: 0.15
+                                                }
+                                            }, void 0, false, {
+                                                fileName: "src/pages/MapView.js",
+                                                lineNumber: 262,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 225,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(LocateButton, {
+                                onLocate: handleLocate
+                            }, void 0, false, {
+                                fileName: "src/pages/MapView.js",
+                                lineNumber: 274,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/pages/MapView.js",
-                        lineNumber: 144,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/MapView.js",
-                lineNumber: 106,
+                lineNumber: 179,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/pages/MapView.js",
-        lineNumber: 90,
+        lineNumber: 134,
         columnNumber: 5
     }, this);
 }
-_s1(MapView, "0ewUg2UfGzG3z4Vdr9Ibvn3mdwY=");
-_c1 = MapView;
+_s1(MapView, "jlJrOIjC+zXIlO2BVrOWCByisUw=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c2 = MapView;
 exports.default = MapView;
-var _c, _c1;
+var _c, _c1, _c2;
 $RefreshReg$(_c, "FlyToMarker");
-$RefreshReg$(_c1, "MapView");
+$RefreshReg$(_c1, "LocateButton");
+$RefreshReg$(_c2, "MapView");
 
   $parcel$ReactRefreshHelpers$9511.postlude(module);
 } finally {
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-leaflet":"jiGne","leaflet/dist/leaflet.css":"6JhOO","leaflet":"gzvEd","leaflet/dist/images/marker-icon.png":"8DYvK","leaflet/dist/images/marker-shadow.png":"exlwG","../styles/MapViewPage.css":"kZVmF","../components/NavBar":"dNMjD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jiGne":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-leaflet":"jiGne","leaflet/dist/leaflet.css":"6JhOO","leaflet":"gzvEd","../styles/MapViewPage.css":"kZVmF","../components/NavBar":"dNMjD","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../api/spots":"etxQ3"}],"jiGne":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useMap", ()=>(0, _hooksJs.useMap));
@@ -35625,7 +35926,7 @@ var _videoOverlayJs = require("./VideoOverlay.js");
 var _wmstileLayerJs = require("./WMSTileLayer.js");
 var _zoomControlJs = require("./ZoomControl.js");
 
-},{"./hooks.js":"j5j6b","./AttributionControl.js":false,"./Circle.js":false,"./CircleMarker.js":false,"./FeatureGroup.js":false,"./GeoJSON.js":false,"./ImageOverlay.js":false,"./LayerGroup.js":false,"./LayersControl.js":false,"./MapContainer.js":"dz61a","./Marker.js":"5zIsr","./Pane.js":false,"./Polygon.js":false,"./Polyline.js":false,"./Popup.js":"ifhCr","./Rectangle.js":false,"./ScaleControl.js":false,"./SVGOverlay.js":false,"./TileLayer.js":"fiMxm","./Tooltip.js":false,"./VideoOverlay.js":false,"./WMSTileLayer.js":false,"./ZoomControl.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"j5j6b":[function(require,module,exports,__globalThis) {
+},{"./hooks.js":"j5j6b","./AttributionControl.js":false,"./Circle.js":"1eVVm","./CircleMarker.js":false,"./FeatureGroup.js":false,"./GeoJSON.js":false,"./ImageOverlay.js":false,"./LayerGroup.js":false,"./LayersControl.js":false,"./MapContainer.js":"dz61a","./Marker.js":"5zIsr","./Pane.js":false,"./Polygon.js":false,"./Polyline.js":false,"./Popup.js":"ifhCr","./Rectangle.js":false,"./ScaleControl.js":false,"./SVGOverlay.js":false,"./TileLayer.js":"fiMxm","./Tooltip.js":false,"./VideoOverlay.js":false,"./WMSTileLayer.js":false,"./ZoomControl.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"j5j6b":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useMap", ()=>useMap);
@@ -35716,7 +36017,7 @@ var _mediaOverlayJs = require("./media-overlay.js");
 var _paneJs = require("./pane.js");
 var _pathJs = require("./path.js");
 
-},{"./attribution.js":false,"./circle.js":false,"./component.js":false,"./context.js":"g9q6X","./control.js":false,"./div-overlay.js":false,"./dom.js":false,"./element.js":"9pAkK","./events.js":false,"./generic.js":"3oFOr","./grid-layer.js":"h9xum","./layer.js":false,"./media-overlay.js":false,"./pane.js":"69x0k","./path.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"fWqey":[function(require,module,exports,__globalThis) {
+},{"./attribution.js":false,"./circle.js":"dCCZV","./component.js":false,"./context.js":"g9q6X","./control.js":false,"./div-overlay.js":false,"./dom.js":false,"./element.js":"9pAkK","./events.js":false,"./generic.js":"3oFOr","./grid-layer.js":"h9xum","./layer.js":false,"./media-overlay.js":false,"./pane.js":"69x0k","./path.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"fWqey":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useAttribution", ()=>useAttribution);
@@ -35735,7 +36036,16 @@ function useAttribution(map, attribution) {
     ]);
 }
 
-},{"react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"b0HQH":[function(require,module,exports,__globalThis) {
+},{"react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"dCCZV":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateCircle", ()=>updateCircle);
+function updateCircle(layer, props, prevProps) {
+    if (props.center !== prevProps.center) layer.setLatLng(props.center);
+    if (props.radius != null && props.radius !== prevProps.radius) layer.setRadius(props.radius);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"b0HQH":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createContainerComponent", ()=>createContainerComponent);
@@ -36058,61 +36368,20 @@ function updateGridLayer(layer, props, prevProps) {
     if (zIndex != null && zIndex !== prevProps.zIndex) layer.setZIndex(zIndex);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"dz61a":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"1eVVm":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MapContainer", ()=>MapContainer);
+parcelHelpers.export(exports, "Circle", ()=>Circle);
 var _core = require("@react-leaflet/core");
 var _leaflet = require("leaflet");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-function _extends() {
-    _extends = Object.assign || function(target) {
-        for(var i = 1; i < arguments.length; i++){
-            var source = arguments[i];
-            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
-        }
-        return target;
-    };
-    return _extends.apply(this, arguments);
-}
-function MapContainerComponent({ bounds, boundsOptions, center, children, className, id, placeholder, style, whenReady, zoom, ...options }, forwardedRef) {
-    const [props] = (0, _react.useState)({
-        className,
-        id,
-        style
-    });
-    const [context, setContext] = (0, _react.useState)(null);
-    (0, _react.useImperativeHandle)(forwardedRef, ()=>context?.map ?? null, [
-        context
-    ]);
-    const mapRef = (0, _react.useCallback)((node)=>{
-        if (node !== null && context === null) {
-            const map = new (0, _leaflet.Map)(node, options);
-            if (center != null && zoom != null) map.setView(center, zoom);
-            else if (bounds != null) map.fitBounds(bounds, boundsOptions);
-            if (whenReady != null) map.whenReady(whenReady);
-            setContext((0, _core.createLeafletContext)(map));
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    (0, _react.useEffect)(()=>{
-        return ()=>{
-            context?.map.remove();
-        };
-    }, [
-        context
-    ]);
-    const contents = context ? /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _core.LeafletProvider), {
-        value: context
-    }, children) : placeholder ?? null;
-    return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", _extends({}, props, {
-        ref: mapRef
-    }), contents);
-}
-const MapContainer = /*#__PURE__*/ (0, _react.forwardRef)(MapContainerComponent);
+const Circle = (0, _core.createPathComponent)(function createCircle({ center, children: _c, ...options }, ctx) {
+    const circle = new (0, _leaflet.Circle)(center, options);
+    return (0, _core.createElementObject)(circle, (0, _core.extendContext)(ctx, {
+        overlayContainer: circle
+    }));
+}, (0, _core.updateCircle));
 
-},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
+},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
  * (c) 2010-2023 Vladimir Agafonkin, (c) 2010-2011 CloudMade
@@ -46708,7 +46977,61 @@ const MapContainer = /*#__PURE__*/ (0, _react.forwardRef)(MapContainerComponent)
     window.L = exports1;
 });
 
-},{}],"5zIsr":[function(require,module,exports,__globalThis) {
+},{}],"dz61a":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MapContainer", ()=>MapContainer);
+var _core = require("@react-leaflet/core");
+var _leaflet = require("leaflet");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+function MapContainerComponent({ bounds, boundsOptions, center, children, className, id, placeholder, style, whenReady, zoom, ...options }, forwardedRef) {
+    const [props] = (0, _react.useState)({
+        className,
+        id,
+        style
+    });
+    const [context, setContext] = (0, _react.useState)(null);
+    (0, _react.useImperativeHandle)(forwardedRef, ()=>context?.map ?? null, [
+        context
+    ]);
+    const mapRef = (0, _react.useCallback)((node)=>{
+        if (node !== null && context === null) {
+            const map = new (0, _leaflet.Map)(node, options);
+            if (center != null && zoom != null) map.setView(center, zoom);
+            else if (bounds != null) map.fitBounds(bounds, boundsOptions);
+            if (whenReady != null) map.whenReady(whenReady);
+            setContext((0, _core.createLeafletContext)(map));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    (0, _react.useEffect)(()=>{
+        return ()=>{
+            context?.map.remove();
+        };
+    }, [
+        context
+    ]);
+    const contents = context ? /*#__PURE__*/ (0, _reactDefault.default).createElement((0, _core.LeafletProvider), {
+        value: context
+    }, children) : placeholder ?? null;
+    return /*#__PURE__*/ (0, _reactDefault.default).createElement("div", _extends({}, props, {
+        ref: mapRef
+    }), contents);
+}
+const MapContainer = /*#__PURE__*/ (0, _react.forwardRef)(MapContainerComponent);
+
+},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"5zIsr":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Marker", ()=>Marker);
@@ -46793,7 +47116,91 @@ const TileLayer = (0, _core.createTileLayerComponent)(function createTileLayer({
     if (url != null && url !== prevProps.url) layer.setUrl(url);
 });
 
-},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6JhOO":[function() {},{}],"8DYvK":[function() {},{}],"exlwG":[function() {},{}],"kZVmF":[function() {},{}],"auemd":[function(require,module,exports,__globalThis) {
+},{"@react-leaflet/core":"b3jf2","leaflet":"gzvEd","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"6JhOO":[function() {},{}],"kZVmF":[function() {},{}],"etxQ3":[function(require,module,exports,__globalThis) {
+// frontend/src/api/spots.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSpots", ()=>getSpots);
+parcelHelpers.export(exports, "getSpotById", ()=>getSpotById);
+parcelHelpers.export(exports, "createSpot", ()=>createSpot);
+var _auth = require("./auth");
+async function getSpots() {
+    return await (0, _auth.GET)("/spots");
+}
+async function getSpotById(id) {
+    if (!id) throw new Error("getSpotById requires an id");
+    return await (0, _auth.GET)(`/spots/${id}`);
+}
+async function createSpot(payload) {
+    if (!payload || typeof payload !== "object") throw new Error("createSpot requires a payload object");
+    return await (0, _auth.POST)("/spots", payload);
+}
+
+},{"./auth":"IRPUF","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"IRPUF":[function(require,module,exports,__globalThis) {
+// frontend/src/api/auth.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * GET helper
+ * @param {string} uri - relative URI (e.g. '/spots' or '/auth/me')
+ * @returns parsed JSON response
+ */ parcelHelpers.export(exports, "GET", ()=>GET);
+/**
+ * POST helper
+ * @param {string} uri - relative URI (e.g. '/auth/login')
+ * @param {object} body - JS object to send as JSON body
+ * @returns parsed JSON response
+ */ parcelHelpers.export(exports, "POST", ()=>POST);
+const BASE_URL = "https://studyspot.online/api";
+async function request(method, uri, body) {
+    const token = localStorage.getItem("authToken");
+    const headers = {
+        Accept: "application/json"
+    };
+    if (body != null) headers["Content-Type"] = "application/json";
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+    const res = await fetch(`${BASE_URL}${uri}`, {
+        method,
+        headers,
+        credentials: "include",
+        body: body != null ? JSON.stringify(body) : undefined
+    });
+    // Handle no-content
+    if (res.status === 204) return null;
+    const text = await res.text();
+    let data = null;
+    try {
+        data = text ? JSON.parse(text) : null;
+    } catch  {
+        // not JSON — keep as text
+        data = text;
+    }
+    if (!res.ok) {
+        const message = data && data.message || typeof data === "string" && data || `Request failed (${res.status})`;
+        const err = new Error(message);
+        err.status = res.status;
+        err.data = data;
+        throw err;
+    }
+    return data;
+}
+async function GET(uri) {
+    return request("GET", uri, null);
+}
+_c = GET;
+async function POST(uri, body) {
+    return request("POST", uri, body);
+}
+_c1 = POST;
+exports.default = {
+    GET,
+    POST
+};
+var _c, _c1;
+$RefreshReg$(_c, "GET");
+$RefreshReg$(_c1, "POST");
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"auemd":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$00d4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$00d4.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -46805,12 +47212,14 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-// Replace missing local App.css with global styles
+var _authContext = require("../context/AuthContext");
 var _globalCss = require("../styles/global.css");
 var _componentsCss = require("../styles/components.css");
 var _s = $RefreshSig$();
 function App() {
     _s();
+    // use AuthContext to get the login function
+    const { login } = (0, _react.useContext)((0, _authContext.AuthContext));
     const [mode, setMode] = (0, _react.useState)("login"); // "login" or "signup"
     const [email, setEmail] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
@@ -46833,25 +47242,39 @@ function App() {
         e.preventDefault();
         setServerError("");
         if (!validate()) return;
-        const url = mode === "login" ? "http://localhost:8080/api/auth/login" : "http://localhost:8080/api/auth/register"; // adjust to your backend
+        const url = mode === "login" ? "https://studyspot.online/api/auth/login" : "https://studyspot.online/api/auth/register";
         try {
+            // For register, include username (extract from email or use email as username)
+            const requestBody = mode === "login" ? {
+                email,
+                password
+            } : {
+                username: email.split("@")[0],
+                email,
+                password
+            };
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
                 },
                 credentials: "include",
-                body: JSON.stringify({
-                    email,
-                    password
-                })
+                body: JSON.stringify(requestBody)
             });
             if (!res.ok) {
-                setServerError(mode === "login" ? "Invalid email or password" : "Could not create account");
+                const msg = await res.text().catch(()=>"");
+                setServerError(msg || (mode === "login" ? "Invalid email or password" : "Could not create account"));
                 return;
             }
-            alert(mode === "login" ? "Logged in (stub)" : "Account created (stub)");
-        } catch  {
+            const data = await res.json();
+            const token = data?.token;
+            if (token) {
+                localStorage.setItem("authToken", token);
+                login(token, email);
+            }
+            window.location.href = "/mapview"; // go to MapView after login
+        } catch (err) {
             setServerError("Network error, please try again");
         }
     };
@@ -46879,14 +47302,14 @@ function App() {
                     children: "USC Study Spot Finder"
                 }, void 0, false, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 87,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                     children: isLogin ? "Log in with your account" : "Create your account"
                 }, void 0, false, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 88,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -46894,7 +47317,7 @@ function App() {
                     children: "Find the perfect study spot within 10 miles of campus."
                 }, void 0, false, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 89,
+                    lineNumber: 111,
                     columnNumber: 9
                 }, this),
                 serverError && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -46902,7 +47325,7 @@ function App() {
                     children: serverError
                 }, void 0, false, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 93,
+                    lineNumber: 115,
                     columnNumber: 25
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -46919,7 +47342,7 @@ function App() {
                                     placeholder: "you@usc.edu"
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 98,
+                                    lineNumber: 120,
                                     columnNumber: 13
                                 }, this),
                                 errors.email && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -46927,13 +47350,13 @@ function App() {
                                     children: errors.email
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 104,
+                                    lineNumber: 126,
                                     columnNumber: 30
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/LoginPage.js",
-                            lineNumber: 96,
+                            lineNumber: 118,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -46946,7 +47369,7 @@ function App() {
                                     placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 109,
+                                    lineNumber: 131,
                                     columnNumber: 13
                                 }, this),
                                 errors.password && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -46954,13 +47377,13 @@ function App() {
                                     children: errors.password
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 116,
+                                    lineNumber: 138,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/LoginPage.js",
-                            lineNumber: 107,
+                            lineNumber: 129,
                             columnNumber: 11
                         }, this),
                         !isLogin && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -46973,7 +47396,7 @@ function App() {
                                     placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 123,
+                                    lineNumber: 145,
                                     columnNumber: 15
                                 }, this),
                                 errors.confirm && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -46981,13 +47404,13 @@ function App() {
                                     children: errors.confirm
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 130,
+                                    lineNumber: 152,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/LoginPage.js",
-                            lineNumber: 121,
+                            lineNumber: 143,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -46995,13 +47418,13 @@ function App() {
                             children: isLogin ? "Log in" : "Sign up"
                         }, void 0, false, {
                             fileName: "src/pages/LoginPage.js",
-                            lineNumber: 135,
+                            lineNumber: 157,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 95,
+                    lineNumber: 117,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47025,13 +47448,13 @@ function App() {
                                     children: "Sign up"
                                 }, void 0, false, {
                                     fileName: "src/pages/LoginPage.js",
-                                    lineNumber: 143,
+                                    lineNumber: 165,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/LoginPage.js",
-                            lineNumber: 141,
+                            lineNumber: 163,
                             columnNumber: 15
                         }, this)
                     }, void 0, false) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
@@ -47054,40 +47477,40 @@ function App() {
                                         children: "Log in"
                                     }, void 0, false, {
                                         fileName: "src/pages/LoginPage.js",
-                                        lineNumber: 163,
+                                        lineNumber: 185,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/LoginPage.js",
-                                lineNumber: 161,
+                                lineNumber: 183,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {}, void 0, false, {
                                 fileName: "src/pages/LoginPage.js",
-                                lineNumber: 178,
+                                lineNumber: 200,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true)
                 }, void 0, false, {
                     fileName: "src/pages/LoginPage.js",
-                    lineNumber: 138,
+                    lineNumber: 160,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/pages/LoginPage.js",
-            lineNumber: 86,
+            lineNumber: 108,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/pages/LoginPage.js",
-        lineNumber: 85,
+        lineNumber: 107,
         columnNumber: 5
     }, this);
 }
-_s(App, "3FTxuQKc7yoHoBi8tOhPRQgHflI=");
+_s(App, "Sr5KoOjMRTpsDjs01lW3pb69TTM=");
 _c = App;
 exports.default = App;
 var _c;
@@ -47098,7 +47521,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../styles/global.css":"ktSbF","../styles/components.css":"g8Z80","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"ktSbF":[function() {},{}],"g8Z80":[function() {},{}],"3CEjY":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../context/AuthContext":"lhbhb","../styles/global.css":"ktSbF","../styles/components.css":"g8Z80","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"ktSbF":[function() {},{}],"g8Z80":[function() {},{}],"3CEjY":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$087e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$087e.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -47113,26 +47536,31 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
 var _addSpotPageCss = require("../styles/AddSpotPage.css");
+var _authContext = require("../context/AuthContext");
 var _navBar = require("../components/NavBar");
 var _navBarDefault = parcelHelpers.interopDefault(_navBar);
 var _s = $RefreshSig$();
 function AddSpotPage() {
     _s();
+    const { token } = (0, _react.useContext)((0, _authContext.AuthContext));
     const navigate = (0, _reactRouterDom.useNavigate)();
     const [formData, setFormData] = (0, _react.useState)({
         name: "",
         address: "",
         description: "",
-        hasWifi: false,
-        hasOutlets: false
+        imageUrl: "",
+        rating: "",
+        openHours: "",
+        closeHours: "",
+        buildingType: ""
     });
     const [submitting, setSubmitting] = (0, _react.useState)(false);
     const [error, setError] = (0, _react.useState)("");
     const handleChange = (e)=>{
-        const { name, value, type, checked } = e.target;
+        const { name, value } = e.target;
         setFormData((prev)=>({
                 ...prev,
-                [name]: type === "checkbox" ? checked : value
+                [name]: value
             }));
     };
     const handleSubmit = async (e)=>{
@@ -47146,16 +47574,20 @@ function AddSpotPage() {
             name: formData.name.trim(),
             address: formData.address.trim(),
             description: formData.description.trim(),
-            hasWifi: formData.hasWifi,
-            hasOutlets: formData.hasOutlets
+            imageUrl: formData.imageUrl.trim(),
+            rating: formData.rating ? parseFloat(formData.rating) : null,
+            openHours: formData.openHours.trim(),
+            closeHours: formData.closeHours.trim(),
+            buildingType: formData.buildingType.trim()
         };
         setSubmitting(true);
         try {
-            const res = await fetch("/api/spots", {
+            const res = await fetch("https://studyspot.online/api/spots", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`
                 },
                 credentials: "include",
                 body: JSON.stringify(payload)
@@ -47177,7 +47609,7 @@ function AddSpotPage() {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                 fileName: "src/pages/AddSpotPage.js",
-                lineNumber: 66,
+                lineNumber: 76,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47188,7 +47620,7 @@ function AddSpotPage() {
                         children: "Add a new study spot"
                     }, void 0, false, {
                         fileName: "src/pages/AddSpotPage.js",
-                        lineNumber: 68,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47196,7 +47628,7 @@ function AddSpotPage() {
                         children: error
                     }, void 0, false, {
                         fileName: "src/pages/AddSpotPage.js",
-                        lineNumber: 69,
+                        lineNumber: 79,
                         columnNumber: 19
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -47216,13 +47648,13 @@ function AddSpotPage() {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "src/pages/AddSpotPage.js",
-                                        lineNumber: 73,
+                                        lineNumber: 83,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/AddSpotPage.js",
-                                lineNumber: 71,
+                                lineNumber: 81,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -47238,13 +47670,34 @@ function AddSpotPage() {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "src/pages/AddSpotPage.js",
-                                        lineNumber: 84,
+                                        lineNumber: 94,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/AddSpotPage.js",
-                                lineNumber: 82,
+                                lineNumber: 92,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "add-spot-field",
+                                children: [
+                                    "Building Type",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "buildingType",
+                                        value: formData.buildingType,
+                                        onChange: handleChange,
+                                        placeholder: "e.g., Library, Coffee Shop, Study Lounge"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 105,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 103,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -47259,62 +47712,135 @@ function AddSpotPage() {
                                         placeholder: "Vibe, seating, best time to go..."
                                     }, void 0, false, {
                                         fileName: "src/pages/AddSpotPage.js",
-                                        lineNumber: 95,
+                                        lineNumber: 115,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/AddSpotPage.js",
-                                lineNumber: 93,
+                                lineNumber: 113,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                className: "add-spot-field",
+                                children: [
+                                    "Image URL",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "url",
+                                        name: "imageUrl",
+                                        value: formData.imageUrl,
+                                        onChange: handleChange,
+                                        placeholder: "https://example.com/image.jpg"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 125,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("small", {
+                                        style: {
+                                            marginTop: "4px",
+                                            color: "#6b7280",
+                                            fontSize: "0.85rem"
+                                        },
+                                        children: "Enter a URL to an image of the study spot"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 132,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/AddSpotPage.js",
+                                lineNumber: 123,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "add-spot-checkbox-row",
+                                style: {
+                                    display: "flex",
+                                    gap: "16px",
+                                    flexWrap: "wrap"
+                                },
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                        className: "add-spot-checkbox",
+                                        className: "add-spot-field",
+                                        style: {
+                                            flex: "1",
+                                            minWidth: "150px"
+                                        },
                                         children: [
+                                            "Rating (0-5)",
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                                type: "checkbox",
-                                                name: "hasWifi",
-                                                checked: formData.hasWifi,
-                                                onChange: handleChange
+                                                type: "number",
+                                                name: "rating",
+                                                value: formData.rating,
+                                                onChange: handleChange,
+                                                placeholder: "4.5",
+                                                min: "0",
+                                                max: "5",
+                                                step: "0.1"
                                             }, void 0, false, {
                                                 fileName: "src/pages/AddSpotPage.js",
-                                                lineNumber: 105,
+                                                lineNumber: 139,
                                                 columnNumber: 15
-                                            }, this),
-                                            "Wi-Fi available"
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/AddSpotPage.js",
-                                        lineNumber: 104,
+                                        lineNumber: 137,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                        className: "add-spot-checkbox",
+                                        className: "add-spot-field",
+                                        style: {
+                                            flex: "1",
+                                            minWidth: "150px"
+                                        },
                                         children: [
+                                            "Open Hours",
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                                type: "checkbox",
-                                                name: "hasOutlets",
-                                                checked: formData.hasOutlets,
+                                                type: "time",
+                                                name: "openHours",
+                                                value: formData.openHours,
                                                 onChange: handleChange
                                             }, void 0, false, {
                                                 fileName: "src/pages/AddSpotPage.js",
-                                                lineNumber: 114,
+                                                lineNumber: 152,
                                                 columnNumber: 15
-                                            }, this),
-                                            "Outlets available"
+                                            }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/AddSpotPage.js",
-                                        lineNumber: 113,
+                                        lineNumber: 150,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "add-spot-field",
+                                        style: {
+                                            flex: "1",
+                                            minWidth: "150px"
+                                        },
+                                        children: [
+                                            "Close Hours",
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "time",
+                                                name: "closeHours",
+                                                value: formData.closeHours,
+                                                onChange: handleChange
+                                            }, void 0, false, {
+                                                fileName: "src/pages/AddSpotPage.js",
+                                                lineNumber: 161,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/AddSpotPage.js",
+                                        lineNumber: 159,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/AddSpotPage.js",
-                                lineNumber: 103,
+                                lineNumber: 136,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -47326,34 +47852,34 @@ function AddSpotPage() {
                                     children: submitting ? "Saving..." : "Create spot"
                                 }, void 0, false, {
                                     fileName: "src/pages/AddSpotPage.js",
-                                    lineNumber: 124,
+                                    lineNumber: 170,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/pages/AddSpotPage.js",
-                                lineNumber: 123,
+                                lineNumber: 169,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/AddSpotPage.js",
-                        lineNumber: 70,
+                        lineNumber: 80,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/AddSpotPage.js",
-                lineNumber: 67,
+                lineNumber: 77,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/pages/AddSpotPage.js",
-        lineNumber: 65,
+        lineNumber: 75,
         columnNumber: 5
     }, this);
 }
-_s(AddSpotPage, "0VYBNFj7awZNpULzUFEbJdi3L/0=", false, function() {
+_s(AddSpotPage, "yyyZIjahDHRhB3JBsucqJ4TdHGU=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -47368,6 +47894,731 @@ $RefreshReg$(_c, "AddSpotPage");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../styles/AddSpotPage.css":"jZZCq","../components/NavBar":"dNMjD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jZZCq":[function() {},{}]},["cRH9c","a0t4e"], "a0t4e", "parcelRequirec7f7", {}, null, null, "http://localhost:3000")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../styles/AddSpotPage.css":"jZZCq","../context/AuthContext":"lhbhb","../components/NavBar":"dNMjD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"jZZCq":[function() {},{}],"6YgOF":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$783c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$783c.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$783c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _navBar = require("../components/NavBar");
+var _navBarDefault = parcelHelpers.interopDefault(_navBar);
+var _studySpotDetailsPageCss = require("../styles/StudySpotDetailsPage.css");
+var _s = $RefreshSig$();
+function StudySpotDetailsPage() {
+    _s();
+    const { id } = (0, _reactRouterDom.useParams)();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const [spot, setSpot] = (0, _react.useState)(null);
+    const [loading, setLoading] = (0, _react.useState)(true);
+    const [error, setError] = (0, _react.useState)("");
+    const [favorite, setFavorite] = (0, _react.useState)(false);
+    (0, _react.useEffect)(()=>{
+        let isMounted = true;
+        async function loadSpot() {
+            setLoading(true);
+            setError("");
+            try {
+                const res = await fetch(`https://studyspot.online/api/spots/${id}`, {
+                    credentials: "include"
+                });
+                if (!res.ok) throw new Error("Failed to fetch spot");
+                const data = await res.json();
+                if (isMounted) setSpot(data);
+            } catch  {
+                if (isMounted) {
+                    setSpot({
+                        id,
+                        name: `Study spot ${id}`,
+                        address: "Location not available",
+                        description: "Description not available.",
+                        imageUrl: null
+                    });
+                    setError("Live data not available, showing placeholder information.");
+                }
+            } finally{
+                if (isMounted) setLoading(false);
+            }
+        }
+        loadSpot();
+        return ()=>{
+            isMounted = false;
+        };
+    }, [
+        id
+    ]);
+    const handleToggleFavorite = async ()=>{
+        const next = !favorite;
+        setFavorite(next);
+        try {
+            await fetch("https://studyspot.online/api/favorites", {
+                method: next ? "POST" : "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    spotId: Number(id)
+                })
+            });
+        } catch  {}
+    };
+    // Helper function to format time
+    const formatTime = (time)=>{
+        if (!time) return "Not specified";
+        // If time is in HH:MM format, convert to 12-hour format
+        if (time.includes(":")) {
+            const [hours, minutes] = time.split(":");
+            const hour = parseInt(hours, 10);
+            const ampm = hour >= 12 ? "PM" : "AM";
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${minutes} ${ampm}`;
+        }
+        return time;
+    };
+    // Helper to render stars
+    const renderStars = (rating)=>{
+        if (!rating) return null;
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "details-rating-stars",
+            children: [
+                Array(fullStars).fill(0).map((_, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        className: "star-full",
+                        children: "\u2605"
+                    }, i, false, {
+                        fileName: "src/pages/StudySpotDetailsPage.js",
+                        lineNumber: 90,
+                        columnNumber: 11
+                    }, this)),
+                hasHalfStar && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                    className: "star-half",
+                    children: "\u2605"
+                }, void 0, false, {
+                    fileName: "src/pages/StudySpotDetailsPage.js",
+                    lineNumber: 92,
+                    columnNumber: 25
+                }, this),
+                Array(emptyStars).fill(0).map((_, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        className: "star-empty",
+                        children: "\u2606"
+                    }, i, false, {
+                        fileName: "src/pages/StudySpotDetailsPage.js",
+                        lineNumber: 94,
+                        columnNumber: 11
+                    }, this))
+            ]
+        }, void 0, true, {
+            fileName: "src/pages/StudySpotDetailsPage.js",
+            lineNumber: 88,
+            columnNumber: 7
+        }, this);
+    };
+    if (loading) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "details-page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 103,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
+                className: "details-main",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "details-loading",
+                    children: "Loading study spot..."
+                }, void 0, false, {
+                    fileName: "src/pages/StudySpotDetailsPage.js",
+                    lineNumber: 105,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 104,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/StudySpotDetailsPage.js",
+        lineNumber: 102,
+        columnNumber: 7
+    }, this);
+    if (!spot) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "details-page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 114,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
+                className: "details-main",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "details-error",
+                    children: [
+                        "Could not load this study spot.",
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                            type: "button",
+                            className: "details-back-button",
+                            onClick: ()=>navigate(-1),
+                            children: "Go back"
+                        }, void 0, false, {
+                            fileName: "src/pages/StudySpotDetailsPage.js",
+                            lineNumber: 118,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/pages/StudySpotDetailsPage.js",
+                    lineNumber: 116,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 115,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/StudySpotDetailsPage.js",
+        lineNumber: 113,
+        columnNumber: 7
+    }, this);
+    // Get image URL - check multiple possible field names
+    const imageUrl = spot.imageUrl || spot.image || spot.images?.[0] || null;
+    const rating = spot.rating || spot.averageRating || null;
+    const buildingType = spot.buildingType || spot.type || null;
+    const openHours = spot.openHours || spot.openTime || null;
+    const closeHours = spot.closeHours || spot.closeTime || null;
+    const isOpen = spot.isOpen !== undefined ? spot.isOpen : spot.isOpenNow !== undefined ? spot.isOpenNow : null;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "details-page",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 141,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
+                className: "details-main",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "details-header-row",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                type: "button",
+                                className: "details-back-button",
+                                onClick: ()=>navigate(-1),
+                                children: "\u2190 Back"
+                            }, void 0, false, {
+                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                lineNumber: 144,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                type: "button",
+                                className: `details-favorite-button ${favorite ? "active" : ""}`,
+                                onClick: handleToggleFavorite,
+                                children: favorite ? "\u2605 In favorites" : "\u2606 Add to favorites"
+                            }, void 0, false, {
+                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                lineNumber: 151,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/pages/StudySpotDetailsPage.js",
+                        lineNumber: 143,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
+                        className: "details-layout",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "details-primary",
+                                children: [
+                                    imageUrl && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-image-container",
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                            src: imageUrl,
+                                            alt: spot.name,
+                                            className: "details-image",
+                                            onError: (e)=>{
+                                                e.target.style.display = 'none';
+                                            }
+                                        }, void 0, false, {
+                                            fileName: "src/pages/StudySpotDetailsPage.js",
+                                            lineNumber: 167,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 166,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-title-block",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                style: {
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    gap: "12px",
+                                                    marginBottom: "0.5rem"
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                                                        style: {
+                                                            margin: 0
+                                                        },
+                                                        children: spot.name
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 180,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    isOpen !== null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                        className: `details-status-badge ${isOpen ? "status-open" : "status-closed"}`,
+                                                        children: isOpen ? "\uD83D\uDFE2 Open Now" : "\uD83D\uDD34 Closed"
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 182,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 179,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-address",
+                                                children: spot.address
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 187,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 178,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-tags-row",
+                                        children: [
+                                            rating ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-on",
+                                                children: [
+                                                    "\u2B50 ",
+                                                    rating.toFixed ? rating.toFixed(1) : rating,
+                                                    " Rating"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 193,
+                                                columnNumber: 17
+                                            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-off",
+                                                children: "\u2B50 No rating yet"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 197,
+                                                columnNumber: 17
+                                            }, this),
+                                            buildingType ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-on",
+                                                children: buildingType
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 202,
+                                                columnNumber: 17
+                                            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-off",
+                                                children: "Building type not specified"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 206,
+                                                columnNumber: 17
+                                            }, this),
+                                            openHours || closeHours ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-on",
+                                                children: [
+                                                    "\uD83D\uDD50 ",
+                                                    formatTime(openHours),
+                                                    " - ",
+                                                    formatTime(closeHours)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 211,
+                                                columnNumber: 17
+                                            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "details-pill pill-off",
+                                                children: "\uD83D\uDD50 Hours not specified"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 215,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 191,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-rating-section",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                                                children: "Rating"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 223,
+                                                columnNumber: 15
+                                            }, this),
+                                            rating ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                className: "details-rating-display",
+                                                children: [
+                                                    renderStars(rating),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                        className: "details-rating-value",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                                className: "rating-number",
+                                                                children: rating.toFixed ? rating.toFixed(1) : rating
+                                                            }, void 0, false, {
+                                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                                lineNumber: 228,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                                className: "rating-max",
+                                                                children: "/ 5.0"
+                                                            }, void 0, false, {
+                                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                                lineNumber: 229,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 227,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 225,
+                                                columnNumber: 17
+                                            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-no-rating",
+                                                children: "No ratings yet. Be the first to rate this spot!"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 233,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 222,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-section",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                                                children: "Overview"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 238,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-description",
+                                                children: spot.description && spot.description.trim().length > 0 ? spot.description : "No description has been added for this spot yet."
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 239,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 237,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-section",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                                                children: "Tips for studying here"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 247,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                                                className: "details-tips-list",
+                                                children: [
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                        children: "Arrive a little early to grab your preferred seat."
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 249,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                        children: "Bring headphones in case the space gets noisy."
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 250,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                        children: "Check Wi-Fi and outlets when you arrive so you can settle in quickly."
+                                                    }, void 0, false, {
+                                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                                        lineNumber: 251,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 248,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 246,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                lineNumber: 163,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("aside", {
+                                className: "details-side",
+                                children: [
+                                    isOpen !== null && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Status"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 260,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                style: {
+                                                    color: isOpen ? "#047857" : "#dc2626",
+                                                    fontWeight: 600
+                                                },
+                                                children: isOpen ? "\uD83D\uDFE2 Open Now" : "\uD83D\uDD34 Closed"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 261,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 259,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Location"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 271,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                children: spot.address || "Address not available."
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 272,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 270,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Building Type"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 279,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                children: buildingType || "Not specified"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 280,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 278,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Hours"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 287,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                children: openHours || closeHours ? `${formatTime(openHours)} - ${formatTime(closeHours)}` : "Not specified"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 288,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 286,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Rating"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 297,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                children: rating ? `\u{2B50} ${rating.toFixed ? rating.toFixed(1) : rating} / 5.0` : "No ratings yet"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 298,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 296,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "details-card",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                                children: "Quick info"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 306,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-text",
+                                                children: "Ideal for focused solo work or small group sessions within a short distance of campus."
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 307,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "details-side-meta",
+                                                children: "Bring a charger and water bottle so you can stay for a full study block."
+                                            }, void 0, false, {
+                                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                                lineNumber: 310,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/StudySpotDetailsPage.js",
+                                        lineNumber: 305,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/StudySpotDetailsPage.js",
+                                lineNumber: 256,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/pages/StudySpotDetailsPage.js",
+                        lineNumber: 162,
+                        columnNumber: 9
+                    }, this),
+                    error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "details-warning",
+                        children: error
+                    }, void 0, false, {
+                        fileName: "src/pages/StudySpotDetailsPage.js",
+                        lineNumber: 318,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/StudySpotDetailsPage.js",
+                lineNumber: 142,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/StudySpotDetailsPage.js",
+        lineNumber: 140,
+        columnNumber: 5
+    }, this);
+}
+_s(StudySpotDetailsPage, "f+m8GbwUXNjEkQwPWqs+DPxb/qU=", false, function() {
+    return [
+        (0, _reactRouterDom.useParams),
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = StudySpotDetailsPage;
+exports.default = StudySpotDetailsPage;
+var _c;
+$RefreshReg$(_c, "StudySpotDetailsPage");
+
+  $parcel$ReactRefreshHelpers$783c.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/NavBar":"dNMjD","../styles/StudySpotDetailsPage.css":"6kH6e","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"6kH6e":[function() {},{}]},["cRH9c","a0t4e"], "a0t4e", "parcelRequirec7f7", {}, null, null, "http://localhost:3000")
 
 //# sourceMappingURL=public.31b563d9.js.map
