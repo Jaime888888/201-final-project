@@ -5,24 +5,23 @@ import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
 
 function AddSpotPage() {
-  const { token } = useContext(AuthContext); // token
+  const { token } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     description: "",
-    hasWifi: false,
-    hasOutlets: false
+    imageUrl: ""
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: value
     }));
   };
 
@@ -37,17 +36,16 @@ function AddSpotPage() {
       name: formData.name.trim(),
       address: formData.address.trim(),
       description: formData.description.trim(),
-      hasWifi: formData.hasWifi,
-      hasOutlets: formData.hasOutlets
+      imageUrl: formData.imageUrl.trim()
     };
     setSubmitting(true);
     try {
-      const res = await fetch("/api/spots", {
+      const res = await fetch("https://studyspot.online/api/spots", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}` // attach token
+          Authorization: `Bearer ${token}`
         },
         credentials: "include",
         body: JSON.stringify(payload)
@@ -104,26 +102,19 @@ function AddSpotPage() {
               placeholder="Vibe, seating, best time to go..."
             />
           </label>
-          <div className="add-spot-checkbox-row">
-            <label className="add-spot-checkbox">
-              <input
-                type="checkbox"
-                name="hasWifi"
-                checked={formData.hasWifi}
-                onChange={handleChange}
-              />
-              Wi-Fi available
-            </label>
-            <label className="add-spot-checkbox">
-              <input
-                type="checkbox"
-                name="hasOutlets"
-                checked={formData.hasOutlets}
-                onChange={handleChange}
-              />
-              Outlets available
-            </label>
-          </div>
+          <label className="add-spot-field">
+            Image URL
+            <input
+              type="url"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleChange}
+              placeholder="https://example.com/image.jpg"
+            />
+            <small style={{ marginTop: "4px", color: "#6b7280", fontSize: "0.85rem" }}>
+              Enter a URL to an image of the study spot
+            </small>
+          </label>
           <div className="add-spot-actions">
             <button
               type="submit"
