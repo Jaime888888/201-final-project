@@ -11,5 +11,6 @@ Frontend:
 * Trent
 * Hailey
 * Riya
+* Jenny
 ---
  add your names for what you're doing 11/23 meeting
