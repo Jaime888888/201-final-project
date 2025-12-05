@@ -74,5 +74,17 @@ Explanation:
 There were no issues, so there is no explanation needed.
 
 
+Jaime:
+Prompt:
+Ask AI to help me center the “Add study spot” form on the page and make match the format used on the map view page, using CSS changes in AddSpotPage.css
+
+Issues:
+The form container was stuck to the right side of the screen
+
+Fixes:
+Move to the left 
+
+Explanation:
+The form now appears in the correct place
 
 
