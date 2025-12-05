@@ -297,6 +297,30 @@ Issues: formatting of button looked different
 
 Fix: move the button to the bottom right corner and make the format and look match the open button
 
+Explanation: The buttons look similar now 
+
+Prompt: i need the study spots detail page to actually display the id specific details retrieved from the api. Calling GET to /api/spots/#spotid returns something like this:
+
+"{
+      ""id"": 1,
+      ""name"": ""Accounting Library"",
+      ""type"": ""Library"",
+      ""hours"": ""monday: 9am-5pm""
+      “isOpen”:1,
+      ""rating"": 4.0,
+      ""note"": ""Focused business and accounting research resources."",
+      ""position"": [34.0185, -118.2840],
+      ""image"": ""https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyl29CqmGqe7riHNzxZKcnmbJIbygAm5zlRM4YmU79IW4JLr_rSaj74EEHP68f""
+    },...." 
+display these details on the frontend 
+
+Issues: didn't specify to use a API helper function that was already written. Didn't specify how the hours field was a string of the hours and that there weren't open/close times specified separately. 
+
+Fix: for open/close times, a string is returned from the backend of the times the study spot is open. just display that string as it is displayed in mapview for hours. use the function i have written in spots.js to get a spot by id 
+
+Explanation: Using the helper function ensured the correct path was being called to retrieve from the backend 
+
+
 Christine:
 Prompt: Help integrate authentication into the front end to hook an existing login/signup UI to backend /api/auth/login and /api/auth/register endpoints, and store the returned token.
 
