@@ -1,41 +1,24 @@
-// src/api/reviews.js
+// frontend/src/api/reviews.js
+import { GET, POST } from "./auth";
 
+/**
+ * Get reviews for a spot
+ */
 export async function getReviews(spotId) {
-  const token = localStorage.getItem("token");
-
-  const res = await fetch(`/api/spots/${spotId}/reviews`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
-    },
-    credentials: "include",
-  });
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch reviews (${res.status})`);
-  }
-
-  return await res.json();
+  if (!spotId) throw new Error("getReviews requires a spotId");
+  return await GET(`/spots/${spotId}/reviews`);
 }
 
+/**
+ * Create a review for a spot
+ * payload example: { rating: 4, busyLevel: "low", comment: "Nice spot" }
+ */
 export async function createReview(spotId, payload) {
-  // payload could be { rating, busyLevel, comment }
-  const token = localStorage.getItem("token");
-
-  const res = await fetch(`/api/spots/${spotId}/reviews`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : undefined,
-    },
-    credentials: "include",
-    body: JSON.stringify(payload),
-  });
-
-  if (!res.ok) {
-    throw new Error(`Failed to create review (${res.status})`);
+  if (!spotId) throw new Error("createReview requires a spotId");
+  if (!payload || typeof payload !== "object") {
+    throw new Error("createReview requires a payload object");
   }
-
-  return await res.json();
+  return await POST(`/spots/${spotId}/reviews`, payload);
 }
+
+export default { getReviews, createReview };

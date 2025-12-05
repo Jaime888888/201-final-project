@@ -1,200 +1,277 @@
-import React, { useState, useRef, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import iconUrl from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "../styles/MapViewPage.css";
-import NavBar from '../components/NavBar';
+import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { getSpots } from "../api/spots";
 
-
-// ✅ Default Leaflet icon fix
-let DefaultIcon = L.icon({
-  iconUrl,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-L.Marker.prototype.options.icon = DefaultIcon;
-
-// 🧭 Helper to move map view when a spot is selected
 function FlyToMarker({ position }) {
   const map = useMap();
   useEffect(() => {
-    if (position) {
-      map.flyTo(position, 18, { duration: 1.3 }); // Smooth zoom-in
-    }
+    if (position) map.flyTo(position, 17, { duration: 1.3 });
   }, [position, map]);
   return null;
 }
 
+function LocateButton({ onLocate }) {
+  return (
+    <button className="locate-btn-floating" onClick={onLocate} title="Use my location">
+      📍
+    </button>
+  );
+}
+
+// Create a blue-dot icon like Google Maps
+const blueDotIcon = L.divIcon({
+  html: `<div class="blue-dot"></div>`,
+  className: "",
+  iconSize: [12, 12],
+});
+
 function MapView() {
   const navigate = useNavigate();
+  const [spots, setSpots] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [flyTo, setFlyTo] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [ratingFilter, setRatingFilter] = useState(1);
+  const [openOnly, setOpenOnly] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const studySpots = [
-    {
-      id: 1,
-      name: "Leavey Library",
-      type: "Library",
-      status: "Open",
-      rating: 4.7,
-      distance: "150 m",
-      note: "Quiet and well-lit study zones",
-      position: [34.0211, -118.2826],
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 2,
-      name: "Café 84",
-      type: "Coffee House",
-      status: "Open",
-      rating: 4.2,
-      distance: "400 m",
-      note: "Great coffee, can get crowded midday",
-      position: [34.0206, -118.2853],
-      image:
-        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 3,
-      name: "Annenberg Commons",
-      type: "Study Lounge",
-      status: "Closed",
-      rating: 3.9,
-      distance: "600 m",
-      note: "Spacious and modern group space",
-      position: [34.0229, -118.2869],
-      image:
-        "https://images.unsplash.com/photo-1556484687-30636164638b?auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 4,
-      name: "USC Village Starbucks",
-      type: "Coffee Shop",
-      status: "Open",
-      rating: 4.5,
-      distance: "900 m",
-      note: "Busy but perfect for long study sessions",
-      position: [34.0266, -118.2854],
-      image:
-        "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=60",
-    },
-  ];
+  // Red and gold icons
+  const redIcon = new L.Icon({
+    iconUrl:
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+  });
+  const goldIcon = new L.Icon({
+    iconUrl:
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+  });
 
-  // Get selected spot coordinates
-  const selectedSpot = studySpots.find((s) => s.id === selectedId);
+  useEffect(() => {
+    async function fetchSpots() {
+      try {
+        setLoading(true);
+        const data = await getSpots();
+        if (Array.isArray(data)) {
+          const mapped = data.map((s) => ({
+            id: s.id,
+            name: s.name,
+            type: s.type || "Study Spot",
+            imageUrl: s.image,
+            note: s.note || "",
+            rating: s.rating || 0.0,
+            hours: s.hours || "",
+            isOpen: s.isOpen === 1,
+            latitude: s.position?.[0],
+            longitude: s.position?.[1],
+          }));
+          setSpots(mapped);
+        } else setError("Invalid data format from server.");
+      } catch (err) {
+        console.error(err);
+        setError("Could not load study spots.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSpots();
+  }, []);
+
+  const filteredSpots = spots.filter((s) => {
+    const t = searchTerm.toLowerCase();
+    const matchSearch =
+      s.name.toLowerCase().includes(t) ||
+      s.type.toLowerCase().includes(t) ||
+      s.note.toLowerCase().includes(t);
+    const matchRating = s.rating >= ratingFilter;
+    const matchOpen = !openOnly || s.isOpen;
+    return matchSearch && matchRating && matchOpen;
+  });
+
+  const handleLocate = () => {
+    if (!navigator.geolocation)
+      return alert("Geolocation not supported by your browser.");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const coords = [pos.coords.latitude, pos.coords.longitude];
+        setUserLocation(coords);
+        setFlyTo(coords);
+      },
+      () => alert("Unable to access your location.")
+    );
+  };
+
+  if (loading)
+    return (
+      <div className="page">
+        <NavBar />
+        <div className="loading-screen">Loading map...</div>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="page">
+        <NavBar />
+        <div className="error-screen">{error}</div>
+      </div>
+    );
 
   return (
     <div className="page">
       <NavBar />
-      {/* Header */}
+
       <header className="header">
         <div className="location">
           <h2>Current Location</h2>
           <p>USC Campus</p>
         </div>
-        <input
-          type="text"
-          className="search"
-          placeholder="🔍 Search for study spots..."
-        />
+
+        <div className="filters">
+          <input
+            type="text"
+            className="search"
+            placeholder="🔍 Search for study spots..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
+          <div className="rating-slider">
+            <label htmlFor="ratingRange" className="slider-label">
+              ⭐ {ratingFilter}+
+            </label>
+            <input
+              id="ratingRange"
+              type="range"
+              min="0"
+              max="5"
+              step="1"
+              value={ratingFilter}
+              onChange={(e) => setRatingFilter(Number(e.target.value))}
+            />
+          </div>
+
+          <label className="toggle-container">
+            <input
+              type="checkbox"
+              checked={openOnly}
+              onChange={(e) => setOpenOnly(e.target.checked)}
+            />
+            <span className="slider"></span>
+            <span className="toggle-label">Open now</span>
+          </label>
+        </div>
       </header>
 
-      {/* Split View */}
       <div className="main">
-        {/* Left: List */}
         <div className="list">
           <h3>Study Areas</h3>
-          <p className="subtitle">{studySpots.length} spots nearby</p>
+          <p className="subtitle">{filteredSpots.length} spots nearby</p>
 
-          {studySpots.map((spot) => (
-            <div
-              key={spot.id}
-              className={`card ${selectedId === spot.id ? "active" : ""}`}
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                setSelectedId(spot.id);
-                setFlyTo(spot.position);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  setSelectedId(spot.id);
-                  setFlyTo(spot.position);
-                }
-              }}
-            >
-              <img src={spot.image} alt={spot.name} className="thumb" />
-              <div className="info">
-                <div className="title-row">
-                  <h4>{spot.name}</h4>
-                  <span
-                    className={
-                      spot.status === "Open" ? "badge open" : "badge closed"
-                    }
-                  >
-                    {spot.status}
-                  </span>
-                </div>
-                <p className="type">{spot.type}</p>
-                <p className="note">{spot.note}</p>
-                <p className="meta">
-                  ⭐ {spot.rating} • {spot.distance}
-                </p>
-                <div className="card-actions">
+          {filteredSpots.length === 0 ? (
+            <p className="no-results">No spots match your filters.</p>
+          ) : (
+            filteredSpots.map((s) => (
+              <div
+                key={s.id}
+                className={`card ${selectedId === s.id ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedId(s.id);
+                  setFlyTo([s.latitude, s.longitude]);
+                }}
+              >
+                <img src={s.imageUrl} alt={s.name} className="thumb" />
+                <div className="info">
+                  <div className="title-row">
+                    <h4>{s.name}</h4>
+                    <span className={s.isOpen ? "badge open" : "badge closed"}>
+                      {s.isOpen ? "Open" : "Closed"}
+                    </span>
+                  </div>
+                  <p className="type">{s.type}</p>
+                  <p className="note">{s.note}</p>
+                  <p className="meta">
+                    ⭐ {s.rating.toFixed(1)} • {s.hours?.split(",")[0]}
+                  </p>
                   <button
-                    type="button"
                     className="open-details-button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      navigate(`/spots/${spot.id}`);
+                      navigate(`/spots/${s.id}`);
                     }}
                   >
                     Open details
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
-        {/* Right: Map */}
         <div className="map">
           <MapContainer
-            center={[34.0205, -118.2856]} // 🎯 USC center
+            center={[34.0205, -118.2856]}
             zoom={17}
             style={{ height: "100%", width: "100%", borderRadius: "16px" }}
-            scrollWheelZoom={true}
           >
             <TileLayer
               attribution='&copy; OpenStreetMap contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {flyTo && <FlyToMarker position={flyTo} />}
-            {studySpots.map((spot) => (
+
+            {filteredSpots.map((s) => (
               <Marker
-                key={spot.id}
-                position={spot.position}
+                key={s.id}
+                position={[s.latitude, s.longitude]}
+                icon={selectedId === s.id ? goldIcon : redIcon}
                 eventHandlers={{
                   click: () => {
-                    setSelectedId(spot.id);
-                    setFlyTo(spot.position);
+                    setSelectedId(s.id);
+                    setFlyTo([s.latitude, s.longitude]);
                   },
                 }}
               >
                 <Popup>
-                  <strong>{spot.name}</strong>
+                  <strong>{s.name}</strong>
                   <br />
-                  {spot.status === "Open" ? "🟢 Open" : "🔴 Closed"} <br />
-                  ⭐ {spot.rating} • {spot.distance}
+                  {s.isOpen ? "🟢 Open" : "🔴 Closed"} <br />
+                  ⭐ {s.rating.toFixed(1)}
                 </Popup>
               </Marker>
             ))}
+
+            {userLocation && (
+              <>
+                <Marker position={userLocation} icon={blueDotIcon}>
+                  <Popup>You are here 📍</Popup>
+                </Marker>
+                <Circle
+                  center={userLocation}
+                  radius={25}
+                  pathOptions={{
+                    color: "#007bff",
+                    fillColor: "#007bff",
+                    fillOpacity: 0.15,
+                  }}
+                />
+              </>
+            )}
           </MapContainer>
+          <LocateButton onLocate={handleLocate} />
         </div>
       </div>
     </div>
@@ -202,4 +279,3 @@ function MapView() {
 }
 
 export default MapView;
-
