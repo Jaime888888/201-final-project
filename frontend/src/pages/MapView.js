@@ -6,6 +6,7 @@ import iconUrl from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "../styles/MapViewPage.css";
 import NavBar from '../components/NavBar';
+import { useNavigate } from "react-router-dom";
 
 
 // ✅ Default Leaflet icon fix
@@ -29,6 +30,7 @@ function FlyToMarker({ position }) {
 }
 
 function MapView() {
+  const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
   const [flyTo, setFlyTo] = useState(null);
 
@@ -113,9 +115,17 @@ function MapView() {
             <div
               key={spot.id}
               className={`card ${selectedId === spot.id ? "active" : ""}`}
+              role="button"
+              tabIndex={0}
               onClick={() => {
                 setSelectedId(spot.id);
                 setFlyTo(spot.position);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setSelectedId(spot.id);
+                  setFlyTo(spot.position);
+                }
               }}
             >
               <img src={spot.image} alt={spot.name} className="thumb" />
@@ -135,6 +145,18 @@ function MapView() {
                 <p className="meta">
                   ⭐ {spot.rating} • {spot.distance}
                 </p>
+                <div className="card-actions">
+                  <button
+                    type="button"
+                    className="open-details-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/spots/${spot.id}`);
+                    }}
+                  >
+                    Open details
+                  </button>
+                </div>
               </div>
             </div>
           ))}
