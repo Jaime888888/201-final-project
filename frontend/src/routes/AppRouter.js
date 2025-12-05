@@ -10,9 +10,9 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MapView />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/mapview" element={<MapView />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/spots/:id" element={<StudySpotDetailsPage />} />
         {/* Additional routes can be added here */}
         <Route path="/login" element={<LoginPage />} />

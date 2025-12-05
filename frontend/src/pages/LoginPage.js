@@ -79,7 +79,7 @@ function App() {
         localStorage.setItem("authToken", token);
         login(token, email);
       }
-      window.location.href = "/"; // go to MapView/home
+      window.location.href = "/mapview"; // go to MapView after login
     } catch (err) {
       setServerError("Network error, please try again");
     }

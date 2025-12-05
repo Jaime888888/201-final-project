@@ -8,20 +8,20 @@ function NavBar() {
 
   const onLogout = () => {
     // TODO: replace with real logout (clear auth, tokens, etc.)
-    // Navigate to Login page
-    navigate('/login', { replace: true });
+    // Navigate to Login page (home page)
+    navigate('/', { replace: true });
   };
 
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-        <div className="navbar__brand" onClick={() => navigate('/')} role="button" tabIndex={0}>
+        <div className="navbar__brand" onClick={() => navigate('/mapview')} role="button" tabIndex={0}>
           StudySpot
         </div>
         <div className="navbar__links">
           <NavLink
-            to="/"
-            className={({ isActive }) => `navlink ${isActive && location.pathname === '/' ? 'active' : ''}`}
+            to="/mapview"
+            className={({ isActive }) => `navlink ${isActive ? 'active' : ''}`}
           >
             MapView
           </NavLink>
