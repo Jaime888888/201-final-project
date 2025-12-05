@@ -85,9 +85,6 @@ function FavoritesPage() {
     setFavorites(prev => prev.filter(f => (f.id || f._id) !== id));
 
     try {
-      // Optimistic UI update
-      setFavorites(prev => prev.filter(f => (f.id || f._id) !== id));
-  
       // Tell backend to remove favorite
       await toggleFavorite(id, false);
   
