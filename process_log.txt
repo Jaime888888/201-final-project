@@ -1,3 +1,183 @@
+Hailey, Login Page
+Prompt:
+Using these technical specifications for my study spot finder website, walk me through the steps to build the login page.​
+
+Issues:
+It was unclear where to start (backend versus frontend), and there was no existing login endpoint or user model.​
+
+Fixes:
+A complete flow was defined: create a backend /login endpoint and user storage that issues a JWT, then build a React login form to call it.​
+
+Explanation:
+This established the overall architecture (Spring Boot + JWT + React) and became the foundation for all later authentication work on the login page.​
+
+Prompt:
+I am working on the front end part only.​
+
+Issues:
+The responsibilities between frontend and backend were unclear, and the toolchain for the login page (React app, Node) needed to be confirmed.​
+
+Fixes:
+A plan was made to set up a React app with Vite and build a standalone login form component that would POST to a future backend login URL, with email/password fields and client‑side validation.​
+
+Explanation:
+This scoped your work to React, local validation, and fetch calls, letting teammates own Spring Boot and MySQL while you focused on the login UI.​
+
+Prompt:
+Can you add it for me (asking to add token handling to the login component that switches between login and signup modes).​
+
+Issues:
+The UI for login/signup existed, but the returned token was not being stored anywhere on the frontend.​
+
+Fixes:
+Inside handleSubmit, code was added to parse the JSON response, read the token, and save it to localStorage under a consistent key such as "token".​
+
+Explanation:
+Storing the token in localStorage enabled later API helper functions to read it and send Authorization: Bearer <token> on protected requests, completing the basic auth flow from the login page.​
+
+Prompt:
+Is the login page still correct? (for LoginPage.js after resolving merge conflicts).​
+
+Issues:
+A stray Git hash line remained in the file and useContext was used without being imported, causing compile errors.​
+
+Fixes:
+The stray hash line was removed and the import was changed to import { useState, useContext } from "react"; while keeping AuthContext usage.​
+
+Explanation:
+These fixes restored a compiling React login component that continued to work with the auth context after the merge.​
+
+Prompt:
+I just finished the login/signup function into backend. Now I need to make sure that FRONTEND correctly uses this new authentication mechanism, particularly ensuring we attach an Authorization: Bearer <token> header on all our API calls. How do I do this?​
+
+Issues:
+The backend was returning a token, but other frontend API calls were not reusing it, and some pages were still calling fetch directly.​
+
+Fixes:
+A pattern was chosen where token reading and Authorization: Bearer <token> headers live inside API helper modules (like favorites.js, reviews.js, and spots.js), and pages call helpers such as getFavorites() instead of managing headers themselves.​
+
+Explanation:
+Centralizing token handling in API helpers kept components simpler and tied the login page’s stored token cleanly to all protected backend requests.​
+
+Prompt:
+Ok do I need to do the same to the other auth js pages?​
+
+Issues:
+It was unclear which files actually needed the token header, creating a risk of adding Authorization to endpoints that do not require login (like /login or /register).​
+
+Fixes:
+It was clarified that only helpers calling protected endpoints (favorites, reviews, spots, and future /api/me‑style endpoints) should add the token, while plain /login and /register must not send Authorization.​
+
+Explanation:
+This decision documented exactly where the login page’s token was required and avoided unnecessary headers on public endpoints.​
+
+Prompt:
+Is it the profile page that I need to import? If yes please make edits.​
+
+Issues:
+There was confusion about whether ProfilePage needed to use the token or import auth helpers, even though it had only hardcoded placeholder data.​
+
+Fixes:
+It was confirmed that ProfilePage did not yet need token or API imports and would only use a helper like getCurrentUser() once a real /api/me endpoint existed.​
+
+Explanation:
+This kept token usage limited to components that actually talk to the backend, preserving a clean separation between login/auth logic and purely presentational pages.​
+
+Prompt:
+Modify for me (login.html with navbar and logout).​
+
+Issues:
+The original HTML login page had minimal frontend validation and did not disable the login button or show clear inline error messages.​
+
+Fixes:
+Username and password length checks were added before the fetch call, the login button was disabled during submission, and result messages were displayed in a dedicated area instead of relying only on alerts.​
+
+Explanation:
+These changes made the early non‑React login page more robust and user‑friendly, and the same validation ideas later informed your React login component.​
+
+Prompt:
+Make modifications (to login.html) so it integrated with main.js.​
+
+Issues:
+Login/logout logic was duplicated between the page and main.js, and navbar state (login link vs logout button) was inconsistent.​
+
+Fixes:
+The login JS was updated so successful login called setLoggedIn(username) from main.js, logout reused shared logic, and the navbar contained only one login link with consistent IDs.​
+
+Explanation:
+Unifying behavior through main.js made the classic login page consistent with shared state management across pages.​
+
+Prompt:
+Here is my login, consolidate it for me (merge login and signup into one HTML page).​
+
+Issues:
+Having separate login.html and signup.html caused duplication and different redirects and navigation behavior.​
+
+Fixes:
+Both forms were merged into a single Login / Sign Up page with side‑by‑side sections, navigation was standardized (Home linking to index.html), and both flows redirected consistently after success.​
+
+Explanation:
+This consolidation simplified the authentication UI and mirrored the later React approach where the login component switches between login and signup modes on one screen.​
+
+
+Riya, Study Spot Map
+
+Prompt:
+Create a map view page using React Leaflet that shows an interactive map centered around USC with markers for study spots, and integrate this page into the main navigation so users can reach it from the login/home flow.​
+
+Issues:
+It was unclear how to structure the React Leaflet components (MapContainer, TileLayer, and markers) within the existing React app and routing.​
+There was some uncertainty about what center coordinates and zoom level to use for the USC area so that the campus filled the initial view appropriately.​
+
+Fixes:
+A dedicated MapView React component was created using MapContainer and TileLayer from React Leaflet, with the center set to approximate USC’s coordinates and a zoom level that shows the campus and nearby study spots.​
+The MapView component was added to the router and nav so that clicking the “Map” or “Map View” link loads this Leaflet map while keeping the shared layout and header consistent.​
+
+Explanation:
+Building the map page with React Leaflet isolated all mapping logic in one component and made it straightforward to later add markers, popups, and filters for study spots while fitting cleanly into the existing navigation and routing.​
+
+Prompt:
+Style the Leaflet map view page with a dedicated CSS file so the map fills the main content area, stays responsive on different devices, and leaves room for any side or bottom panels.​
+
+Issues:
+Initially the Leaflet map container did not have a fixed height, so the map either collapsed to zero height or appeared very short depending on its parent elements.​
+On mobile and smaller screens, the map and surrounding content could overflow or cause awkward scrolling, instead of resizing smoothly to fit the viewport.​​
+
+Fixes:
+A map wrapper class (for example .map-view or .full-height-map) was given a height based on the viewport (such as height: 100vh or a calculated main area height), and the inner Leaflet map container was set to height: 100% and width: 100%.​
+Responsive CSS rules were added so that on wide screens the map can sit next to optional filters/details, while on smaller screens panels stack above or below the map and the map container uses max-width: 100% to avoid horizontal scrolling.​​
+
+Explanation:
+By explicitly controlling the map container’s height and using responsive CSS, the Leaflet map renders at a consistent, usable size across desktops and mobile devices, making the map view page feel like a first‑class, responsive screen in the study spot finder.
+
+Prompt:
+Add Leaflet markers for each study spot returned from the backend onto the map view, and show basic info (name and rating) in a popup when a marker is clicked.​
+
+Issues:
+The initial map only showed the base tiles with no visual indication of study spot locations.​
+There was uncertainty about how to loop over an array of spots and render multiple Leaflet markers with React.​
+
+Fixes:
+The MapView component was updated to map over the study spot data and render a Marker and Popup for each item, displaying the spot’s name and key metadata.​
+Marker state and props were structured so that when the backend data updates, the markers on the Leaflet map re‑render automatically.​
+
+Explanation:
+Rendering dynamic Leaflet markers from the study spot data turned the map into a functional visualization of available locations, making it easy for users to see and tap into details for each spot.​
+
+Prompt:
+Polish the map page CSS to match the app’s visual style by customizing the background, padding, and Leaflet marker appearance while keeping accessibility and responsiveness.​​
+
+Issues:
+The default Leaflet appearance did not fully match the rest of the site’s design, and spacing around the map and controls felt inconsistent with other pages.​​
+Some color choices and contrast levels in the initial styling made markers and overlays harder to see on certain screens.​
+
+Fixes:
+CSS was adjusted so the map container used the same padding, fonts, and background colors as other main pages, and custom marker icons or colors were applied to better match the brand.​​
+Contrast and hover/focus styles for interactive elements around the map were improved to enhance readability and accessibility across devices.​
+
+Explanation:
+Aligning the Leaflet map’s look and feel with existing app styles produced a cohesive UI, while improved contrast and responsive spacing kept the map page both attractive and usable.​​
+
 Trent:
 Prompt:
 Create a frontend file structure for a studyspot app that includes a study spot details page, a favorites page, a map view page, 
@@ -104,4 +284,6 @@ Prompt: add a button on the study spot card to open the details page for each st
 Issues: formatting of button looked different  
 
 Fix: move the button to the bottom right corner and make the format and look match the open button
+
+
 
