@@ -265,6 +265,18 @@ There were no fixes needed.
 Explanation:
 There were no issues, so there is no explanation needed.
 
+Prompt:
+Add a ratings sections, building type, and open/close hours to the studyspotdetails page and the addnewspot page.
+
+Issues:
+There weren't any issues.
+
+Fixes:
+There were no fixes needed.
+
+Explanation:
+There were no issues, so there is no explanation needed.
+
 Jaime:
 Prompt:
 Ask AI to help me center the “Add study spot” form on the page and make match the format used on the map view page, using CSS changes in AddSpotPage.css
