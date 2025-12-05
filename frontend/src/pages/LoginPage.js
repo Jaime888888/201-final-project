@@ -1,7 +1,5 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./App.css";
-// Replace missing local App.css with global styles
 import "../styles/global.css";
 import "../styles/components.css";
 
@@ -40,37 +38,49 @@ function App() {
     if (!validate()) return;
 
     const url =
-      mode === "login"
-        ? "http://localhost:8080/api/auth/login"
-        : "http://localhost:8080/api/auth/register"; // adjust to your backend
+      mode === "login" 
+        ? "https://studyspot.online/api/auth/login" 
+        : "https://studyspot.online/api/auth/register";
 
     try {
+      // For register, include username (extract from email or use email as username)
+      const requestBody = mode === "login" 
+        ? { email, password }
+        : { 
+            username: email.split("@")[0], // Use part before @ as username
+            email, 
+            password 
+          };
+
       const res = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         credentials: "include",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!res.ok) {
+        const msg = await res.text().catch(() => "");
         setServerError(
-          mode === "login"
-            ? "Invalid email or password"
-            : "Could not create account"
+          msg ||
+            (mode === "login"
+              ? "Invalid email or password"
+              : "Could not create account")
         );
         return;
       }
 
-      // NEW: read response body and store token
-      const data = await res.json();      // expect something like { token: "..." }
-      const token = data.token;           // change name if your backend uses a different field
-
+      const data = await res.json();
+      const token = data?.token;
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem("authToken", token);
+        login(token, email);
       }
-
-      alert(mode === "login" ? "Logged in!" : "Account created!");
-    } catch {
+      window.location.href = "/"; // go to MapView/home
+    } catch (err) {
       setServerError("Network error, please try again");
     }
   };

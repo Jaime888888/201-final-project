@@ -4,6 +4,7 @@ import FavoritesPage from '../pages/FavoritesPage';
 import MapView from "../pages/MapView";
 import LoginPage from '../pages/LoginPage';
 import AddSpotPage from '../pages/AddSpotPage';
+import StudySpotDetailsPage from '../pages/StudySpotDetailsPage';
 
 function AppRouter() {
   return (
