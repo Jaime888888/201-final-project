@@ -17,7 +17,7 @@ function StudySpotDetailsPage() {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch(`/api/spots/${id}`, {
+        const res = await fetch(`https://studyspot.online/api/spots/${id}`, {
           credentials: "include"
         });
         if (!res.ok) {
@@ -34,8 +34,7 @@ function StudySpotDetailsPage() {
             name: `Study spot ${id}`,
             address: "Location not available",
             description: "Description not available.",
-            hasWifi: false,
-            hasOutlets: false
+            imageUrl: null
           });
           setError("Live data not available, showing placeholder information.");
         }
@@ -55,7 +54,7 @@ function StudySpotDetailsPage() {
     const next = !favorite;
     setFavorite(next);
     try {
-      await fetch("/api/favorites", {
+      await fetch("https://studyspot.online/api/favorites", {
         method: next ? "POST" : "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -95,8 +94,8 @@ function StudySpotDetailsPage() {
     );
   }
 
-  const hasWifi = Boolean(spot.hasWifi);
-  const hasOutlets = Boolean(spot.hasOutlets);
+  // Get image URL - check multiple possible field names
+  const imageUrl = spot.imageUrl || spot.image || spot.images?.[0] || null;
 
   return (
     <div className="details-page">
@@ -123,27 +122,26 @@ function StudySpotDetailsPage() {
 
         <section className="details-layout">
           <div className="details-primary">
+            {/* Image section */}
+            {imageUrl && (
+              <div className="details-image-container">
+                <img 
+                  src={imageUrl} 
+                  alt={spot.name} 
+                  className="details-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+
             <div className="details-title-block">
               <h1>{spot.name}</h1>
               <p className="details-address">{spot.address}</p>
             </div>
 
-            <div className="details-tags-row">
-              <span
-                className={`details-pill ${
-                  hasWifi ? "pill-on" : "pill-off"
-                }`}
-              >
-                {hasWifi ? "Wi-Fi available" : "Wi-Fi not listed"}
-              </span>
-              <span
-                className={`details-pill ${
-                  hasOutlets ? "pill-on" : "pill-off"
-                }`}
-              >
-                {hasOutlets ? "Outlets available" : "Outlets not listed"}
-              </span>
-            </div>
+            {/* Removed wifi/outlets tags section */}
 
             <div className="details-section">
               <h2>Overview</h2>
