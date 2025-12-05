@@ -2,28 +2,39 @@ import React, { useState, useRef, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import iconUrl from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import "../styles/MapViewPage.css";
-import NavBar from '../components/NavBar';
+import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
-
-// ✅ Default Leaflet icon fix
-let DefaultIcon = L.icon({
-  iconUrl,
-  shadowUrl: iconShadow,
+// 🎯 Define custom icons
+const redIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
 });
-L.Marker.prototype.options.icon = DefaultIcon;
 
-// 🧭 Helper to move map view when a spot is selected
+const goldIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+// 🗺️ Smooth zoom animation when selecting a spot
 function FlyToMarker({ position }) {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.flyTo(position, 18, { duration: 1.3 }); // Smooth zoom-in
+      map.flyTo(position, 18, { duration: 1.3 });
     }
   }, [position, map]);
   return null;
@@ -91,6 +102,7 @@ function MapView() {
   return (
     <div className="page">
       <NavBar />
+
       {/* Header */}
       <header className="header">
         <div className="location">
@@ -174,11 +186,14 @@ function MapView() {
               attribution='&copy; OpenStreetMap contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
             {flyTo && <FlyToMarker position={flyTo} />}
+
             {studySpots.map((spot) => (
               <Marker
                 key={spot.id}
                 position={spot.position}
+                icon={selectedId === spot.id ? goldIcon : redIcon} // 🟥 default red, 🟨 gold when selected
                 eventHandlers={{
                   click: () => {
                     setSelectedId(spot.id);
@@ -202,4 +217,3 @@ function MapView() {
 }
 
 export default MapView;
-
