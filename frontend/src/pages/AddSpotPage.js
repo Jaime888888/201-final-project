@@ -12,7 +12,11 @@ function AddSpotPage() {
     name: "",
     address: "",
     description: "",
-    imageUrl: ""
+    imageUrl: "",
+    rating: "",
+    openHours: "",
+    closeHours: "",
+    buildingType: ""
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -36,7 +40,11 @@ function AddSpotPage() {
       name: formData.name.trim(),
       address: formData.address.trim(),
       description: formData.description.trim(),
-      imageUrl: formData.imageUrl.trim()
+      imageUrl: formData.imageUrl.trim(),
+      rating: formData.rating ? parseFloat(formData.rating) : null,
+      openHours: formData.openHours.trim(),
+      closeHours: formData.closeHours.trim(),
+      buildingType: formData.buildingType.trim()
     };
     setSubmitting(true);
     try {
@@ -93,6 +101,16 @@ function AddSpotPage() {
             />
           </label>
           <label className="add-spot-field">
+            Building Type
+            <input
+              type="text"
+              name="buildingType"
+              value={formData.buildingType}
+              onChange={handleChange}
+              placeholder="e.g., Library, Coffee Shop, Study Lounge"
+            />
+          </label>
+          <label className="add-spot-field">
             Description
             <textarea
               name="description"
@@ -115,6 +133,39 @@ function AddSpotPage() {
               Enter a URL to an image of the study spot
             </small>
           </label>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <label className="add-spot-field" style={{ flex: "1", minWidth: "150px" }}>
+              Rating (0-5)
+              <input
+                type="number"
+                name="rating"
+                value={formData.rating}
+                onChange={handleChange}
+                placeholder="4.5"
+                min="0"
+                max="5"
+                step="0.1"
+              />
+            </label>
+            <label className="add-spot-field" style={{ flex: "1", minWidth: "150px" }}>
+              Open Hours
+              <input
+                type="time"
+                name="openHours"
+                value={formData.openHours}
+                onChange={handleChange}
+              />
+            </label>
+            <label className="add-spot-field" style={{ flex: "1", minWidth: "150px" }}>
+              Close Hours
+              <input
+                type="time"
+                name="closeHours"
+                value={formData.closeHours}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
           <div className="add-spot-actions">
             <button
               type="submit"
