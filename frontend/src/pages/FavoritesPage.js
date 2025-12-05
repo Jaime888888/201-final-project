@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import "../styles/FavoritesPage.css";
 import { AuthContext } from "../context/AuthContext";
 import { getFavorites } from "../api/favorites";
+import { toggleFavorite } from "../api/favorites";
 
 
 function FavoritesPage() {
@@ -78,10 +79,25 @@ function FavoritesPage() {
     navigate(`/spots/${id}`);
   };
 
-  const handleRemoveFavorite = (id, evt) => {
+  const handleRemoveFavorite = async (id, evt) => {
     if (evt) evt.stopPropagation();
     if (!id) return;
     setFavorites(prev => prev.filter(f => (f.id || f._id) !== id));
+
+    try {
+      // Optimistic UI update
+      setFavorites(prev => prev.filter(f => (f.id || f._id) !== id));
+  
+      // Tell backend to remove favorite
+      await toggleFavorite(id, false);
+  
+    } catch (err) {
+      console.error("Failed to remove favorite:", err);
+      alert("Failed to remove favorite.");
+  
+      // Revert UI if backend fails
+      setFavorites(prev => [...prev]); 
+    }
   };
 
   const renderImage = (spot) => {
