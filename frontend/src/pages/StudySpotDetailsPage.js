@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import "../styles/StudySpotDetailsPage.css";
 import { getReviews, createReview } from "../api/reviews";
 import { getFavorites, toggleFavorite } from "../api/favorites";
+import { getSpotById } from "../api/spots";
 
 function StudySpotDetailsPage() {
   const { id } = useParams();
@@ -26,17 +27,25 @@ function StudySpotDetailsPage() {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch(`https://studyspot.online/api/spots/${id}`, {
-          credentials: "include"
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch spot");
-        }
-        const data = await res.json();
-        if (isMounted) {
-          setSpot(data);
-        }
-      } catch {
+        // Use API helper which already handles auth/URL
+        const data = await getSpotById(id);
+        // Normalize to the shape MapView expects
+        const normalized = {
+          id: data.id ?? data._id,
+          name: data.name,
+          type: data.type || data.buildingType || "Study Spot",
+          imageUrl: data.image || data.imageUrl || (Array.isArray(data.images) ? data.images[0] : null),
+          note: data.note || data.description || "",
+          rating: data.rating ?? data.averageRating ?? 0,
+          hours: data.hours || data.openHours || "",
+          isOpen: data.isOpen === 1 || data.isOpen === true || data.isOpenNow === true,
+          latitude: Array.isArray(data.position) ? data.position[0] : data.lat ?? null,
+          longitude: Array.isArray(data.position) ? data.position[1] : data.lng ?? null,
+          address: data.address || data.location || null,
+          raw: data,
+        };
+        if (isMounted) setSpot(normalized);
+      } catch (e) {
         if (isMounted) {
           setSpot({
             id,
@@ -200,13 +209,19 @@ function StudySpotDetailsPage() {
     );
   }
 
-  // Get image URL - check multiple possible field names
-  const imageUrl = spot.imageUrl || spot.image || spot.images?.[0] || null;
-  const rating = spot.rating || spot.averageRating || null;
-  const buildingType = spot.buildingType || spot.type || null;
-  const openHours = spot.openHours || spot.openTime || null;
-  const closeHours = spot.closeHours || spot.closeTime || null;
-  const isOpen = spot.isOpen !== undefined ? spot.isOpen : (spot.isOpenNow !== undefined ? spot.isOpenNow : null);
+  // Map API fields to UI variables (handle multiple possible names)
+  const imageUrl = spot.image || spot.imageUrl || (Array.isArray(spot.images) ? spot.images[0] : null) || null;
+  const rating = spot.rating ?? spot.averageRating ?? null;
+  const buildingType = spot.type || spot.buildingType || null;
+  // The API returns a freeform hours string in `hours` per example; prefer that first
+  const hoursText = spot.hours || spot.openHours || spot.hoursText || null;
+  // If API provides open/close times separately, try to use them (openTime/closeTime)
+  const openTime = spot.openTime || spot.open || null;
+  const closeTime = spot.closeTime || spot.close || null;
+  // isOpen may be returned as 0/1 or boolean
+  const isOpen = spot.isOpen !== undefined ? (spot.isOpen === 1 || spot.isOpen === true) : (spot.isOpenNow !== undefined ? !!spot.isOpenNow : null);
+  const note = spot.note || spot.description || null;
+  const position = Array.isArray(spot.position) ? spot.position : (spot.lat && spot.lng ? [spot.lat, spot.lng] : null);
 
   return (
     <div className="details-page">
@@ -234,17 +249,17 @@ function StudySpotDetailsPage() {
         <section className="details-layout">
           <div className="details-primary">
             {/* Image section */}
-            {imageUrl && (
+            {imageUrl ? (
               <div className="details-image-container">
-                <img 
-                  src={imageUrl} 
-                  alt={spot.name} 
+                <img
+                  src={imageUrl}
+                  alt={spot.name}
                   className="details-image"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
+                  onError={(e) => { e.target.style.display = 'none'; }}
                 />
               </div>
+            ) : (
+              <div className="details-image-placeholder">No image available</div>
             )}
 
             <div className="details-title-block">
@@ -256,7 +271,7 @@ function StudySpotDetailsPage() {
                   </span>
                 )}
               </div>
-              <p className="details-address">{spot.address}</p>
+              <p className="details-address">{spot.address || (position ? `${position[0].toFixed(5)}, ${position[1].toFixed(5)}` : "Address not available.")}</p>
             </div>
 
             {/* Info tags row - always show */}
@@ -279,14 +294,13 @@ function StudySpotDetailsPage() {
                   Building type not specified
                 </span>
               )}
-              {(openHours || closeHours) ? (
-                <span className="details-pill pill-on">
-                  🕐 {formatTime(openHours)} - {formatTime(closeHours)}
-                </span>
+              {hoursText ? (
+                // Match MapView: show the first comma-separated segment of the hours string
+                <span className="details-pill pill-on">🕐 {String(hoursText).split(",")[0]}</span>
+              ) : (openTime || closeTime) ? (
+                <span className="details-pill pill-on">🕐 {formatTime(openTime)} - {formatTime(closeTime)}</span>
               ) : (
-                <span className="details-pill pill-off">
-                  🕐 Hours not specified
-                </span>
+                <span className="details-pill pill-off">🕐 Hours not specified</span>
               )}
             </div>
 
@@ -309,9 +323,7 @@ function StudySpotDetailsPage() {
             <div className="details-section">
               <h2>Overview</h2>
               <p className="details-description">
-                {spot.description && spot.description.trim().length > 0
-                  ? spot.description
-                  : "No description has been added for this spot yet."}
+                {note && note.trim().length > 0 ? note : "No description has been added for this spot yet."}
               </p>
             </div>
 
@@ -423,9 +435,7 @@ function StudySpotDetailsPage() {
             <div className="details-card">
               <h3>Hours</h3>
               <p className="details-side-text">
-                {(openHours || closeHours) 
-                  ? `${formatTime(openHours)} - ${formatTime(closeHours)}`
-                  : "Not specified"}
+                {hoursText ? String(hoursText).split(",")[0] : (openTime || closeTime) ? `${formatTime(openTime)} - ${formatTime(closeTime)}` : "Not specified"}
               </p>
             </div>
 
