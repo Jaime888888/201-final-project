@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { useContext } from 'react';
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddSpotPage.css";
 import { AuthContext } from '../context/AuthContext';
 import NavBar from '../components/NavBar';
-a1065f1e9dba282a0ea6368a7f2074bdcd1fc3e1
 
 function AddSpotPage() {
   const { token } = useContext(AuthContext); // token
