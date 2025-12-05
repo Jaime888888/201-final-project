@@ -63,6 +63,40 @@ function StudySpotDetailsPage() {
     } catch {}
   };
 
+  // Helper function to format time
+  const formatTime = (time) => {
+    if (!time) return "Not specified";
+    // If time is in HH:MM format, convert to 12-hour format
+    if (time.includes(":")) {
+      const [hours, minutes] = time.split(":");
+      const hour = parseInt(hours, 10);
+      const ampm = hour >= 12 ? "PM" : "AM";
+      const hour12 = hour % 12 || 12;
+      return `${hour12}:${minutes} ${ampm}`;
+    }
+    return time;
+  };
+
+  // Helper to render stars
+  const renderStars = (rating) => {
+    if (!rating) return null;
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    return (
+      <div className="details-rating-stars">
+        {Array(fullStars).fill(0).map((_, i) => (
+          <span key={i} className="star-full">★</span>
+        ))}
+        {hasHalfStar && <span className="star-half">★</span>}
+        {Array(emptyStars).fill(0).map((_, i) => (
+          <span key={i} className="star-empty">☆</span>
+        ))}
+      </div>
+    );
+  };
+
   if (loading) {
     return (
       <div className="details-page">
@@ -96,6 +130,11 @@ function StudySpotDetailsPage() {
 
   // Get image URL - check multiple possible field names
   const imageUrl = spot.imageUrl || spot.image || spot.images?.[0] || null;
+  const rating = spot.rating || spot.averageRating || null;
+  const buildingType = spot.buildingType || spot.type || null;
+  const openHours = spot.openHours || spot.openTime || null;
+  const closeHours = spot.closeHours || spot.closeTime || null;
+  const isOpen = spot.isOpen !== undefined ? spot.isOpen : (spot.isOpenNow !== undefined ? spot.isOpenNow : null);
 
   return (
     <div className="details-page">
@@ -137,11 +176,63 @@ function StudySpotDetailsPage() {
             )}
 
             <div className="details-title-block">
-              <h1>{spot.name}</h1>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "0.5rem" }}>
+                <h1 style={{ margin: 0 }}>{spot.name}</h1>
+                {isOpen !== null && (
+                  <span className={`details-status-badge ${isOpen ? "status-open" : "status-closed"}`}>
+                    {isOpen ? "🟢 Open Now" : "🔴 Closed"}
+                  </span>
+                )}
+              </div>
               <p className="details-address">{spot.address}</p>
             </div>
 
-            {/* Removed wifi/outlets tags section */}
+            {/* Info tags row - always show */}
+            <div className="details-tags-row">
+              {rating ? (
+                <span className="details-pill pill-on">
+                  ⭐ {rating.toFixed ? rating.toFixed(1) : rating} Rating
+                </span>
+              ) : (
+                <span className="details-pill pill-off">
+                  ⭐ No rating yet
+                </span>
+              )}
+              {buildingType ? (
+                <span className="details-pill pill-on">
+                  {buildingType}
+                </span>
+              ) : (
+                <span className="details-pill pill-off">
+                  Building type not specified
+                </span>
+              )}
+              {(openHours || closeHours) ? (
+                <span className="details-pill pill-on">
+                  🕐 {formatTime(openHours)} - {formatTime(closeHours)}
+                </span>
+              ) : (
+                <span className="details-pill pill-off">
+                  🕐 Hours not specified
+                </span>
+              )}
+            </div>
+
+            {/* Rating section - always show */}
+            <div className="details-rating-section">
+              <h2>Rating</h2>
+              {rating ? (
+                <div className="details-rating-display">
+                  {renderStars(rating)}
+                  <div className="details-rating-value">
+                    <span className="rating-number">{rating.toFixed ? rating.toFixed(1) : rating}</span>
+                    <span className="rating-max">/ 5.0</span>
+                  </div>
+                </div>
+              ) : (
+                <p className="details-no-rating">No ratings yet. Be the first to rate this spot!</p>
+              )}
+            </div>
 
             <div className="details-section">
               <h2>Overview</h2>
@@ -163,12 +254,54 @@ function StudySpotDetailsPage() {
           </div>
 
           <aside className="details-side">
+            {/* Status card - always show */}
+            {isOpen !== null && (
+              <div className="details-card">
+                <h3>Status</h3>
+                <p className="details-side-text" style={{ 
+                  color: isOpen ? "#047857" : "#dc2626",
+                  fontWeight: 600 
+                }}>
+                  {isOpen ? "🟢 Open Now" : "🔴 Closed"}
+                </p>
+              </div>
+            )}
+
             <div className="details-card">
               <h3>Location</h3>
               <p className="details-side-text">
                 {spot.address || "Address not available."}
               </p>
             </div>
+
+            {/* Building Type - always show */}
+            <div className="details-card">
+              <h3>Building Type</h3>
+              <p className="details-side-text">
+                {buildingType || "Not specified"}
+              </p>
+            </div>
+
+            {/* Hours - always show */}
+            <div className="details-card">
+              <h3>Hours</h3>
+              <p className="details-side-text">
+                {(openHours || closeHours) 
+                  ? `${formatTime(openHours)} - ${formatTime(closeHours)}`
+                  : "Not specified"}
+              </p>
+            </div>
+
+            {/* Rating - always show */}
+            <div className="details-card">
+              <h3>Rating</h3>
+              <p className="details-side-text">
+                {rating 
+                  ? `⭐ ${rating.toFixed ? rating.toFixed(1) : rating} / 5.0`
+                  : "No ratings yet"}
+              </p>
+            </div>
+
             <div className="details-card">
               <h3>Quick info</h3>
               <p className="details-side-text">
@@ -179,19 +312,6 @@ function StudySpotDetailsPage() {
               </p>
             </div>
           </aside>
-        </section>
-
-        <section className="details-section reviews-section">
-          <div className="details-reviews-header">
-            <h2>Reviews</h2>
-            <span className="details-reviews-subtitle">
-              Reviews integration can be added here using your reviews table.
-            </span>
-          </div>
-          <div className="details-review-placeholder">
-            No reviews are shown yet. Once the backend endpoint for reviews is ready,
-            this section can list recent comments and ratings from other students.
-          </div>
         </section>
 
         {error && (

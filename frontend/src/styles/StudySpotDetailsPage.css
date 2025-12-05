@@ -210,6 +210,33 @@
   display: block;
 }
 
+.details-status-badge {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.details-status-badge.status-open {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #34d399;
+}
+
+.details-status-badge.status-closed {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.details-no-rating {
+  margin-top: 0.75rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
 @media (max-width: 800px) {
   .details-layout {
     grid-template-columns: minmax(0, 1fr);
