@@ -98,4 +98,10 @@ Move to the left
 Explanation:
 The form now appears in the correct place
 
+Jenny: 
+Prompt: add a button on the study spot card to open the details page for each study spot instead of having it so that clicking the whole card opens the detail page 
+
+Issues: formatting of button looked different  
+
+Fix: move the button to the bottom right corner and make the format and look match the open button
 
