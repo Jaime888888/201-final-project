@@ -285,5 +285,22 @@ Issues: formatting of button looked different
 
 Fix: move the button to the bottom right corner and make the format and look match the open button
 
+Christine:
+Prompt: Help integrate authentication into the front end to hook an existing login/signup UI to backend /api/auth/login and /api/auth/register endpoints, and store the returned token.
+
+Issues: The original code in LoginPage.js directly called fetch inside the component, showed only stub alerts on success, and did not store any token.
+
+Fixes: An AuthContext was created to centralize authentication state and localStorage persistence:
+
+Explanation: Storing the token and user email in localStorage allows persistent login across page refreshes, while isLoggedIn enables protected routes.
+
+Prompt: Attach Authorization: Bearer <token> to all subsequent API calls.
+
+Issues: There were no issues.
+
+Fixes: There were no fixes needed.
+
+Explanation: Bearer <token> was attached to all subsequent API calls. 
+
 
 
