@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../styles/StudySpotDetailsPage.css";
 import { getReviews, createReview } from "../api/reviews";
+import { getFavorites, toggleFavorite } from "../api/favorites";
 
 function StudySpotDetailsPage() {
   const { id } = useParams();
@@ -46,7 +47,19 @@ function StudySpotDetailsPage() {
           });
           setError("Live data not available, showing placeholder information.");
         }
-      } finally {
+      } 
+
+      try {
+        const favs = await getFavorites();
+        if (isMounted) {
+          const isFav = favs.some(f => (f.id || f._id) == id);
+          setFavorite(isFav);
+        }
+      } catch (favErr) {
+        console.error("Failed to load favorites:", favErr);
+      }
+      
+      finally {
         if (isMounted) {
           setLoading(false);
         }
@@ -81,14 +94,20 @@ function StudySpotDetailsPage() {
   const handleToggleFavorite = async () => {
     const next = !favorite;
     setFavorite(next);
+    // try {
+    //   await fetch("https://studyspot.online/api/favorites", {
+    //     method: next ? "POST" : "DELETE",
+    //     headers: { "Content-Type": "application/json" },
+    //     credentials: "include",
+    //     body: JSON.stringify({ spotId: Number(id) })
+    //   });
+    // } catch {}
     try {
-      await fetch("https://studyspot.online/api/favorites", {
-        method: next ? "POST" : "DELETE",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ spotId: Number(id) })
-      });
-    } catch {}
+      await toggleFavorite(Number(id), next);
+    } catch (err) {
+      console.error("Failed to toggle favorite:", err);
+      setFavorite(!next); // rollback
+    }
   };
 
   const handleSubmitReview = async (e) => {
