@@ -29,7 +29,7 @@ Fixes:
 I fixed the issue with another prompt seen later.
 
 Explanation:
-T
+It was important to fix this issue in order to improve robustness and the user experience. Without this change, the page would crash everytime a user tries to view their favorite study spots. By fixing this issue, the favorites page now works as intended.
 
 Prompt:
 Help me fix this error in the FavoritesPage:
@@ -73,6 +73,17 @@ There were no fixes needed.
 Explanation:
 There were no issues, so there is no explanation needed.
 
+Prompt:
+Connect the Login/Register page to the backend using the endpoints https://studyspot.online/api/auth/register and https://studyspot.online/api/auth/login.
+
+Issues:
+There weren't any issues.
+
+Fixes:
+There were no fixes needed.
+
+Explanation:
+There were no issues, so there is no explanation needed.
 
 Jaime:
 Prompt:
