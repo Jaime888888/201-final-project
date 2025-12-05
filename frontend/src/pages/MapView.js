@@ -156,7 +156,7 @@ function MapView() {
             <input
               id="ratingRange"
               type="range"
-              min="90"
+              min="0"
               max="5"
               step="1"
               value={ratingFilter}
