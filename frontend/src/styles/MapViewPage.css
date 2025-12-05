@@ -149,4 +149,27 @@ body {
     padding: 1.5rem;
     background: #fafafa;
   }
+
+  /* Actions area inside the card - position the button bottom-right */
+  .card { position: relative; }
+
+  .card-actions {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  /* Match the rounded pill style used elsewhere */
+  .open-details-button {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    background: var(--usc-cardinal, #990000);
+    color: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .open-details-button:disabled { opacity: 0.7; cursor: default; }
   
