@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../styles/StudySpotDetailsPage.css";
+import { getReviews, createReview } from "../api/reviews";
 
 function StudySpotDetailsPage() {
   const { id } = useParams();
@@ -10,6 +11,13 @@ function StudySpotDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [favorite, setFavorite] = useState(false);
+
+  // Reviews state
+  const [reviews, setReviews] = useState([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [reviewsError, setReviewsError] = useState(null);
+  const [newReview, setNewReview] = useState({ rating: 5, comment: "" });
+  const [submittingReview, setSubmittingReview] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -50,6 +58,26 @@ function StudySpotDetailsPage() {
     };
   }, [id]);
 
+  // Load reviews for this spot
+  useEffect(() => {
+    let mounted = true;
+    async function loadReviews() {
+      setReviewsLoading(true);
+      setReviewsError(null);
+      try {
+        const data = await getReviews(id);
+        const list = Array.isArray(data) ? data : (data?.reviews || []);
+        if (mounted) setReviews(list);
+      } catch (err) {
+        if (mounted) setReviewsError(err.message || "Failed to load reviews");
+      } finally {
+        if (mounted) setReviewsLoading(false);
+      }
+    }
+    if (id) loadReviews();
+    return () => { mounted = false; };
+  }, [id]);
+
   const handleToggleFavorite = async () => {
     const next = !favorite;
     setFavorite(next);
@@ -61,6 +89,31 @@ function StudySpotDetailsPage() {
         body: JSON.stringify({ spotId: Number(id) })
       });
     } catch {}
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (submittingReview) return;
+    setSubmittingReview(true);
+    setReviewsError(null);
+    try {
+      const payload = {
+        rating: Number(newReview.rating),
+        comment: newReview.comment ? newReview.comment.trim() : ""
+      };
+      const created = await createReview(id, payload);
+      if (created) {
+        setReviews(prev => [created, ...prev]);
+      } else {
+        const fresh = await getReviews(id);
+        setReviews(Array.isArray(fresh) ? fresh : (fresh?.reviews || []));
+      }
+      setNewReview({ rating: 5, comment: "" });
+    } catch (err) {
+      setReviewsError(err.message || "Could not submit review");
+    } finally {
+      setSubmittingReview(false);
+    }
   };
 
   // Helper function to format time
@@ -241,6 +294,71 @@ function StudySpotDetailsPage() {
                   ? spot.description
                   : "No description has been added for this spot yet."}
               </p>
+            </div>
+
+            {/* Reviews section */}
+            <div className="details-section">
+              <h2>Reviews</h2>
+
+              {reviewsLoading ? (
+                <p>Loading reviews…</p>
+              ) : (
+                <>
+                  {reviews.length === 0 ? (
+                    <p>No reviews yet. Be the first to leave one!</p>
+                  ) : (
+                    <ul className="details-reviews-list">
+                      {reviews.map((r, idx) => (
+                        <li key={r.id || r._id || idx} className="details-review-item">
+                          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                            <strong>{r.user?.username || r.username || "Anonymous"}</strong>
+                            <span>⭐ {r.rating != null ? (r.rating.toFixed ? r.rating.toFixed(1) : r.rating) : "-"}</span>
+                          </div>
+                          {r.comment && <p style={{ marginTop: "0.25rem" }}>{r.comment}</p>}
+                          <div className="details-review-meta">
+                            <small>{r.createdAt ? new Date(r.createdAt).toLocaleString() : ""}</small>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              )}
+
+              <form className="details-review-form" onSubmit={handleSubmitReview} style={{ marginTop: "1rem" }}>
+                <label style={{ display: "block", marginBottom: "0.25rem" }}>
+                  Rating:
+                  <select
+                    value={newReview.rating}
+                    onChange={(e) => setNewReview(prev => ({ ...prev, rating: Number(e.target.value) }))}
+                    style={{ marginLeft: "0.5rem" }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={4}>4</option>
+                    <option value={3}>3</option>
+                    <option value={2}>2</option>
+                    <option value={1}>1</option>
+                  </select>
+                </label>
+
+                <label style={{ display: "block", marginTop: "0.5rem" }}>
+                  Comment:
+                  <textarea
+                    value={newReview.comment}
+                    onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
+                    rows={3}
+                    style={{ display: "block", width: "100%", marginTop: "0.25rem" }}
+                    placeholder="Share a short tip about this spot..."
+                  />
+                </label>
+
+                <div style={{ marginTop: "0.5rem" }}>
+                  <button type="submit" disabled={submittingReview}>
+                    {submittingReview ? "Submitting…" : "Submit review"}
+                  </button>
+                  {reviewsError && <div style={{ color: "crimson", marginTop: "0.5rem" }}>{reviewsError}</div>}
+                </div>
+              </form>
             </div>
 
             <div className="details-section">
