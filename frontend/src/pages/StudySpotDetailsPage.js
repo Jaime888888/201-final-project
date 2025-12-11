@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import "../styles/StudySpotDetailsPage.css";
 import { getReviews, createReview } from "../api/reviews";
 import { getFavorites, toggleFavorite } from "../api/favorites";
+import { getSpotById } from "../api/spots";
 
 function StudySpotDetailsPage() {
   const { id } = useParams();
@@ -26,17 +27,29 @@ function StudySpotDetailsPage() {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch(`https://studyspot.online/api/spots/${id}`, {
-          credentials: "include"
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch spot");
+        const data = await getSpotById(id);
+        if (isMounted && data) {
+          // Map the data structure to match what we need
+          // Based on MapView, API returns: id, name, type, image, note, rating, hours, isOpen, position
+          // Remove day of week from hours (e.g., "Sunday: 8am-8pm" -> "8am-8pm")
+          const cleanHours = (data.hours || "").replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*/i, "");
+
+          setSpot({
+            id: data.id,
+            name: data.name || `Study spot ${id}`,
+            address: data.address || "Address not available",
+            description: data.note || data.description || "",
+            imageUrl: data.image || data.imageUrl || null,
+            rating: data.rating || 0,
+            buildingType: data.type || null,
+            openHours: cleanHours.split(",")[0]?.split("-")[0]?.trim() || data.openTime || data.openHours || null,
+            closeHours: cleanHours.split(",")[0]?.split("-")[1]?.trim() || data.closeTime || data.closeHours || null,
+            isOpen: data.isOpen === 1 || data.isOpen === true,
+            hours: cleanHours
+          });
         }
-        const data = await res.json();
-        if (isMounted) {
-          setSpot(data);
-        }
-      } catch {
+      } catch (err) {
+        console.error("Failed to load spot:", err);
         if (isMounted) {
           setSpot({
             id,
@@ -47,7 +60,7 @@ function StudySpotDetailsPage() {
           });
           setError("Live data not available, showing placeholder information.");
         }
-      } 
+      }
 
       try {
         const favs = await getFavorites();
@@ -58,7 +71,7 @@ function StudySpotDetailsPage() {
       } catch (favErr) {
         console.error("Failed to load favorites:", favErr);
       }
-      
+
       finally {
         if (isMounted) {
           setLoading(false);
@@ -138,7 +151,11 @@ function StudySpotDetailsPage() {
   // Helper function to format time
   const formatTime = (time) => {
     if (!time) return "Not specified";
-    // If time is in HH:MM format, convert to 12-hour format
+    // If time already has am/pm, return as-is
+    if (time.toLowerCase().includes("am") || time.toLowerCase().includes("pm")) {
+      return time;
+    }
+    // If time is in HH:MM format (24-hour), convert to 12-hour format
     if (time.includes(":")) {
       const [hours, minutes] = time.split(":");
       const hour = parseInt(hours, 10);

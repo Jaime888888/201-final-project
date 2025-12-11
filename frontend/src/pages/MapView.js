@@ -66,18 +66,23 @@ function MapView() {
         setLoading(true);
         const data = await getSpots();
         if (Array.isArray(data)) {
-          const mapped = data.map((s) => ({
-            id: s.id,
-            name: s.name,
-            type: s.type || "Study Spot",
-            imageUrl: s.image,
-            note: s.note || "",
-            rating: s.rating || 0.0,
-            hours: s.hours || "",
-            isOpen: s.isOpen === 1,
-            latitude: s.position?.[0],
-            longitude: s.position?.[1],
-          }));
+          const mapped = data.map((s) => {
+            // Remove day of week from hours (e.g., "Sunday: 8am-8pm" -> "8am-8pm")
+            const cleanHours = (s.hours || "").replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*/i, "");
+
+            return {
+              id: s.id,
+              name: s.name,
+              type: s.type || "Study Spot",
+              imageUrl: s.image,
+              note: s.note || "",
+              rating: s.rating || 0.0,
+              hours: cleanHours,
+              isOpen: s.isOpen === 1,
+              latitude: s.position?.[0],
+              longitude: s.position?.[1],
+            };
+          });
           setSpots(mapped);
         } else setError("Invalid data format from server.");
       } catch (err) {
