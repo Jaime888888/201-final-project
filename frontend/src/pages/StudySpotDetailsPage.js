@@ -27,7 +27,6 @@ function StudySpotDetailsPage() {
       setLoading(true);
       setError("");
       try {
-<<<<<<< HEAD
         const data = await getSpotById(id);
         if (isMounted && data) {
           // Map the data structure to match what we need
@@ -51,27 +50,6 @@ function StudySpotDetailsPage() {
         }
       } catch (err) {
         console.error("Failed to load spot:", err);
-=======
-        // Use API helper which already handles auth/URL
-        const data = await getSpotById(id);
-        // Normalize to the shape MapView expects
-        const normalized = {
-          id: data.id ?? data._id,
-          name: data.name,
-          type: data.type || "Study Spot",
-          imageUrl: data.image || (Array.isArray(data.images) ? data.images[0] : null),
-          note: data.note || "",
-          rating: data.rating ?? 0,
-          hours: data.hours || data.openHours || "",
-          isOpen: data.isOpen === 1,
-          latitude: Array.isArray(data.position) ? data.position[0] : data.lat ?? null,
-          longitude: Array.isArray(data.position) ? data.position[1] : data.lng ?? null,
-          address: data.address || data.location || null,
-          raw: data,
-        };
-        if (isMounted) setSpot(normalized);
-      } catch (e) {
->>>>>>> b151fea7c92e9c7e53ae7bc995050ed2865c68c5
         if (isMounted) {
           setSpot({
             id,
