@@ -98,9 +98,7 @@ function FavoritesPage() {
   };
 
   const renderImage = (spot) => {
-    const photos = spot?.photos || spot?.images || [];
-    const firstPhoto = Array.isArray(photos) ? photos[0] : null;
-    const src = typeof firstPhoto === 'string' ? firstPhoto : firstPhoto?.url || null;
+    const src = spot?.image || null;
     if (!src) return <div className="thumb thumb--placeholder" aria-label="No image available" />;
     return <img className="thumb" src={src} alt={`${spot?.name || 'Study Spot'} preview`} loading="lazy" />;
   };
