@@ -340,3 +340,95 @@ Explanation: Bearer <token> was attached to all subsequent API calls.
 
 
 
+Caleb:
+AI Process Log
+LLM: Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
+
+LOOP 1: JSON Error Message Parsing
+Prompt 1: "The login page isn't showing proper error messages from the backend. When I enter wrong credentials, I just see a blank error or the default message instead of the actual error from the server." 
+
+Initial Code (LoginPage.js:63-73):
+if (!res.ok) {
+  const msg = await res.text().catch(() => "");
+  setServerError(
+    msg ||
+      (mode === "login"
+        ? "Invalid email or password"
+        : "Could not create account")
+  );
+  return;
+}
+
+Prompt 2: "The backend is returning JSON error responses like {\"error\": \"Account already exists\"} but the code is trying to read them as plain text. Please update the error handling to properly parse JSON error responses and fall back to default messages if parsing fails." 
+
+Updated Code (LoginPage.js:65-83):
+if (!res.ok) {
+  let errorMessage = mode === "login"
+    ? "Invalid email or password"
+    : "Could not create account";
+
+  try {
+    const errorData = await res.json();
+    if (errorData.error) {
+      errorMessage = errorData.error;
+    } else if (errorData.message) {
+      errorMessage = errorData.message;
+    }
+  } catch {
+    // Use default message if JSON parsing fails
+  }
+
+  setServerError(errorMessage);
+  return;
+}
+
+Explanation: The original code attempted to read error responses as plain text, which failed when the backend returned JSON. The updated code properly parses JSON error responses, checking for both error and message fields. If JSON parsing fails, it gracefully falls back to default error messages, ensuring users always see meaningful feedback.
+
+
+LOOP 2: Mobile Viewport and Responsive Styling
+Prompt 1: "The login page doesn't render properly on mobile devices. The viewport isn't configured correctly and the page layout breaks on smaller screens." 
+
+Initial Code (index.html:5, components.css:6-10):
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+Prompt 2: "Add proper viewport baseline configuration to prevent zooming issues on mobile, and add text-size-adjust properties to ensure consistent font rendering across devices. Also improve the error banner styling for better readability on small screens." 
+
+Updated Code (index.html:5, components.css:6-23, 89):
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+html {
+  font-size: 16px;
+  height: 100%;
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* ... */
+
+.error-banner { 
+  margin-bottom: 0.75rem; 
+  padding: 0.6rem 0.75rem; 
+  border-radius: 10px; 
+  background: #fef2f2; 
+  color: #991b1b; 
+  border: 1px solid #fecaca; 
+  font-size: 0.9rem; 
+}
+
+Explanation: The initial viewport meta tag lacked minimum-scale constraints, causing zoom issues on mobile browsers. The updated configuration adds minimum-scale and proper decimal values for initial-scale. CSS improvements include explicit HTML font-size baseline, text-size-adjust properties to prevent automatic font scaling, and improved error banner font sizing for mobile readability.
+
+
+
