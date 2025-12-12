@@ -22,7 +22,7 @@ import com.studyspotfinder.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000", "https://studyspot.online"}, allowCredentials = "true")
 public class AuthController {
 
     private final UserService userService;
@@ -144,5 +144,3 @@ public class AuthController {
         }
     }
 }
-
-
