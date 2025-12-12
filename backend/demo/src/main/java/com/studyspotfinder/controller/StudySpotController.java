@@ -87,7 +87,7 @@ public class StudySpotController {
 
             // Create and save hours entries if provided
             if (request.hours != null && !request.hours.isEmpty()) {
-                for (HourEntry hourEntry : request.hours) {
+                for (CreateSpotRequest.HourEntry hourEntry : request.hours) {
                     // Validate hour entry
                     if (hourEntry.dayOfWeek < 0 || hourEntry.dayOfWeek > 6) {
                         return ResponseEntity.badRequest().body(Map.of("error", "dayOfWeek must be between 0 (Sunday) and 6 (Saturday)"));
