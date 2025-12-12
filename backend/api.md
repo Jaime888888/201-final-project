@@ -44,6 +44,54 @@ Endpoints
   - Header: Authorization: Bearer <jwt>
   - Response 200: JSON array of users.
 
+- GET /spots (secured)
+  - Header: Authorization: Bearer <jwt>
+  - Response 200: JSON array of study spots.
+  - Each spot object contains:
+    - id: Long
+    - name: String
+    - type: String (optional, e.g., "Library", "Cafe")
+    - hours: String (formatted hours string, e.g., "monday: 9am-5pm, tuesday: 9am-5pm")
+    - isOpen: int (0 or 1)
+    - rating: Double (average rating from reviews, 0.0 if no reviews)
+    - note: String (optional)
+    - position: double[] (latitude, longitude array)
+    - image: String (image URL, optional)
+
+- GET /spots/{id} (secured)
+  - Header: Authorization: Bearer <jwt>
+  - Response 200: JSON object with the same structure as GET /spots items.
+  - Response 404: If spot not found.
+
+- POST /spots (secured)
+  - Header: Authorization: Bearer <jwt>
+  - Request JSON:
+    {
+      "name": "Main Library",                    // Required
+      "type": "Library",                          // Optional
+      "address": "123 University Ave",            // Required
+      "description": "A quiet study space",       // Optional
+      "note": "Great for group study",            // Optional
+      "latitude": 37.7749,                        // Optional
+      "longitude": -122.4194,                     // Optional
+      "imageUrl": "https://example.com/image.jpg", // Optional
+      "hours": [                                  // Optional array of hour entries
+        {
+          "dayOfWeek": 1,                         // Required: 0=Sunday, 1=Monday, ..., 6=Saturday
+          "openTime": "09:00",                    // Required: Format "HH:mm" or "HH:mm:ss"
+          "closeTime": "17:00"                    // Required: Format "HH:mm" or "HH:mm:ss"
+        },
+        {
+          "dayOfWeek": 2,
+          "openTime": "09:00",
+          "closeTime": "17:00"
+        }
+      ]
+    }
+  - Response 201: Created spot object (same structure as GET /spots/{id}).
+  - Response 400: If validation fails (missing required fields, invalid dayOfWeek, invalid time format).
+  - Response 500: If server error occurs.
+
 Quick curl examples
 
 - Register:
@@ -60,6 +108,34 @@ Quick curl examples
   TOKEN="<jwt>"
   curl https://studyspot.online/api/users \
     -H "Authorization: Bearer $TOKEN"
+
+- Get all spots:
+  TOKEN="<jwt>"
+  curl https://studyspot.online/api/spots \
+    -H "Authorization: Bearer $TOKEN"
+
+- Get spot by ID:
+  TOKEN="<jwt>"
+  curl https://studyspot.online/api/spots/1 \
+    -H "Authorization: Bearer $TOKEN"
+
+- Create a new spot:
+  TOKEN="<jwt>"
+  curl -X POST https://studyspot.online/api/spots \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "name": "Main Library",
+      "type": "Library",
+      "address": "123 University Ave",
+      "description": "A quiet study space",
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "hours": [
+        {"dayOfWeek": 1, "openTime": "09:00", "closeTime": "17:00"},
+        {"dayOfWeek": 2, "openTime": "09:00", "closeTime": "17:00"}
+      ]
+    }'
 
 Frontend usage
 
@@ -120,3 +196,6 @@ Implementation references
 - [`com.studyspotfinder.security.JwtAuthenticationFilter`](src/main/java/com/studyspotfinder/security/JwtAuthenticationFilter.java)
 - [`com.studyspotfinder.controller.UserController`](src/main/java/com/studyspotfinder/controller/UserController.java)
 - [`com.studyspotfinder.model.User`](src/main/java/com/studyspotfinder/model/User.java)
+- [`com.studyspotfinder.controller.StudySpotController`](demo/src/main/java/com/studyspotfinder/controller/StudySpotController.java)
+- [`com.studyspotfinder.model.StudySpot`](demo/src/main/java/com/studyspotfinder/model/StudySpot.java)
+- [`com.studyspotfinder.model.StudySpotHours`](demo/src/main/java/com/studyspotfinder/model/StudySpotHours.java)
