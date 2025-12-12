@@ -21,9 +21,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = !!token;
+  const isGuestUser = email === "a@usc.edu";
 
   return (
-    <AuthContext.Provider value={{ token, email, login, logout, isLoggedIn }}>
+    <AuthContext.Provider value={{ token, email, login, logout, isLoggedIn, isGuestUser }}>
       {children}
     </AuthContext.Provider>
   );

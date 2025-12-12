@@ -101,6 +101,35 @@ function App() {
     setConfirm("");
   };
 
+  const handleGuestLogin = async () => {
+    setServerError("");
+    try {
+      const res = await fetch("https://studyspot.online/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email: "a@usc.edu", password: "a" }),
+      });
+
+      if (!res.ok) {
+        setServerError("Guest login failed. Please try again.");
+        return;
+      }
+
+      const data = await res.json();
+      const token = data?.token;
+      if (token) {
+        login(token, "a@usc.edu");
+        window.location.href = "/mapview";
+      }
+    } catch (err) {
+      setServerError("Network error, please try again");
+    }
+  };
+
   const isLogin = mode === "login";
 
   return (
@@ -175,6 +204,23 @@ function App() {
                   }}
                 >
                   Sign up
+                </button>
+              </span>
+              <span>
+                Or{" "}
+                <button
+                  type="button"
+                  onClick={handleGuestLogin}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 0,
+                    color: "#475569",
+                    cursor: "pointer",
+                    font: "inherit",
+                  }}
+                >
+                  Try as Guest
                 </button>
               </span>
             </>
