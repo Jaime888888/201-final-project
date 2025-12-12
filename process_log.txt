@@ -431,4 +431,40 @@ body,
 Explanation: The initial viewport meta tag lacked minimum-scale constraints, causing zoom issues on mobile browsers. The updated configuration adds minimum-scale and proper decimal values for initial-scale. CSS improvements include explicit HTML font-size baseline, text-size-adjust properties to prevent automatic font scaling, and improved error banner font sizing for mobile readability.
 
 
+KT
+Prompt: Implement secure login system and enable guest and authenticated functionality
+
+Issues:
+The backend had no authentication flow: passwords were not hashed, users couldn’t log in, and the system couldn’t distinguish guest users from authenticated users. The frontend also had no way to store or send auth tokens.
+
+Fixes:
+Added the /api/auth/login endpoint, implemented input validation, and verified user credentials using BCrypt. Integrated JWT generation with a 24-hour expiration and connected it to frontend storage through the Authorization: Bearer <token> header. Added error handling for invalid credentials and set up the backend to determine user access based on token validity.
+
+Explanation:
+This established a login system that securely authenticates users and enables the app to enforce different functionality for guests and logged-in users.
+
+Prompt2: Add GET review endpoint for study spots
+
+Issues:
+Study spots had no way to display user reviews. The backend lacked an endpoint to fetch reviews, and there was no ordering or DTO structure to safely return review data without lazy-loading issues.
+
+Fixes:
+Implemented GET /api/spots/{spotId}/reviews, returning reviews ordered newest-first. Added a repository method findByStudySpotIdOrderByCreatedAtDesc and introduced a lightweight DTO including review id, rating, comment, timestamp, and the reviewer’s user id and username. Controller now exposes the public GET route under /api.
+
+Explanation:
+This enables the frontend to display all reviews for a study spot with consistent formatting and correct ordering. The endpoint works publicly but still flows through global security config, meaning additional adjustments can be made later if full public access is required.
+
+Kasra
+Prompt: Initialize backend structure and create the first StudySpot + User API routes
+
+Issues:
+The backend folder only contained a skeleton Maven project with no functional APIs. There was no database connection, no entities for StudySpot or User, and developers could not test any backend features from the frontend. Docker configuration also wasn’t aligned with the service names used in the project.
+
+Fixes:
+Set up the Spring Boot backend project structure (src/), added a docker-compose.yml for MySQL + backend containers, and configured .env.example for DB credentials. Implemented the initial StudySpot API and created the User table along with a simple user API endpoint. Updated .gitignore and backend wrapper files to support local development.
+
+Explanation:
+These changes established the full backend foundation so new features could be built incrementally. With the base API in place and the database running through Docker, the team could begin integrating login, study spot features, and frontend connections.
+
+
 
