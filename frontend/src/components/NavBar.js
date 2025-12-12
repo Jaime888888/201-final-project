@@ -6,11 +6,10 @@ import './NavBar.css';
 function NavBar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isGuestUser } = useContext(AuthContext);
+  const { isGuestUser, logout } = useContext(AuthContext);
 
   const onLogout = () => {
-    // TODO: replace with real logout (clear auth, tokens, etc.)
-    // Navigate to Login page (home page)
+    logout();
     navigate('/', { replace: true });
   };
 

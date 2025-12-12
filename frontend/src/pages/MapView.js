@@ -60,43 +60,58 @@ function MapView() {
     iconAnchor: [12, 41],
   });
 
-  useEffect(() => {
-    async function fetchSpots() {
-      try {
-        setLoading(true);
-        const data = await getSpots();
-        if (Array.isArray(data)) {
-          const mapped = data.map((s) => {
-            // Remove day of week from hours (e.g., "Sunday: 8am-8pm" -> "8am-8pm")
-            const cleanHours = (s.hours || "").replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*/i, "");
+  const fetchSpots = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await getSpots();
+      if (Array.isArray(data)) {
+        const mapped = data.map((s) => {
+          // Remove day of week from hours (e.g., "Sunday: 8am-8pm" -> "8am-8pm")
+          const cleanHours = (s.hours || "").replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*/i, "");
 
-            // Ensure rating is always a number
-            const rating = typeof s.rating === 'number' ? s.rating : (s.rating != null ? Number(s.rating) : 0.0);
-            const numRating = isNaN(rating) ? 0.0 : rating;
+          // Ensure rating is always a number
+          const rating = typeof s.rating === 'number' ? s.rating : (s.rating != null ? Number(s.rating) : 0.0);
+          const numRating = isNaN(rating) ? 0.0 : rating;
 
-            return {
-              id: s.id,
-              name: s.name,
-              type: s.type || "Study Spot",
-              imageUrl: s.image,
-              note: s.note || "",
-              rating: numRating,
-              hours: cleanHours,
-              isOpen: s.isOpen === 1,
-              latitude: s.position?.[0],
-              longitude: s.position?.[1],
-            };
-          });
-          setSpots(mapped);
-        } else setError("Invalid data format from server.");
-      } catch (err) {
-        console.error(err);
-        setError("Could not load study spots.");
-      } finally {
-        setLoading(false);
-      }
+          return {
+            id: s.id,
+            name: s.name,
+            type: s.type || "Study Spot",
+            imageUrl: s.image,
+            note: s.note || "",
+            rating: numRating,
+            hours: cleanHours,
+            isOpen: s.isOpen === 1,
+            latitude: s.position?.[0],
+            longitude: s.position?.[1],
+          };
+        });
+        setSpots(mapped);
+      } else setError("Invalid data format from server.");
+    } catch (err) {
+      console.error(err);
+      setError("Could not load study spots.");
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
     fetchSpots();
+    
+    // Refetch when page becomes visible again (user navigates back to this tab/page)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchSpots();
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   const filteredSpots = spots.filter((s) => {
@@ -155,6 +170,24 @@ function MapView() {
         </div>
 
         <div className="filters">
+          <button
+            onClick={fetchSpots}
+            className="refresh-button"
+            title="Refresh spots"
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "0.9rem",
+              fontWeight: "500",
+              marginRight: "8px"
+            }}
+          >
+            🔄 Refresh
+          </button>
           <input
             type="text"
             className="search"
