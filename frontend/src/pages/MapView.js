@@ -37,7 +37,7 @@ function MapView() {
   const [flyTo, setFlyTo] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [ratingFilter, setRatingFilter] = useState(1);
+  const [ratingFilter, setRatingFilter] = useState(0);
   const [openOnly, setOpenOnly] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -70,13 +70,17 @@ function MapView() {
             // Remove day of week from hours (e.g., "Sunday: 8am-8pm" -> "8am-8pm")
             const cleanHours = (s.hours || "").replace(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*/i, "");
 
+            // Ensure rating is always a number
+            const rating = typeof s.rating === 'number' ? s.rating : (s.rating != null ? Number(s.rating) : 0.0);
+            const numRating = isNaN(rating) ? 0.0 : rating;
+
             return {
               id: s.id,
               name: s.name,
               type: s.type || "Study Spot",
               imageUrl: s.image,
               note: s.note || "",
-              rating: s.rating || 0.0,
+              rating: numRating,
               hours: cleanHours,
               isOpen: s.isOpen === 1,
               latitude: s.position?.[0],
@@ -96,12 +100,17 @@ function MapView() {
   }, []);
 
   const filteredSpots = spots.filter((s) => {
+    // Filter out spots with invalid coordinates
+    if (s.latitude == null || s.longitude == null || isNaN(s.latitude) || isNaN(s.longitude)) {
+      return false;
+    }
+    
     const t = searchTerm.toLowerCase();
     const matchSearch =
       s.name.toLowerCase().includes(t) ||
       s.type.toLowerCase().includes(t) ||
       s.note.toLowerCase().includes(t);
-    const matchRating = s.rating >= ratingFilter;
+    const matchRating = (s.rating ?? 0) >= ratingFilter;
     const matchOpen = !openOnly || s.isOpen;
     return matchSearch && matchRating && matchOpen;
   });
@@ -209,7 +218,7 @@ function MapView() {
                   <p className="type">{s.type}</p>
                   <p className="note">{s.note}</p>
                   <p className="meta">
-                    ⭐ {s.rating.toFixed(1)} • {s.hours?.split(",")[0]}
+                    ⭐ {typeof s.rating === 'number' ? s.rating.toFixed(1) : '0.0'} • {s.hours?.split(",")[0]}
                   </p>
                   <button
                     className="open-details-button"
@@ -254,7 +263,7 @@ function MapView() {
                   <strong>{s.name}</strong>
                   <br />
                   {s.isOpen ? "🟢 Open" : "🔴 Closed"} <br />
-                  ⭐ {s.rating.toFixed(1)}
+                  ⭐ {typeof s.rating === 'number' ? s.rating.toFixed(1) : '0.0'}
                 </Popup>
               </Marker>
             ))}

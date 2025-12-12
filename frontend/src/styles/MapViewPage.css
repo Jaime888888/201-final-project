@@ -20,6 +20,8 @@
 
 .filters {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 16px;
 }
@@ -35,8 +37,10 @@
 
 .rating-slider {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .slider-label {
