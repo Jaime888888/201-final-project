@@ -123,10 +123,3 @@ See [`backend/api.md`](./backend/api.md) for request examples, response shapes, 
 - Restrict CORS to the real frontend origin before deployment.
 - Do not expose development database or Adminer ports publicly.
 
-## Team
-
-This was a collaborative course project. Original contribution attribution is preserved.
-
-**Backend:** Kasra, KT  
-**Frontend:** Christine, Trent, Hailey, Riya, Jenny, Jaime, Caleb
-
