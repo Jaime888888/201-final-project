@@ -1,20 +1,132 @@
-# 201-final-project
-README
+# USC Study Spot Finder
 
-A study spot website that can detect study spots based on geographic location (within 10 miles from USC campus). Users can rate and provide feedback on the study spots.
+A full-stack platform for discovering, saving, rating, and reviewing study spaces near the University of Southern California. Unlike a general map product, Study Spot Finder focuses on the details students care about—including specific rooms, study environment, hours, notes, and community feedback.
 
-Our product differs from a service like Google Maps due to its concentration on study spots and increased specificity (can add a specific room in Doheny, for example).
+## Features
 
-Backend:
-* Kasra
-* KT
-  
-Frontend:
-* Christine
-* Trent
-* Hailey
-* Riya
-* Jenny
-* Jaime
-* Caleb
+- Browse study locations on an interactive map
+- View detailed information, hours, notes, photos, and average ratings
+- Register, sign in, and continue with supported guest flows
+- Add new study spots with location and schedule information
+- Write reviews and rate existing locations
+- Save and manage favorite study spots
+- Protect authenticated API routes with JWT-based security
+- Persist users, locations, hours, reviews, and favorites in MySQL
+
+## Architecture
+
+```mermaid
+flowchart LR
+    UI[React + Parcel] -->|REST / JSON| API[Spring Boot API]
+    UI --> MAP[Leaflet maps]
+    API --> AUTH[Spring Security + JWT]
+    API --> ORM[JPA / Hibernate]
+    ORM --> DB[(MySQL)]
+```
+
+## Technology
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 18, React Router, React Leaflet, Parcel |
+| Backend | Java 17, Spring Boot, Spring Web, Spring Security |
+| Data | MySQL, Spring Data JPA, Hibernate |
+| Authentication | JSON Web Tokens (JJWT) |
+| Development | Maven Wrapper, Docker Compose, Adminer |
+
+## Repository layout
+
+```text
+.
+├── frontend/
+│   ├── public/                 # HTML shell and static assets
+│   └── src/
+│       ├── api/                # Auth, spot, review, and favorite clients
+│       ├── components/         # Navigation, cards, and ratings
+│       ├── context/            # Authentication state
+│       ├── pages/              # Map, details, favorites, login, and add-spot views
+│       └── routes/             # Application routing
+└── backend/
+    ├── api.md                  # Detailed API guide
+    └── demo/
+        ├── docker-compose.yml  # Local MySQL and Adminer
+        ├── pom.xml             # Maven dependencies
+        └── src/                # Controllers, services, security, models, repositories
+```
+
+## Local development
+
+### Prerequisites
+
+- Node.js 18+
+- Java 17
+- Docker Desktop
+
+### 1. Start the database
+
+```bash
+cd backend/demo
+docker compose up -d
+```
+
+This starts the local MySQL service and Adminer. Review `docker-compose.yml` and `application.properties` before running, and replace development-only credentials and JWT values for any shared environment.
+
+### 2. Run the backend
+
+From `backend/demo`:
+
+```bash
+./mvnw spring-boot:run
+```
+
+On Windows:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+The API runs at `http://localhost:8080` by default.
+
+### 3. Run the frontend
+
+In a separate terminal:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+The Parcel development server runs at `http://localhost:3000`.
+
+## API overview
+
+| Area | Representative endpoints |
+| --- | --- |
+| Authentication | `POST /auth/register`, `POST /auth/login` |
+| Study spots | `GET /spots`, `GET /spots/{id}`, `POST /spots` |
+| Reviews | Review creation and retrieval through the review controller |
+| Favorites | Per-user favorite creation, listing, and removal |
+
+Except for `/auth/*`, secured routes expect:
+
+```http
+Authorization: Bearer <token>
+```
+
+See [`backend/api.md`](./backend/api.md) for request examples, response shapes, and implementation references.
+
+## Security notes
+
+- Local configuration values are development defaults only.
+- Use environment variables or a secret manager for database and JWT secrets.
+- Restrict CORS to the real frontend origin before deployment.
+- Do not expose development database or Adminer ports publicly.
+
+## Team
+
+This was a collaborative course project. Original contribution attribution is preserved.
+
+**Backend:** Kasra, KT  
+**Frontend:** Christine, Trent, Hailey, Riya, Jenny, Jaime, Caleb
 
