@@ -1,5 +1,6 @@
 package com.studyspotfinder.security;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class JwtService {
     private long expirationHours;
 
     private byte[] getSigningKey() {
-        return secret.getBytes();
+        return secret.getBytes(StandardCharsets.UTF_8);
     }
 
     public String generateToken(String subject) {

@@ -1,12 +1,14 @@
 # USC Study Spot Finder
 
+[![CI](https://github.com/Jaime888888/usc-study-spot-finder/actions/workflows/ci.yml/badge.svg)](https://github.com/Jaime888888/usc-study-spot-finder/actions/workflows/ci.yml)
+
 A full-stack platform for discovering, saving, rating, and reviewing study spaces near the University of Southern California. Unlike a general map product, Study Spot Finder focuses on the details students care about—including specific rooms, study environment, hours, notes, and community feedback.
 
 ## Features
 
 - Browse study locations on an interactive map
 - View detailed information, hours, notes, photos, and average ratings
-- Register, sign in, and continue with supported guest flows
+- Register and sign in with JWT-based authentication
 - Add new study spots with location and schedule information
 - Write reviews and rate existing locations
 - Save and manage favorite study spots
@@ -58,7 +60,7 @@ flowchart LR
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22 LTS
 - Java 17
 - Docker Desktop
 
@@ -66,10 +68,12 @@ flowchart LR
 
 ```bash
 cd backend/demo
+cp .env.example .env
+# Replace the password and JWT placeholders in .env.
 docker compose up -d
 ```
 
-This starts the local MySQL service and Adminer. Review `docker-compose.yml` and `application.properties` before running, and replace development-only credentials and JWT values for any shared environment.
+This starts MySQL on port `33061` and Adminer at `http://localhost:8081`. Docker Compose and Spring Boot both read the same `.env` values, so the database name and credentials stay aligned.
 
 ### 2. Run the backend
 
@@ -93,11 +97,12 @@ In a separate terminal:
 
 ```bash
 cd frontend
-npm install
+cp .env.example .env
+npm ci
 npm start
 ```
 
-The Parcel development server runs at `http://localhost:3000`.
+The Parcel development server runs at `http://localhost:3000`. Its example environment points API requests to the local backend; deployed builds default to same-origin `/api` unless `STUDYSPOT_API_BASE_URL` is set.
 
 ## API overview
 
@@ -118,8 +123,8 @@ See [`backend/api.md`](./backend/api.md) for request examples, response shapes, 
 
 ## Security notes
 
-- Local configuration values are development defaults only.
-- Use environment variables or a secret manager for database and JWT secrets.
-- Restrict CORS to the real frontend origin before deployment.
+- Local configuration templates contain placeholders only and committed application properties contain no credentials.
+- Generate unique database and JWT secrets before shared use or deployment.
+- Set `CORS_ALLOWED_ORIGINS` to the exact deployed frontend origins.
 - Do not expose development database or Adminer ports publicly.
 

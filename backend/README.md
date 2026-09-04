@@ -1,154 +1,67 @@
-# StudySpot Backend — Developer Environment Setup (VS Code)
+# StudySpot backend setup
 
-This document explains how to set up the **exact backend development environment** used for the StudySpot backend.  
-It is meant for developers using **VS Code** with:
+The backend is a Java 17 Spring Boot API backed by MySQL. It includes the Maven Wrapper, so a separate Maven installation is optional.
 
-- Spring Boot (Java 17)
-- Maven
-- MySQL (Docker)
-- Adminer
+## Prerequisites
 
----
+- Java 17
+- Docker Desktop with Docker Compose
 
-# 1. Prerequisites
+## Start locally
 
-Install the following on your machine:
+From `backend/demo`:
 
-## Java 17
-
-Mac (Homebrew):
-
-```sh
-brew install openjdk@17
+```bash
+cp .env.example .env
 ```
 
-Verify:
+Replace every password/signing-key placeholder in `.env`, then start MySQL and Adminer:
 
-```sh
-java -version
-```
-
----
-
-## Maven
-
-Mac (Homebrew):
-
-```sh
-brew install maven
-```
-
-Verify:
-
-```sh
-mvn -v
-```
-
----
-
-## Docker Desktop
-
-Download & install:
-
-https://www.docker.com/products/docker-desktop/
-
-Docker is required to run:
-- MySQL database
-- Adminer web UI
-
----
-
-## Visual Studio Code
-
-https://code.visualstudio.com/
-
-Install the following extensions (search by name):
-
-### Required VS Code Extensions
-
-| Category | Extension |
-|---------|-----------|
-| Java + Spring | Spring Boot Extension Pack |
-| Docker | Docker |
-| SQL | SQLTools + SQLTools MySQL/MariaDB Driver |
-| API Testing | Thunder Client (recommended) or REST Client |
-| Misc | YAML, DotENV, GitLens |
-
----
-
-# 2. Start the Local Database (Docker Compose)
-
-To start MySQL + Adminer:
-
-```sh
+```bash
 docker compose up -d
 ```
 
-This launches:
+The shared local configuration uses:
 
-### MySQL
-- Host: localhost
-- Port: 33061 (mapped to 3306)
-- Database: appdb
-- User: root
-- Password: password
+- MySQL: `127.0.0.1:33061`
+- Database: `appdb`
+- Application user: `appuser`
+- Adminer: `http://localhost:8081`
 
-### Adminer UI
-Visit:
+Run the API:
 
-```
-http://localhost:8081
+```bash
+./mvnw spring-boot:run
 ```
 
-Login:
-- System: MySQL
-- Server: mysql
-- Username: root
-- Password: password
-- Database: appdb
+On Windows, use `./mvnw.cmd spring-boot:run`. The API listens at `http://localhost:8080`.
 
+## Verify
 
----
-
-# 3. Running the Backend (Spring Boot)
-
-## Option 1 — Using Maven
-
-```sh
-mvn spring-boot:run
+```bash
+./mvnw test
+./mvnw clean package
 ```
 
-## Option 2 — Using VS Code
+The test profile uses an in-memory H2 database and does not require Docker. GitHub Actions runs the backend tests and the frontend production build on every pull request and push to `main`.
 
-1. Open `StudySpotApplication.java`
-2. Click **Run** or **Debug** above the main method
+## Stop local services
 
-Server runs at:
-
-```
-http://localhost:8080
-```
-
----
-
-# Common Commands
-
-### Start database containers
-```sh
-docker compose up -d
-```
-
-### Stop containers
-```sh
+```bash
 docker compose down
 ```
 
-### Build JAR
-```sh
-mvn clean package
-```
+The MySQL data remains in the named Docker volume. Use `docker compose down --volumes` only when you intentionally want to reset local demo data.
 
-### Run tests
-```sh
-mvn test
-```
+## Configuration
+
+Spring loads `backend/demo/.env` for local development. Deployed environments should provide the same values through their secret manager or process environment:
+
+- `SPRING_DATASOURCE_URL`
+- `MYSQL_USER`
+- `MYSQL_PASSWORD`
+- `JWT_SECRET`
+- `JWT_EXPIRATION_HOURS` (optional, defaults to 24)
+- `CORS_ALLOWED_ORIGINS` (comma-separated, defaults to `http://localhost:3000`)
+
+Never commit `.env`; it is ignored by Git.

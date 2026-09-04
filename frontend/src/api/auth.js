@@ -1,5 +1,5 @@
 // frontend/src/api/auth.js
-const BASE_URL = "https://studyspot.online/api";
+const BASE_URL = (process.env.STUDYSPOT_API_BASE_URL || "/api").replace(/\/$/, "");
 
 async function request(method, uri, body) {
   const token = localStorage.getItem("authToken");
@@ -35,7 +35,7 @@ async function request(method, uri, body) {
   }
 
   if (!res.ok) {
-    const message = (data && data.message) || (typeof data === "string" && data) || `Request failed (${res.status})`;
+    const message = (data && (data.message || data.error)) || (typeof data === "string" && data) || `Request failed (${res.status})`;
     const err = new Error(message);
     err.status = res.status;
     err.data = data;

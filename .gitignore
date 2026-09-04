@@ -8,6 +8,10 @@
 /frontend/.env
 /frontend/npm-debug.log*
 
+# Local backend configuration and database volume
+/backend/demo/.env
+/backend/demo/mysql_data/
+
 # Root node artifacts (no root package.json in this repo)
 /package-lock.json
 

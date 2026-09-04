@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -21,10 +21,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = !!token;
-  const isGuestUser = email === "a@usc.edu";
-
   return (
-    <AuthContext.Provider value={{ token, email, login, logout, isLoggedIn, isGuestUser }}>
+    <AuthContext.Provider value={{ token, email, login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

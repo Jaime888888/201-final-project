@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { POST } from "../api/auth";
 import "../styles/global.css";
 import "../styles/components.css";
 
@@ -37,11 +38,6 @@ function App() {
 
     if (!validate()) return;
 
-    const url =
-      mode === "login" 
-        ? "https://studyspot.online/api/auth/login" 
-        : "https://studyspot.online/api/auth/register";
-
     try {
       // For register, include username (extract from email or use email as username)
       const requestBody = mode === "login" 
@@ -52,36 +48,14 @@ function App() {
             password 
           };
 
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!res.ok) {
-        const msg = await res.text().catch(() => "");
-        setServerError(
-          msg ||
-            (mode === "login"
-              ? "Invalid email or password"
-              : "Could not create account")
-        );
-        return;
-      }
-
-      const data = await res.json();
+      const endpoint = mode === "login" ? "/auth/login" : "/auth/register";
+      const data = await POST(endpoint, requestBody);
       const token = data?.token;
-      if (token) {
-        localStorage.setItem("authToken", token);
-        login(token, email);
-      }
+      if (!token) throw new Error("The server did not return an authentication token");
+      login(token, email);
       window.location.href = "/mapview"; // go to MapView after login
     } catch (err) {
-      setServerError("Network error, please try again");
+      setServerError(err.message || "Network error, please try again");
     }
   };
 
@@ -99,35 +73,6 @@ function App() {
     setServerError("");
     setPassword("");
     setConfirm("");
-  };
-
-  const handleGuestLogin = async () => {
-    setServerError("");
-    try {
-      const res = await fetch("https://studyspot.online/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email: "a@usc.edu", password: "a" }),
-      });
-
-      if (!res.ok) {
-        setServerError("Guest login failed. Please try again.");
-        return;
-      }
-
-      const data = await res.json();
-      const token = data?.token;
-      if (token) {
-        login(token, "a@usc.edu");
-        window.location.href = "/mapview";
-      }
-    } catch (err) {
-      setServerError("Network error, please try again");
-    }
   };
 
   const isLogin = mode === "login";
@@ -204,23 +149,6 @@ function App() {
                   }}
                 >
                   Sign up
-                </button>
-              </span>
-              <span>
-                Or{" "}
-                <button
-                  type="button"
-                  onClick={handleGuestLogin}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    color: "#475569",
-                    cursor: "pointer",
-                    font: "inherit",
-                  }}
-                >
-                  Try as Guest
                 </button>
               </span>
             </>

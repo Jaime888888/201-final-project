@@ -1,7 +1,7 @@
 # StudySpot API Guide
 
 Base URL
-- https://studyspot.online/api
+- http://localhost:8080/api
 
 Auth overview
 - JWT-based auth. Tokens are issued by [`com.studyspotfinder.controller.AuthController`](src/main/java/com/studyspotfinder/controller/AuthController.java) using [`com.studyspotfinder.security.JwtService`](src/main/java/com/studyspotfinder/security/JwtService.java).
@@ -95,33 +95,33 @@ Endpoints
 Quick curl examples
 
 - Register:
-  curl -X POST https://studyspot.online/api/auth/register \
+  curl -X POST http://localhost:8080/api/auth/register \
     -H "Content-Type: application/json" \
     -d '{"username":"jane","email":"jane@example.com","password":"secret123"}'
 
 - Login:
-  curl -X POST https://studyspot.online/api/auth/login \
+  curl -X POST http://localhost:8080/api/auth/login \
     -H "Content-Type: application/json" \
     -d '{"email":"jane@example.com","password":"secret123"}'
 
 - Call a secured endpoint:
   TOKEN="<jwt>"
-  curl https://studyspot.online/api/users \
+  curl http://localhost:8080/api/users \
     -H "Authorization: Bearer $TOKEN"
 
 - Get all spots:
   TOKEN="<jwt>"
-  curl https://studyspot.online/api/spots \
+  curl http://localhost:8080/api/spots \
     -H "Authorization: Bearer $TOKEN"
 
 - Get spot by ID:
   TOKEN="<jwt>"
-  curl https://studyspot.online/api/spots/1 \
+  curl http://localhost:8080/api/spots/1 \
     -H "Authorization: Bearer $TOKEN"
 
 - Create a new spot:
   TOKEN="<jwt>"
-  curl -X POST https://studyspot.online/api/spots \
+  curl -X POST http://localhost:8080/api/spots \
     -H "Authorization: Bearer $TOKEN" \
     -H "Content-Type: application/json" \
     -d '{
@@ -146,7 +146,7 @@ Example (fetch)
 
 - Login and store token:
   const login = async (email, password) => {
-    const res = await fetch("https://studyspot.online/api/auth/login", {
+    const res = await fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -160,7 +160,7 @@ Example (fetch)
 - Authenticated request:
   const apiFetch = (path, options = {}) => {
     const token = localStorage.getItem("token");
-    return fetch(`https://studyspot.online/api${path}`, {
+    return fetch(`http://localhost:8080/api${path}`, {
       ...options,
       headers: {
         ...(options.headers || {}),
@@ -187,7 +187,7 @@ Token details
 
 CORS notes
 
-- Auth endpoints currently allow origin http://localhost:3000 (see [`com.studyspotfinder.controller.AuthController`](src/main/java/com/studyspotfinder/controller/AuthController.java)). Adjust as needed for your frontend origin if calling cross-origin. Same-origin requests from https://studyspot.online do not require CORS.
+- CORS origins come from `CORS_ALLOWED_ORIGINS` and default to `http://localhost:3000`. Use comma-separated exact origins for deployed frontends.
 
 Implementation references
 

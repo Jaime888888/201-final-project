@@ -6,11 +6,11 @@ import java.util.Map;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,6 @@ import com.studyspotfinder.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "https://studyspot.online"}, allowCredentials = "true")
 public class AuthController {
 
     private final UserService userService;
@@ -91,6 +90,7 @@ public class AuthController {
         private String email;
 
         @NotBlank
+        @Size(min = 8, max = 128)
         private String password;
 
         public String getUsername() {

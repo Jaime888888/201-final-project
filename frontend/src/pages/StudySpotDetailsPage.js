@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import NavBar from "../components/NavBar";
 import "../styles/StudySpotDetailsPage.css";
 import { getReviews, createReview } from "../api/reviews";
@@ -10,7 +9,6 @@ import { getSpotById } from "../api/spots";
 function StudySpotDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isGuestUser } = useContext(AuthContext);
   const [spot, setSpot] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -109,14 +107,6 @@ function StudySpotDetailsPage() {
   const handleToggleFavorite = async () => {
     const next = !favorite;
     setFavorite(next);
-    // try {
-    //   await fetch("https://studyspot.online/api/favorites", {
-    //     method: next ? "POST" : "DELETE",
-    //     headers: { "Content-Type": "application/json" },
-    //     credentials: "include",
-    //     body: JSON.stringify({ spotId: Number(id) })
-    //   });
-    // } catch {}
     try {
       await toggleFavorite(Number(id), next);
     } catch (err) {
@@ -245,17 +235,15 @@ function StudySpotDetailsPage() {
           >
             ← Back
           </button>
-          {!isGuestUser && (
-            <button
-              type="button"
-              className={`details-favorite-button ${
-                favorite ? "active" : ""
-              }`}
-              onClick={handleToggleFavorite}
-            >
-              {favorite ? "★ In favorites" : "☆ Add to favorites"}
-            </button>
-          )}
+          <button
+            type="button"
+            className={`details-favorite-button ${
+              favorite ? "active" : ""
+            }`}
+            onClick={handleToggleFavorite}
+          >
+            {favorite ? "★ In favorites" : "☆ Add to favorites"}
+          </button>
         </div>
 
         <section className="details-layout">
@@ -369,47 +357,38 @@ function StudySpotDetailsPage() {
               )}
 
               <form className="details-review-form" onSubmit={handleSubmitReview} style={{ marginTop: "1rem" }}>
-                {!isGuestUser && (
-                  <>
-                    <label style={{ display: "block", marginBottom: "0.25rem" }}>
-                      Rating:
-                      <select
-                        value={newReview.rating}
-                        onChange={(e) => setNewReview(prev => ({ ...prev, rating: Number(e.target.value) }))}
-                        style={{ marginLeft: "0.5rem" }}
-                      >
-                        <option value={5}>5</option>
-                        <option value={4}>4</option>
-                        <option value={3}>3</option>
-                        <option value={2}>2</option>
-                        <option value={1}>1</option>
-                      </select>
-                    </label>
+                <label style={{ display: "block", marginBottom: "0.25rem" }}>
+                  Rating:
+                  <select
+                    value={newReview.rating}
+                    onChange={(e) => setNewReview(prev => ({ ...prev, rating: Number(e.target.value) }))}
+                    style={{ marginLeft: "0.5rem" }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={4}>4</option>
+                    <option value={3}>3</option>
+                    <option value={2}>2</option>
+                    <option value={1}>1</option>
+                  </select>
+                </label>
 
-                    <label style={{ display: "block", marginTop: "0.5rem" }}>
-                      Comment:
-                      <textarea
-                        value={newReview.comment}
-                        onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
-                        rows={3}
-                        style={{ display: "block", width: "100%", marginTop: "0.25rem" }}
-                        placeholder="Share a short tip about this spot..."
-                      />
-                    </label>
+                <label style={{ display: "block", marginTop: "0.5rem" }}>
+                  Comment:
+                  <textarea
+                    value={newReview.comment}
+                    onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
+                    rows={3}
+                    style={{ display: "block", width: "100%", marginTop: "0.25rem" }}
+                    placeholder="Share a short tip about this spot..."
+                  />
+                </label>
 
-                    <div style={{ marginTop: "0.5rem" }}>
-                      <button type="submit" disabled={submittingReview}>
-                        {submittingReview ? "Submitting…" : "Submit review"}
-                      </button>
-                      {reviewsError && <div style={{ color: "crimson", marginTop: "0.5rem" }}>{reviewsError}</div>}
-                    </div>
-                  </>
-                )}
-                {isGuestUser && (
-                  <p style={{ color: "#666", fontStyle: "italic", marginTop: "0.5rem" }}>
-                    Log in to submit a review.
-                  </p>
-                )}
+                <div style={{ marginTop: "0.5rem" }}>
+                  <button type="submit" disabled={submittingReview}>
+                    {submittingReview ? "Submitting…" : "Submit review"}
+                  </button>
+                  {reviewsError && <div style={{ color: "crimson", marginTop: "0.5rem" }}>{reviewsError}</div>}
+                </div>
               </form>
             </div>
 
